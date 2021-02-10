@@ -1,0 +1,19 @@
+.nav-bar {
+  text-decoration: none;
+}
+
+.nav-bar a {
+  text-align: center;
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  border: red;
+  display: inline-block;
+}
+
+.company-logo {
+  width: 30%;
+  height: auto;
+  display: inline-block;
+}
