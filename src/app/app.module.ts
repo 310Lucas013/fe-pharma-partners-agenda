@@ -20,6 +20,10 @@ import { ClockComponent } from './agenda/clock/clock.component';
 import { SideCalendarComponent } from './agenda/side-calendar/side-calendar.component';
 import { MainCalendarComponent } from './agenda/main-calendar/main-calendar.component';
 import { CoworkerOverviewComponent } from './agenda/coworker-overview/coworker-overview.component';
+import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
+import {CalendarModule, DateAdapter} from 'angular-calendar';
+import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
+import {FlatpickrModule} from 'angularx-flatpickr';
 
 @NgModule({
   declarations: [
@@ -46,6 +50,13 @@ import { CoworkerOverviewComponent } from './agenda/coworker-overview/coworker-o
     FormsModule,
     RoutingController,
     MaterialModule,
+    NgbModalModule,
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory,
+    })
+
   ],
   providers: [],
   bootstrap: [AppComponent]
