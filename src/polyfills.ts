@@ -1,3 +1,9 @@
+import 'core-js/es6/reflect';
+import 'core-js/es7/reflect';
+import 'hammerjs';
+import 'web-animations-js';
+import '@angular/localize/init';
+
 /**
  * This file includes polyfills needed by Angular and is loaded before the app.
  * You can add your own extra polyfills to this file.
@@ -13,6 +19,9 @@
  *
  * Learn more in https://angular.io/guide/browser-support
  */
+
+(window as any).global = window;
+
 
 /***************************************************************************************************
  * BROWSER POLYFILLS
