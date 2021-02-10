@@ -1,9 +1,13 @@
 <div class="nav-bar">
-  <img class="company-logo" src="assets/images/medicom-logo.jpg" alt="logo van het bedrijf medicom">
-  <span><a>search bar with icon</a>
-  <a>Start</a>
-  <a>Agenda</a>
-  <a>Patiënten</a>
-  <a>Post</a>
-  <a>Support</a></span>
+  <div class="left-nav-side">
+    <img class="company-logo" src="assets/images/medicom-logo.jpg" alt="logo van het bedrijf medicom">
+    <input type="text" [(ngModel)]="searchBarText" value="typ hier om te zoeken" (toggle)="removeText()">
+  </div>
+  <div class="right-nav-side">
+    <a>Start</a>
+    <a>Agenda</a>
+    <a>Patiënten</a>
+    <a>Post</a>
+    <a>Support</a>
+  </div>
 </div>

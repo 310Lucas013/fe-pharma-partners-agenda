@@ -6,10 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navigation.component.css']
 })
 export class NavigationComponent implements OnInit {
+  searchBarText: string;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  removeText(): void {
+    if (this.searchBarText === '') {
+      this.searchBarText = 'Typ hier om te zoeken';
+    } else {
+      this.searchBarText = '';
+    }
   }
 
 }

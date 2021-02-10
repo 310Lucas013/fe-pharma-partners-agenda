@@ -1,5 +1,6 @@
 .nav-bar {
   text-decoration: none;
+  width: 100%;
 }
 
 .nav-bar a {
@@ -13,7 +14,15 @@
 }
 
 .company-logo {
-  width: 30%;
+  width: 10%;
   height: auto;
   display: inline-block;
+}
+
+.left-nav-side {
+  float: left
+}
+
+.right-nav-side {
+  float: left
 }
