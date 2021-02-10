@@ -4,7 +4,7 @@
   border-radius: 5px;
   color: white;
   padding: 10px;
-  width: 200px;
+  width: 270px;
   max-height: 5vh;
   height: 5vh;
   margin: 10px;
@@ -13,13 +13,14 @@
 .clock-date {
   font-size: 14px;
   display: inline-block;
-  width: 120px;
+  width: 160px;
   text-align: center;
-  padding-top: 11px;
+  padding-top: 10px;
 }
 
 .clock-time {
   font-size: 30px;
-  width:80px;
+  width:100px;
   float: right;
+  padding-right: 10px;
 }
