@@ -11,12 +11,22 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {RoutingController} from './RoutingController';
 import {MaterialModule} from './material-module';
+import { LoginComponent } from './login/login.component';
+import { AgendaComponent } from './agenda/agenda.component';
+import { AppointmentSearchComponent } from './appointment-search/appointment-search.component';
+import { ClientOverviewComponent } from './client-overview/client-overview.component';
+import { NavigationComponent } from './navigation/navigation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent,
+    AgendaComponent,
+    AppointmentSearchComponent,
+    ClientOverviewComponent,
+    NavigationComponent
   ],
   imports: [
     BrowserModule,
