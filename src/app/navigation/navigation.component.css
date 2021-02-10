@@ -1,5 +1,11 @@
 .nav-bar {
   text-decoration: none;
+  width: 100vw;
+  height: auto;
+}
+
+input{
+  margin-right: 5px;
 }
 
 .nav-bar a {
@@ -13,7 +19,16 @@
 }
 
 .company-logo {
-  width: 30%;
+  width: 10%;
   height: auto;
   display: inline-block;
+  float: left;
+}
+
+.left-nav-side {
+  float: left
+}
+
+.right-nav-side {
+  float: left
 }
