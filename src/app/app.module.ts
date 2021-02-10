@@ -16,6 +16,10 @@ import { AgendaComponent } from './agenda/agenda.component';
 import { AppointmentSearchComponent } from './appointment-search/appointment-search.component';
 import { ClientOverviewComponent } from './client-overview/client-overview.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ClockComponent } from './agenda/clock/clock.component';
+import { SideCalendarComponent } from './agenda/side-calendar/side-calendar.component';
+import { MainCalendarComponent } from './agenda/main-calendar/main-calendar.component';
+import { CoworkerOverviewComponent } from './agenda/coworker-overview/coworker-overview.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +30,11 @@ import { NavigationComponent } from './navigation/navigation.component';
     AgendaComponent,
     AppointmentSearchComponent,
     ClientOverviewComponent,
-    NavigationComponent
+    NavigationComponent,
+    ClockComponent,
+    SideCalendarComponent,
+    MainCalendarComponent,
+    CoworkerOverviewComponent
   ],
   imports: [
     BrowserModule,
