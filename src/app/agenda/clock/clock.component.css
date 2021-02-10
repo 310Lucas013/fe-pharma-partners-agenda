@@ -1,0 +1,25 @@
+.clock {
+  background: #4379ba;
+  float:left;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+  width: 200px;
+  max-height: 5vh;
+  height: 5vh;
+  margin: 10px;
+}
+
+.clock-date {
+  font-size: 14px;
+  display: inline-block;
+  width: 120px;
+  text-align: center;
+  padding-top: 11px;
+}
+
+.clock-time {
+  font-size: 30px;
+  width:80px;
+  float: right;
+}
