@@ -24,6 +24,7 @@ import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import {FlatpickrModule} from 'angularx-flatpickr';
+import { AppointmentModalComponent } from './agenda/main-calendar/appointment-modal/appointment-modal.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {FlatpickrModule} from 'angularx-flatpickr';
     ClockComponent,
     SideCalendarComponent,
     MainCalendarComponent,
-    CoworkerOverviewComponent
+    CoworkerOverviewComponent,
+    AppointmentModalComponent
   ],
   imports: [
     BrowserModule,
