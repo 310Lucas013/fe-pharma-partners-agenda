@@ -1,1 +1,53 @@
-<p>appointment-modal works!</p>
+<h1>Nieuwe Afspraak</h1>
+<div class="modal-type">
+  <h2>Soort afspraak</h2>
+  <br>
+  <mat-select placeholder="Geef de soort afspraak aan">
+    <mat-option class="front">patiënt afspraak</mat-option>
+  </mat-select>
+</div>
+<div class="modal-information">
+  <mat-label>ICON</mat-label>
+  <input matInput [matDatepicker]="picker">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker> Aanpassen
+  <br>
+  <mat-label>ICON</mat-label>
+  <mat-label>14:30 - 15:00</mat-label>
+  <mat-select placeholder="">
+    <mat-option class="front">10 min</mat-option>
+    <mat-option class="front">20 min</mat-option>
+    <mat-option class="front">30 min</mat-option>
+    <mat-option class="front">60 min</mat-option>
+  </mat-select> Aanpassen
+  <br>
+  <mat-label>ICON</mat-label>
+  <input placeholder="Zoek naar een locatie"> Aanpassen
+  <br>
+  <mat-label>ICON</mat-label>
+  <mat-label>Dr. W.Janssen</mat-label> Aanpassen
+</div>
+<div class="modal-patient">
+  <h2>patiënt zoeken</h2>
+  <input placeholder="Voor- of achternaam>"/>
+  <input placeholder="Straatnaam + huisnummer">
+  <input placeholder="Geboortedatum">
+  <input placeholder="Postcode">
+</div>
+<div class="modal-reason">
+  <h2>Reden van komst</h2>
+  <mat-select placeholder="Geef de reden van de afspraak aan">
+    <mat-option>ziekte</mat-option>
+  </mat-select>
+  <br>
+  <textarea placeholder="Vul de reden aan met vrije tekst"></textarea>
+</div>
+<div class="modal-attention">
+  <h2>Attentieregel</h2>
+  <br>
+  <textarea placeholder="Typ hier de attentieregel"></textarea>
+</div>
+<div class="modal-buttons">
+  <button>annuleren</button>
+  <button>opslaan</button>
+</div>
