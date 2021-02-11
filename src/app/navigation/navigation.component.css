@@ -1,25 +1,31 @@
 .nav-bar {
   text-decoration: none;
   width: 100vw;
-  height: auto;
+  height: 8vh;
 }
 
 input{
   margin-right: 5px;
+  margin-top: 1vh;
+  width: 15vw;
+  border-radius: 20px;
+
 }
 
 .nav-bar a {
   text-align: center;
   text-decoration: none;
   padding: 10px 20px;
-  background-color: black;
-  color: white;
-  border: red;
+  color: #cbced4;
   display: inline-block;
+  margin: 2px;
 }
 
+.nav-bar a:hover{
+  cursor :pointer;
+}
 .company-logo {
-  width: 10%;
+  width: 15%;
   height: auto;
   display: inline-block;
   float: left;
@@ -30,5 +36,6 @@ input{
 }
 
 .right-nav-side {
-  float: left
+  float: right;
+  margin-right: 2vw;
 }
