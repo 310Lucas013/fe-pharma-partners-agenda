@@ -1,13 +1,13 @@
 <div class="nav-bar">
-  <img class="company-logo container" src="assets/images/medicom-logo.jpg" alt="logo van het bedrijf medicom">
+  <img (click)="navigateToHome()" class="company-logo container" src="assets/images/medicom-logo.jpg"
+       alt="logo van het bedrijf medicom">
   <div class="left-nav-side">
-
     <input type="text" [(ngModel)]="searchBarText" value="typ hier om te zoeken" (toggle)="removeText()">
-    <a>Start</a>
-    <a>Agenda</a>
-    <a>Patiënten</a>
-    <a>Post</a>
-    <a>Support</a>
+    <a (click)="navigateToLogin()">Start</a>
+    <a (click)="navigateToAgenda()">Agenda</a>
+    <a (click)="navigateToClientOverview()">Patiënten</a>
+    <a (click)="navigateToPost()">Post</a>
+    <a (click)="navigateToSupport()">Support</a>
   </div>
 </div>
 <br/>
