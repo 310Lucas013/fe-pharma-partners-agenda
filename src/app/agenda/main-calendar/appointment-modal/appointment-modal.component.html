@@ -5,10 +5,9 @@
     <br>
     <div>
       <mat-select class="mat-select-width" placeholder="Kies hier de soort afspraak">
-        <mat-option value="patiënt afspraak">patiënt afspraak</mat-option>
+        <mat-option value="Patiënt afspraak">Patiënt afspraak</mat-option>
       </mat-select>
     </div>
-    <br>
   </div>
   <div class="modal-information">
     <span class="material-icons">date_range</span>
@@ -30,9 +29,8 @@
       <span class="material-icons">edit</span>
       Aanpassen
     </div>
-    <br>
     <span class="material-icons">location_on</span>
-    <input placeholder="Zoek naar een locatie">
+    <input matInput placeholder="Zoek naar een locatie">
     <div class="right-side">
       <span class="material-icons">edit</span>
       Aanpassen
@@ -46,15 +44,11 @@
     </div>
   </div>
   <div class="modal-patient">
-    <h2>Patiënt zoeken</h2>
-    <input placeholder="Voor- of achternaam>"/>
-    <br>
-    <input placeholder="Straatnaam + huisnummer">
-    <br>
-    <input placeholder="Geboortedatum">
-    <br>
-    <input placeholder="Postcode">
-
+    <h2><span class="material-icons">search</span>Patiënt zoeken</h2>
+    <input matInput class="input-patient" placeholder="Voor- of achternaam"/>
+    <input matInput class="input-patient" placeholder="Straatnaam + huisnummer">
+    <input matInput class="input-patient" placeholder="Geboortedatum">
+    <input matInput class="input-patient" placeholder="Postcode">
   </div>
   <br>
   <div class="modal-reason">
@@ -71,7 +65,7 @@
               placeholder="Typ hier de attentieregel"></textarea>
   </div>
   <div class="modal-buttons">
-    <button class="button-cancel" mat-button>annuleren</button>
-    <button class="button-save" mat-button>opslaan</button>
+    <button class="button-cancel" mat-button>Annuleren</button>
+    <button class="button-save" mat-button>Opslaan</button>
   </div>
 </div>
