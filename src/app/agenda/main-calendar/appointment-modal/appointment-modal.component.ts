@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppointmentModalComponent implements OnInit {
 
+  attentionLineText: string;
+
   constructor() { }
 
   ngOnInit(): void {
