@@ -6,9 +6,10 @@
 .container-left{
  float: left;
 margin: 2%;
+  margin-left: 10vw;
 }
 .body{
-  background-color: darkgrey;
-  height: 110vh;
+  background-color: #f3f3f9;
+  height: 144vh;
   width: 100vw;
 }

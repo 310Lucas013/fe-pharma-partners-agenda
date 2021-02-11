@@ -3,8 +3,9 @@
   text-align: center;
 }
 .body{
+  margin-top:10vh;
   background-color: white;
   border-radius: 5px;
   padding: 5%;
-  margin-bottom: 2%;;
+  margin-bottom: 9%;;
 }
