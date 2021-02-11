@@ -187,4 +187,8 @@ export class MainCalendarComponent implements OnInit {
   closeOpenMonthViewDay(): void {
     this.activeDayIsOpen = false;
   }
+
+  newAppointment(): void {
+    this.modal.open(this.modalContent, {size: 'lg'});
+  }
 }
