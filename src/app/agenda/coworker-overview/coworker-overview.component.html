@@ -1,7 +1,10 @@
-<h3>Medewerkers</h3>
-<input type="text" value="Filter op namen" [(ngModel)]="searchName" (ngModelChange)="search()">
-<mat-selection-list #coworkers>
-  <mat-list-option checkboxPosition="before" *ngFor="let coworker of coworkerShownList">
-    {{coworker}}
-  </mat-list-option>
-</mat-selection-list>
+<div class="body">
+  <h3>Medewerkers</h3>
+  <input type="text" value="Filter op namen" [(ngModel)]="searchName" (ngModelChange)="search()">
+  <mat-selection-list #coworkers>
+    <mat-list-option checkboxPosition="before" *ngFor="let coworker of coworkerShownList">
+      {{coworker}}
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+

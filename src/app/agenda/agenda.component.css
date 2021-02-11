@@ -1,0 +1,14 @@
+.container-right{
+  float: left;
+  margin: 2%;
+
+}
+.container-left{
+ float: left;
+margin: 2%;
+}
+.body{
+  background-color: darkgrey;
+  height: 110vh;
+  width: 100vw;
+}

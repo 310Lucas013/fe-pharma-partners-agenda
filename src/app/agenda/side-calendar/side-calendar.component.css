@@ -2,3 +2,9 @@
   width: 300px;
   text-align: center;
 }
+.body{
+  background-color: white;
+  border-radius: 5px;
+  padding: 5%;
+  margin-bottom: 2%;;
+}
