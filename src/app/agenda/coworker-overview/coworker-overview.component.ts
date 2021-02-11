@@ -7,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoworkerOverviewComponent implements OnInit {
 
-  coworkerList: string[] = ['M.De Graaf', 'J.Barendse', 'W.Jongeneel', 'M.Vermeer', 'P.Willemse', 'C.De Vries'];
-  coworkerShownList: string[] = this.coworkerList;
+  coworkerList: string[][] = [['M.De Graaf', 'Assistent'], ['J.Barendse', 'Huisarts'], ['W.Jongeneel', 'PharmaPartners Medewerker'], ['M.Vermeer', 'Huisarts']
+    , ['P.Willemse', 'Planner'], ['C.De Vries', 'Beheerder']];
+  coworkerShownList: string[][] = this.coworkerList;
 
   searchName: string;
 
@@ -17,9 +18,9 @@ export class CoworkerOverviewComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  filterItems(arr, query): string[] {
+  filterItems(arr, query): string[][] {
     return arr.filter(value => {
-      return value.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+      return value[0].toLowerCase().indexOf(query.toLowerCase()) !== -1;
     });
   }
 

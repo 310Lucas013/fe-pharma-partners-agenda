@@ -3,7 +3,7 @@
   <input type="text" value="Filter op namen" [(ngModel)]="searchName" (ngModelChange)="search()">
   <mat-selection-list #coworkers>
     <mat-list-option checkboxPosition="before" *ngFor="let coworker of coworkerShownList">
-      {{coworker}}
+      <span>{{coworker[0]}}</span><span class="function">  {{coworker[1]}}</span>
     </mat-list-option>
   </mat-selection-list>
 </div>
