@@ -1,11 +1,12 @@
 .calendar-wrapper{
   width: 300px;
+  height: 37vh;
   text-align: center;
 }
 .body{
   margin-top:10vh;
   background-color: white;
   border-radius: 5px;
-  padding: 5%;
+  padding-left: 2vw;
   margin-bottom: 9%;;
 }
