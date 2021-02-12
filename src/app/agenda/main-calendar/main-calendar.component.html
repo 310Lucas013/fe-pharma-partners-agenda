@@ -97,6 +97,6 @@
   </div>
 
   <ng-template #modalContent let-close="close">
-    <app-appointment-modal></app-appointment-modal>
+    <app-appointment-modal (addAppointmentEvent)="addEvent($event)"></app-appointment-modal>
   </ng-template>
 </div>
