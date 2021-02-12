@@ -15,5 +15,21 @@ pre {
 }
 
 .button-new-appointment {
+  background-color: #004496;
+  color: #ffffff;
+  border-radius: 10px;
+  width: 250px;
+  padding: 10px 0;
+  text-align: center;
+  float: right;
+}
+
+@media (min-width: 768px) {
+  .col-md-4 {
+    flex: 0 0 20%;
+  }
+}
+
+.row {
   margin-left: 10%;
 }
