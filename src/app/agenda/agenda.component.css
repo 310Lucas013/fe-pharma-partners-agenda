@@ -5,11 +5,11 @@
 }
 .container-left{
  float: left;
-margin: 2%;
-  margin-left: 10vw;
+  margin-top: 2%;
+  margin-left: 5vw;
 }
 .body{
   background-color: #f3f3f9;
-  height: 144vh;
+  height: 108vh;
   width: 100vw;
 }

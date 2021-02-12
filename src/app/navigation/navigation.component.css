@@ -4,12 +4,11 @@
   height: 8vh;
 }
 
-input{
+input {
   margin-right: 5px;
   margin-top: 1vh;
   width: 15vw;
   border-radius: 20px;
-
 }
 
 .nav-bar a {
@@ -21,14 +20,14 @@ input{
   margin: 2px;
 }
 
-.nav-bar a:hover{
-  cursor :pointer;
+.nav-bar a:hover {
+  cursor: pointer;
 }
+
 .company-logo {
-  width: 15%;
+  width: 90%;
   height: auto;
   display: inline-block;
-  float: left;
 }
 
 .left-nav-side {
@@ -38,4 +37,19 @@ input{
 .right-nav-side {
   float: right;
   margin-right: 2vw;
+}
+
+span {
+  vertical-align: center;
+  transform: translateY(30%);
+  margin-right: 2px;
+}
+
+.company-logo :hover {
+  cursor: pointer;
+}
+
+.company-logo-box {
+  width: 17vw;
+  margin-right: 1px;
 }
