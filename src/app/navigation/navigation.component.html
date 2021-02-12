@@ -1,6 +1,6 @@
 <div class="nav-bar">
-  <img (click)="navigateToHome()" class="company-logo container" src="assets/images/medicom-logo.jpg"
-       alt="logo van het bedrijf medicom">
+ <a class="company-logo-box"><img (click)="navigateToHome()" class="company-logo container" src="assets/images/medicom-logo.jpg"
+       alt="logo van het bedrijf medicom"></a>
   <input type="text" [(ngModel)]="searchBarText" value="typ hier om te zoeken" (toggle)="removeText()" placeholder="typ hier om te zoeken">
   <div class="right-nav-side">
 

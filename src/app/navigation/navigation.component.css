@@ -25,10 +25,9 @@ input{
   cursor :pointer;
 }
 .company-logo {
-  width: 15%;
+  width: 90%;
   height: auto;
   display: inline-block;
-  float: left;
 }
 
 .left-nav-side {
@@ -38,4 +37,12 @@ input{
 .right-nav-side {
   float: right;
   margin-right: 2vw;
+}
+
+.company-logo :hover{
+  cursor: pointer;
+}
+.company-logo-box{
+  width: 17vw;
+  margin-right: 1px;
 }

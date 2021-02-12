@@ -10,7 +10,8 @@ pre {
 .body{
   background-color: white;
   border-radius: 5px;
-  padding: 5%
+  padding: 5%;
+  width: 67vw;
 }
 
 .button-new-appointment {
