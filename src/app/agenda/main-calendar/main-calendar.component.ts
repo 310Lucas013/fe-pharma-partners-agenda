@@ -17,6 +17,7 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView,
 } from 'angular-calendar';
+import {Appointment} from '../../shared/class/appointment';
 
 const colors: any = {
   red: {
@@ -159,19 +160,17 @@ export class MainCalendarComponent implements OnInit {
     this.modal.open(this.modalContent, {size: 'lg'});
   }
 
-  addEvent(): void {
+  addEvent(appointment: Appointment): void {
     this.events = [
       ...this.events,
       {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
+        title: appointment.title,
+        start: appointment.start,
+        end: appointment.end,
+        color: appointment.color,
+        draggable: appointment.draggable,
+        resizable: appointment.resizable,
+        actions: this.actions
       },
     ];
   }
