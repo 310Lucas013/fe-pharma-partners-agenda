@@ -30,7 +30,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'nl': 1: [] : 5 }}</h3>
     </div>
     <div class="col-md-4">
       <div class="btn-group">
@@ -78,7 +78,14 @@
     </mwl-calendar-month-view>
     <mwl-calendar-week-view
       *ngSwitchCase="CalendarView.Week"
+      [daysInWeek]="5"
       [viewDate]="viewDate"
+      [hourSegments]="12"
+      [dayStartHour]="8"
+      [dayStartMinute]="0"
+      [dayEndHour]="17"
+      [dayEndMinute]="0"
+      [locale]="'nl'"
       [events]="events"
       [refresh]="refresh"
       (eventClicked)="handleEvent('Clicked', $event.event)"
@@ -88,8 +95,14 @@
     <mwl-calendar-day-view
       *ngSwitchCase="CalendarView.Day"
       [viewDate]="viewDate"
+      [hourSegments]="12"
+      [dayStartHour]="8"
+      [dayStartMinute]="0"
+      [dayEndHour]="17"
+      [dayEndMinute]="0"
       [events]="events"
       [refresh]="refresh"
+      [locale]="'nl'"
       (eventClicked)="handleEvent('Clicked', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
     >

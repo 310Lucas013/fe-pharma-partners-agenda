@@ -43,11 +43,11 @@ const colors: any = {
 export class MainCalendarComponent implements OnInit {
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
 
-  view: CalendarView = CalendarView.Month;
+  view: CalendarView = CalendarView.Week;
 
   CalendarView = CalendarView;
 
-  viewDate: Date = new Date();
+  viewDate: Date;
 
   modalData: {
     action: string;
@@ -118,6 +118,9 @@ export class MainCalendarComponent implements OnInit {
   activeDayIsOpen = true;
 
   constructor(private modal: NgbModal) {
+    this.viewDate = new Date();
+    this.viewDate.setDate(this.viewDate.getDate() - this.viewDate.getDay() + 1);
+
   }
 
   ngOnInit(): void {
