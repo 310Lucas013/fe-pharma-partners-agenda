@@ -1,6 +1,6 @@
-<body>
-  <div class="pw-login-control-container">
-    <table id="lc1_loginControl" style="width:100%;border-collapse:collapse;" cellspacing="0" cellpadding="0">
+<form (submit)="login()">
+  <div class="login-control-container">
+    <table id="loginControl" style="width:100%;border-collapse:collapse;" cellspacing="0" cellpadding="0">
       <tbody>
         <tr>
           <td>
@@ -16,9 +16,7 @@
                 </tbody>
               </table>
               <table>
-
                 <tbody>
-                  <form (submit)="login(credentials)">
                   <tr>
                     <td class="label">Gebruikersnaam</td>
                     <td class="input">
@@ -27,8 +25,8 @@
                     </td>
                   </tr>
                   <tr>
-                    <td class="pw-label">Wachtwoord</td>
-                    <td class="pw-input last">
+                    <td class="label">Wachtwoord</td>
+                    <td class="input last">
                       <input name="password" type="password" id="password" [(ngModel)]="credentials.password"
                         tabindex="1" class="input last">
                     </td>
@@ -45,7 +43,6 @@
                       <a id="resetpwd" href="">Wachtwoord vergeten?</a>
                     </td>
                   </tr>
-                  </form>
                 </tbody>
 
               </table>
@@ -77,4 +74,4 @@
       </tbody>
     </table>
   </div>
-</body>
+</form>

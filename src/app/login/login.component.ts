@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  credentials = {} as Credentials
+  credentials = {} as Credentials;
 
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -18,11 +18,11 @@ export class LoginComponent implements OnInit {
   }
 
   navigateToHome(): void {
-    this.router.navigate(['/home']);
+    // this.router.navigate(['/home']);
   }
 
-  login(cre : Credentials) {
-    this.authService.login(cre)
+  login(): void {
+    this.authService.login(this.credentials)
       .subscribe(data => this.router.navigate(['/home']),
         error => console.log(error));
   }

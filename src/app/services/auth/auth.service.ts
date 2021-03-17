@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import decode from 'jwt-decode';
 import { Credentials } from 'src/models/Credentials';
 
 const AUTH_API = 'http://localhost:4000/';
