@@ -1,0 +1,14 @@
+.body{
+  background-color: white;
+  border-radius: 5px;
+  padding: 5%
+}
+
+.function {
+  color: grey;
+}
+
+mat-selection-list {
+  max-height: 250px;
+  overflow: auto;
+}

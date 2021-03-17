@@ -1,0 +1,55 @@
+.nav-bar {
+  text-decoration: none;
+  width: 100vw;
+  height: 8vh;
+}
+
+input {
+  margin-right: 5px;
+  margin-top: 1vh;
+  width: 15vw;
+  border-radius: 20px;
+}
+
+.nav-bar a {
+  text-align: center;
+  text-decoration: none;
+  padding: 10px 20px;
+  color: #cbced4;
+  display: inline-block;
+  margin: 2px;
+}
+
+.nav-bar a:hover {
+  cursor: pointer;
+}
+
+.company-logo {
+  width: 90%;
+  height: auto;
+  display: inline-block;
+}
+
+.left-nav-side {
+  float: left
+}
+
+.right-nav-side {
+  float: right;
+  margin-right: 2vw;
+}
+
+span {
+  vertical-align: center;
+  transform: translateY(30%);
+  margin-right: 2px;
+}
+
+.company-logo :hover {
+  cursor: pointer;
+}
+
+.company-logo-box {
+  width: 17vw;
+  margin-right: 1px;
+}

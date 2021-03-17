@@ -1,0 +1,15 @@
+.container-right{
+  float: left;
+  margin: 2%;
+
+}
+.container-left{
+ float: left;
+  margin-top: 2%;
+  margin-left: 5vw;
+}
+.body{
+  background-color: #f3f3f9;
+  height: 108vh;
+  width: 100vw;
+}

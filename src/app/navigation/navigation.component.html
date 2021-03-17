@@ -1,0 +1,13 @@
+<div class="nav-bar">
+  <a class="company-logo-box"><img (click)="navigateToHome()" class="company-logo container" src="assets/images/medicom-logo.jpg"
+                                   alt="logo van het bedrijf medicom"></a>
+  <input type="text" [(ngModel)]="searchBarText" value="typ hier om te zoeken" (toggle)="removeText()" placeholder="typ hier om te zoeken"><span class="material-icons">search</span>
+  <div class="right-nav-side">
+
+    <a (click)="navigateToLogin()"><span class="material-icons">grid_view</span>Start</a>
+    <a (click)="navigateToAgenda()"><span class="material-icons">calendar_today</span>Agenda</a>
+    <a (click)="navigateToClientOverview()"><span class="material-icons">archive</span>Patiënten</a>
+    <a (click)="navigateToPost()"><span class="material-icons">local_shipping</span>Post </a>
+    <a (click)="navigateToSupport()"><span class="material-icons">headset_mic</span>Support</a>
+  </div>
+</div>

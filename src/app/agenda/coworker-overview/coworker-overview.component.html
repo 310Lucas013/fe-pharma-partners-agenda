@@ -1,0 +1,10 @@
+<div class="body">
+  <h3>Medewerkers</h3>
+  <input type="text" value="Filter op namen" [(ngModel)]="searchName" (ngModelChange)="search()">
+  <mat-selection-list #coworkers>
+    <mat-list-option checkboxPosition="before" *ngFor="let coworker of coworkerShownList">
+      <span>{{coworker[0]}}</span><span class="function">  {{coworker[1]}}</span>
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+
