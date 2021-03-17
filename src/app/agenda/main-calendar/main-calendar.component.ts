@@ -18,6 +18,7 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import {Appointment} from '../../shared/class/appointment';
+import {ActivatedRoute} from '@angular/router';
 
 const colors: any = {
   red: {
@@ -48,6 +49,8 @@ export class MainCalendarComponent implements OnInit {
   CalendarView = CalendarView;
 
   viewDate: Date;
+
+  id: number;
 
   modalData: {
     action: string;
@@ -117,9 +120,12 @@ export class MainCalendarComponent implements OnInit {
 
   activeDayIsOpen = true;
 
-  constructor(private modal: NgbModal) {
+  constructor(private modal: NgbModal, private route: ActivatedRoute) {
     this.viewDate = new Date();
     this.viewDate.setDate(this.viewDate.getDate() - this.viewDate.getDay() + 1);
+    this.route.params.subscribe(params => {
+      this.id = params.id;
+    });
 
   }
 
