@@ -1,3 +1,4 @@
+
 @media (max-width: 1024px) {
   .login-control-container {
     display: inline-block;
@@ -20,7 +21,7 @@
 
 @media (min-width: 1024px) {
   .wrapper {
-    background-image: url("~src/assets/images/login-background.jpg");
+    background-image: url("src/assets/images/login-background.jpg");
     background-position: left top;
     background-repeat: no-repeat;
     background-size: cover;
@@ -36,13 +37,13 @@
     height: 485px;
     background-color: rgba(60, 120, 216, 0.4);
     color: white;
-    font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
     padding: 20px 40px 0 40px;
   }
 }
 
 .login-container .logo {
-  background-image: url("~src/assets/images/login-logo.png");
+  background-image: url("src/assets/images/login-logo.png");
   background-position: left top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -93,7 +94,7 @@
   font-weight: 500;
 }
 
-.input.last {
+.input .last {
   margin-bottom: 0;
 }
 .reset-pwd {
