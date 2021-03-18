@@ -5,22 +5,22 @@
     <h2>Soort afspraak</h2>
     <br>
     <div>
-      <mat-select required [(ngModel)]="type" class="mat-select-width" placeholder="Kies hier de soort afspraak">
+      <mat-select required [(ngModel)]="appointment.type" class="mat-select-width" placeholder="Kies hier de soort afspraak">
         <mat-option  value="Patiënt afspraak">Patiënt afspraak</mat-option>
       </mat-select>
     </div>
   </div>
   <div class="modal-information">
     <span class="material-icons">date_range</span>
-    <mat-label [(ngModel)]="date">Dinsdag 11 november 2019</mat-label>
+    <mat-label [(ngModel)]="appointment.date">Dinsdag 11 november 2019</mat-label>
     <div class="right-side">
       <span class="material-icons">edit</span>
       Aanpassen
     </div>
     <br>
     <span class="material-icons">schedule</span>
-    <mat-label [(ngModel)]="time">14:30 - 15:00</mat-label>
-    <mat-select required [(ngModel)]="duration" class="mat-select-width" placeholder="Tijdsduur afspraak">
+    <mat-label [(ngModel)]="appointment.time">14:30 - 15:00</mat-label>
+    <mat-select required [(ngModel)]="appointment.duration" class="mat-select-width" placeholder="Tijdsduur afspraak">
       <mat-option value="10">10 min</mat-option>
       <mat-option value="20">20 min</mat-option>
       <mat-option value="30">30 min</mat-option>
@@ -31,14 +31,14 @@
       Aanpassen
     </div>
     <span class="material-icons">location_on</span>
-    <input required [(ngModel)]="location" matInput placeholder="Zoek naar een locatie">
+    <input required [(ngModel)]="appointment.location" matInput placeholder="Zoek naar een locatie">
     <div class="right-side">
       <span class="material-icons">edit</span>
       Aanpassen
     </div>
     <br>
     <span class="material-icons">person_add</span>
-    <mat-label [(ngModel)]="doctorName">Dr. W.Janssen</mat-label>
+    <mat-label [(ngModel)]="appointment.doctorName">Dr. W.Janssen</mat-label>
     <div class="right-side">
       <span class="material-icons">edit</span>
       Aanpassen
@@ -46,23 +46,23 @@
   </div>
   <div class="modal-patient">
     <h2><span class="material-icons">search</span>Patiënt zoeken</h2>
-    <input required [(ngModel)]="patientName" matInput class="input-patient" placeholder="Voor- of achternaam"/>
-    <input required [(ngModel)]="patientStreetNameNumber" matInput class="input-patient" placeholder="Straatnaam + huisnummer">
-    <input required [(ngModel)]="patientDateOfBirth" matInput class="input-patient" placeholder="Geboortedatum">
-    <input required [(ngModel)]="patientPostalCode" matInput class="input-patient" placeholder="Postcode">
+    <input required [(ngModel)]="appointment.patientName" matInput class="input-patient" placeholder="Voor- of achternaam"/>
+    <input required [(ngModel)]="appointment.patientStreetNameNumber" matInput class="input-patient" placeholder="Straatnaam + huisnummer">
+    <input required [(ngModel)]="appointment.patientDateOfBirth" matInput class="input-patient" placeholder="Geboortedatum">
+    <input required [(ngModel)]="appointment.patientPostalCode" matInput class="input-patient" placeholder="Postcode">
   </div>
   <br>
   <div class="modal-reason">
     <h2>Reden van komst</h2>
-    <mat-select required [(ngModel)]="reasonSelection" class="mat-select-width" placeholder="Geef de reden van de afspraak aan">
+    <mat-select required [(ngModel)]="appointment.reasonSelection" class="mat-select-width" placeholder="Geef de reden van de afspraak aan">
       <mat-option value="Ziekte">Ziekte</mat-option>
     </mat-select>
     <br>
-    <textarea [(ngModel)]="reasonText" class="text-area-width" placeholder="Vul de reden aan met vrije tekst"></textarea>
+    <textarea [(ngModel)]="appointment.reasonText" class="text-area-width" placeholder="Vul de reden aan met vrije tekst"></textarea>
   </div>
   <div class="modal-attention">
     <h2>Attentieregel</h2>
-    <textarea [(ngModel)]="attentionLineText" class="text-area-width"
+    <textarea [(ngModel)]="appointment.attentionLineText" class="text-area-width"
               placeholder="Typ hier de attentieregel"></textarea>
   </div>
   <div class="modal-buttons">

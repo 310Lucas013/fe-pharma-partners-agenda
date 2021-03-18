@@ -1,4 +1,4 @@
-export class Appointment {
+export interface AppointmentDto {
   title: string;
   start: Date;
   end: Date;
