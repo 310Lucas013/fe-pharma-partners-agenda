@@ -181,6 +181,11 @@ export class MainCalendarComponent implements OnInit {
     }
   }
 
+  resetViewDate(): void {
+    this.viewDate = new Date();
+    this.setMonday();
+  }
+
   setMonday(): void {
     this.viewDate.setDate(this.viewDate.getDate() - this.viewDate.getDay() + 1);
   }
