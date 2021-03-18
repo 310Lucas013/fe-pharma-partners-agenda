@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Credentials } from 'src/models/Credentials';
-import { AuthService } from '../services/auth/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {Credentials} from 'src/models/Credentials';
+import {AuthService} from '../services/auth/auth.service';
+import {TokenStorageService} from '../services/token-storage/token-storage.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ export class LoginComponent implements OnInit {
 
   credentials = {} as Credentials;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private tokenService: TokenStorageService) {
+  }
 
   ngOnInit(): void {
   }
@@ -22,8 +24,19 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    console.log(this.credentials);
     this.authService.login(this.credentials)
-      .subscribe(data => this.router.navigate(['/home']),
+      .subscribe(data => {
+        this.tokenService.saveToken(data.token);
+        this.router.navigate(['/agenda']);
+      },
+        error => console.log(error));
+  }
+
+  register(): void {
+    console.log(this.credentials);
+    this.authService.register(this.credentials)
+      .subscribe(
         error => console.log(error));
   }
 }
