@@ -1,11 +1,12 @@
 <div class="around">
+  <form (ngSubmit)="saveAppointment()">
   <h1>Nieuwe Afspraak</h1>
   <div class="modal-type">
     <h2>Soort afspraak</h2>
     <br>
     <div>
-      <mat-select [(ngModel)]="type" class="mat-select-width" placeholder="Kies hier de soort afspraak">
-        <mat-option value="Patiënt afspraak">Patiënt afspraak</mat-option>
+      <mat-select required [(ngModel)]="type" class="mat-select-width" placeholder="Kies hier de soort afspraak">
+        <mat-option  value="Patiënt afspraak">Patiënt afspraak</mat-option>
       </mat-select>
     </div>
   </div>
@@ -19,7 +20,7 @@
     <br>
     <span class="material-icons">schedule</span>
     <mat-label [(ngModel)]="time">14:30 - 15:00</mat-label>
-    <mat-select [(ngModel)]="duration" class="mat-select-width" placeholder="Tijdsduur afspraak">
+    <mat-select required [(ngModel)]="duration" class="mat-select-width" placeholder="Tijdsduur afspraak">
       <mat-option value="10">10 min</mat-option>
       <mat-option value="20">20 min</mat-option>
       <mat-option value="30">30 min</mat-option>
@@ -30,7 +31,7 @@
       Aanpassen
     </div>
     <span class="material-icons">location_on</span>
-    <input [(ngModel)]="location" matInput placeholder="Zoek naar een locatie">
+    <input required [(ngModel)]="location" matInput placeholder="Zoek naar een locatie">
     <div class="right-side">
       <span class="material-icons">edit</span>
       Aanpassen
@@ -45,15 +46,15 @@
   </div>
   <div class="modal-patient">
     <h2><span class="material-icons">search</span>Patiënt zoeken</h2>
-    <input [(ngModel)]="patientName" matInput class="input-patient" placeholder="Voor- of achternaam"/>
-    <input [(ngModel)]="patientStreetNameNumber" matInput class="input-patient" placeholder="Straatnaam + huisnummer">
-    <input [(ngModel)]="patientDateOfBirth" matInput class="input-patient" placeholder="Geboortedatum">
-    <input [(ngModel)]="patientPostalCode" matInput class="input-patient" placeholder="Postcode">
+    <input required [(ngModel)]="patientName" matInput class="input-patient" placeholder="Voor- of achternaam"/>
+    <input required [(ngModel)]="patientStreetNameNumber" matInput class="input-patient" placeholder="Straatnaam + huisnummer">
+    <input required [(ngModel)]="patientDateOfBirth" matInput class="input-patient" placeholder="Geboortedatum">
+    <input required [(ngModel)]="patientPostalCode" matInput class="input-patient" placeholder="Postcode">
   </div>
   <br>
   <div class="modal-reason">
     <h2>Reden van komst</h2>
-    <mat-select [(ngModel)]="reasonSelection" class="mat-select-width" placeholder="Geef de reden van de afspraak aan">
+    <mat-select required [(ngModel)]="reasonSelection" class="mat-select-width" placeholder="Geef de reden van de afspraak aan">
       <mat-option value="Ziekte">Ziekte</mat-option>
     </mat-select>
     <br>
@@ -66,6 +67,7 @@
   </div>
   <div class="modal-buttons">
     <button (click)="cancelAppointment()" class="button-cancel" mat-button>Annuleren</button>
-    <button (click)="saveAppointment()" class="button-save" mat-button>Opslaan</button>
+    <button type="submit" class="button-save" mat-button>Opslaan</button>
   </div>
+  </form>
 </div>
