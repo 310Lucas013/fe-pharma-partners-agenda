@@ -1,22 +1,8 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours,
-} from 'date-fns';
+import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {addDays, addHours, endOfMonth, isSameDay, isSameMonth, startOfDay, subDays,} from 'date-fns';
 import {Subject} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarView,
-} from 'angular-calendar';
+import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView,} from 'angular-calendar';
 import {Appointment} from '../../shared/class/appointment';
 import {ActivatedRoute} from '@angular/router';
 
@@ -122,7 +108,7 @@ export class MainCalendarComponent implements OnInit {
 
   constructor(private modal: NgbModal, private route: ActivatedRoute) {
     this.viewDate = new Date();
-    this.viewDate.setDate(this.viewDate.getDate() - this.viewDate.getDay() + 1);
+    this.setMonday();
     this.route.params.subscribe(params => {
       this.id = params.id;
     });
@@ -190,6 +176,19 @@ export class MainCalendarComponent implements OnInit {
 
   setView(view: CalendarView): void {
     this.view = view;
+    if (this.view === CalendarView.Week) {
+      this.setMonday();
+    }
+  }
+
+  setMonday(): void {
+    this.viewDate.setDate(this.viewDate.getDate() - this.viewDate.getDay() + 1);
+  }
+
+  setDayView(idk: any): void {
+    this.view = CalendarView.Day;
+    this.viewDate = idk.day.date;
+    console.log(idk);
   }
 
   closeOpenMonthViewDay(): void {
