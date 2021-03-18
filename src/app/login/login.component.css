@@ -13,14 +13,13 @@
     padding: 10px;
   }
 
-  body {
+  .wrapper {
     background-color: #808080;
     }
 }
 
-
 @media (min-width: 1024px) {
-  body {
+  .wrapper {
     background-image: url("~src/assets/images/login-background.jpg");
     background-position: left top;
     background-repeat: no-repeat;
