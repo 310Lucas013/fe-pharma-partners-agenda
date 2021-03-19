@@ -1,0 +1,9 @@
+<div class="wrapper">
+  <button class="close" mat-button >X</button>
+  <div class="header">Agenda kiezen</div>
+  <mat-nav-list>
+    <mat-list-item (click)="agenda(employee.id)" *ngFor="let employee of employees">
+      <div class="employee">{{employee.firstName + " " + employee.middleName + " " + employee.lastName }}</div>
+    </mat-list-item>
+  </mat-nav-list>
+</div>
