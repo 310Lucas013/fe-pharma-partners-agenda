@@ -1,0 +1,32 @@
+.wrapper{
+  background: white;
+  margin: 10% auto;
+  width: 25%;
+  border-style: solid;
+  border-width: 1px;
+}
+
+mat-nav-list{
+  width: 95%;
+  margin: 0 auto;
+}
+
+mat-list-item{
+  border-radius: 10px;
+  background-color: #4379ba;
+  margin: 2% 0;
+}
+
+.employee{
+  color: white;
+  text-align:center;
+  width: 50%;
+  margin: 0 auto
+}
+
+.header{
+  color: #4379ba;
+  padding: 10px ;
+  border-bottom: solid thin grey;
+  font-size: 25px;
+}
