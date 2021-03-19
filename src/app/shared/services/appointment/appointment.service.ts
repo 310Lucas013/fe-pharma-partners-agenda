@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AppointmentDto } from 'src/app/shared/dto/appointmentDto';
+import { AppointmentDto } from 'src/app/shared/dto/AppointmentDto';
 import { Observable } from 'rxjs';
 
 const API_KEY = 'http://localhost:5004/appointments';

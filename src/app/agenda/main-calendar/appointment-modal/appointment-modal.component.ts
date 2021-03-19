@@ -3,8 +3,11 @@ import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
 import { addDays, addHours, endOfMonth, startOfDay, subDays } from 'date-fns';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Appointment } from 'src/app/shared/class/appointment';
-import { AppointmentDto } from 'src/app/shared/dto/appointmentDto';
+import { AppointmentDto } from 'src/app/shared/dto/AppointmentDto';
 import { AppointmentService } from 'src/app/shared/services/appointment/appointment.service'
+import { DatePipe } from '@angular/common'
+import {timeInterval} from 'rxjs/operators';
+import {TimeNumbersPipe} from 'src/app/shared/pipes/time-numbers-pipe'
 
 @Component({
   selector: 'app-appointment-modal',
@@ -14,7 +17,11 @@ import { AppointmentService } from 'src/app/shared/services/appointment/appointm
 
 export class AppointmentModalComponent implements OnInit {
 
-  appointment = {} as AppointmentDto;
+  appointment : AppointmentDto;
+  date = new Date();
+  duration: number;
+  startTime: string;
+  endTime: string;
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 
@@ -44,6 +51,7 @@ export class AppointmentModalComponent implements OnInit {
   constructor(private modal: NgbModal, private appointmentService: AppointmentService) { }
 
   ngOnInit(): void {
+    this.appointment = new AppointmentDto()
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
@@ -61,4 +69,25 @@ export class AppointmentModalComponent implements OnInit {
     this.appointmentService.addAppointment(this.appointment).subscribe(data => { console.log(data) }, error => console.log(error));
   }
 
+  //TODO split up start time
+  // And endTime updates 1 tick too late
+  calcEndTime(): void {
+    if(this.startTime.includes(':') && this.duration != null){
+      let hours = Number(this.startTime.split(':')[0]);
+      let min = Number(this.startTime.split(':')[1]);
+      this.appointment.startTime = this.appointment.date;
+      this.appointment.startTime.setHours(hours);
+      this.appointment.startTime.setMinutes(min);
+      let startTime = this.appointment.startTime.getTime();
+      let tempTime : Date = this.appointment.startTime;
+      tempTime.setTime(startTime + this.duration * 60000);
+      this.endTime = tempTime.getHours().toString() + ":" + tempTime.getMinutes().toString();
+      this.appointment.endTime.setTime(startTime + this.duration * 60000); //60000 time ticks in a minute
+      console.log(this.appointment.endTime);
+    }
+  }
+
+  updateEndTime(): void {
+    console.log("AAAA")
+  }
 }
