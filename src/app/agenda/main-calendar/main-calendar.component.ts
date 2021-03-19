@@ -1,23 +1,10 @@
-import {Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours,
-} from 'date-fns';
+import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {addDays, addHours, endOfMonth, isSameDay, isSameMonth, startOfDay, subDays,} from 'date-fns';
 import {Subject} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarView,
-} from 'angular-calendar';
+import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView,} from 'angular-calendar';
 import {Appointment} from '../../shared/class/appointment';
+import {ActivatedRoute} from '@angular/router';
 
 const colors: any = {
   red: {
@@ -43,11 +30,13 @@ const colors: any = {
 export class MainCalendarComponent implements OnInit {
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
 
-  view: CalendarView = CalendarView.Month;
+  view: CalendarView = CalendarView.Week;
 
   CalendarView = CalendarView;
 
-  viewDate: Date = new Date();
+  viewDate: Date;
+
+  id: number;
 
   modalData: {
     action: string;
@@ -117,7 +106,13 @@ export class MainCalendarComponent implements OnInit {
 
   activeDayIsOpen = true;
 
-  constructor(private modal: NgbModal) {
+  constructor(private modal: NgbModal, private route: ActivatedRoute) {
+    this.viewDate = new Date();
+    this.setMonday();
+    this.route.params.subscribe(params => {
+      this.id = params.id;
+    });
+
   }
 
   ngOnInit(): void {
@@ -181,6 +176,19 @@ export class MainCalendarComponent implements OnInit {
 
   setView(view: CalendarView): void {
     this.view = view;
+    if (this.view === CalendarView.Week) {
+      this.setMonday();
+    }
+  }
+
+  setMonday(): void {
+    this.viewDate.setDate(this.viewDate.getDate() - this.viewDate.getDay() + 1);
+  }
+
+  setDayView(idk: any): void {
+    this.view = CalendarView.Day;
+    this.viewDate = idk.day.date;
+    console.log(idk);
   }
 
   closeOpenMonthViewDay(): void {

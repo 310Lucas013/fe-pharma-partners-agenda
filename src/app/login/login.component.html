@@ -1,69 +1,79 @@
-<div class="pw-login-control-container">
-  <table id="lc1_loginControl" style="width:100%;border-collapse:collapse;" cellspacing="0" cellpadding="0">
-    <tbody>
-    <tr>
-      <td>
-        <div class="login-container">
+<div class="wrapper">
+  <form (submit)="login()">
+    <div class="login-control-container">
+      <table id="loginControl" style="width:100%;border-collapse:collapse;" cellspacing="0" cellpadding="0">
+        <tbody>
+          <tr>
+            <td>
+              <div class="login-container">
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="logo"></div>
+                      </td>
+                      <td class="header">Welkom op mijn.pharmapartners.nl</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td class="label">Gebruikersnaam</td>
+                      <td class="input">
+                        <input name="username" type="text" id="username" [(ngModel)]="credentials.username" tabindex="1"
+                          class="input">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="label">Wachtwoord</td>
+                      <td class="input last">
+                        <input name="password" type="password" id="password" [(ngModel)]="credentials.password"
+                          tabindex="1" class="input last">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td class="submit">
+                        <input type="submit" name="login" value="Inloggen" id="login" class="loginButton">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td class="reset-pwd">
+                        <a id="resetpwd" href="">Wachtwoord vergeten?</a>
+                      </td>
+                    </tr>
+                  </tbody>
 
-          <table>
-            <tbody>
-            <tr>
-              <td>
-                <div class="logo"></div>
-              </td>
-              <td class="header">Welkom op mijn.pharmapartners.nl</td>
-            </tr>
-            </tbody>
-          </table>
-          <table>
-            <tbody>
-            <tr>
-              <td class="label">Gebruikersnaam</td>
-              <td class="input">
-                <input name="username" type="text" id="username" tabindex="1" class="input"></td>
-            </tr>
-            <tr>
-              <td class="pw-label">Wachtwoord</td>
-              <td class="pw-input last">
-                <input name="password" type="password" id="password" tabindex="1" class="input last"></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td class="submit">
-                <input type="submit" name="login" value="Inloggen" id="login" class="loginButton"></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td class="reset-pwd">
-                <a id="resetpwd" href="">Wachtwoord vergeten?</a>
-              </td>
-            </tr>
-            </tbody>
-          </table>
+                </table>
 
-          <div class="error-message">
-            <span id="failuretext" class="login-error-message"></span>
-          </div>
+                <div class="error-message">
+                  <span id="failuretext" class="login-error-message"></span>
+                </div>
 
-          <div class="description">
-            <b>Heeft u nog geen inloggegevens of bent u uw wachtwoord vergeten?</b>
-            <ul>
-              <li>Bent u een medewerker in een praktijk of apotheek? De praktijkhouder of apotheker kan inloggegevens
-                voor u
-                aanmaken en beheren.
-              </li>
-              <li>Bent u zelf praktijkhouder of apotheker?
-                Afhankelijk van uw situatie kan uw zorggroep / keten inloggegevens voor u
-                aanmaken of doet PharmaPartners dat voor u.
-              </li>
-              <li>Werkt u bij een zorggroep of keten? Dan maakt PharmaPartners een account voor u aan.</li>
-            </ul>
-            <b>Contact met PharmaPartners?
-              Bel: 088 688 88 00</b>
-          </div>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+                <div class="description">
+                  <b>Heeft u nog geen inloggegevens of bent u uw wachtwoord vergeten?</b>
+                  <ul>
+                    <li>Bent u een medewerker in een praktijk of apotheek? De praktijkhouder of apotheker kan
+                      inloggegevens
+                      voor u
+                      aanmaken en beheren.
+                    </li>
+                    <li>Bent u zelf praktijkhouder of apotheker?
+                      Afhankelijk van uw situatie kan uw zorggroep / keten inloggegevens voor u
+                      aanmaken of doet PharmaPartners dat voor u.
+                    </li>
+                    <li>Werkt u bij een zorggroep of keten? Dan maakt PharmaPartners een account voor u aan.</li>
+                  </ul>
+                  <b>Contact met PharmaPartners?
+                    Bel: 088 688 88 00</b>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
 </div>

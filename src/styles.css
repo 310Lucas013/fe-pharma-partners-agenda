@@ -4,3 +4,10 @@
 .cdk-global-overlay-wrapper, .cdk-overlay-container {
   z-index: 10000 !important;
 }
+
+html,
+.wrapper, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
