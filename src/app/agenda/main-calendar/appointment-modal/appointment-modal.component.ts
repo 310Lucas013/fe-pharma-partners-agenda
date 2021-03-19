@@ -1,8 +1,7 @@
 import {Component, OnInit, Output, TemplateRef, ViewChild, EventEmitter} from '@angular/core';
-import {CalendarEvent, CalendarEventAction} from 'angular-calendar';
-import {addDays, addHours, endOfMonth, startOfDay, subDays} from 'date-fns';
+import {CalendarEvent} from 'angular-calendar';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Appointment} from '../../../shared/class/appointment';
+import {Appointment} from '../../../shared/models/appointment';
 
 @Component({
   selector: 'app-appointment-modal',
@@ -68,25 +67,25 @@ export class AppointmentModalComponent implements OnInit {
 
   saveAppointment(): void {
     const appointment = new Appointment();
-    appointment.title = 'Ziek';
-    appointment.start = new Date();
-    appointment.end = new Date();
-    appointment.color = this.colors.blue;
-    appointment.draggable = false;
-    appointment.resizable = {beforeStart: true, afterEnd: true};
-    appointment.type = this.type;
-    appointment.date = this.date;
-    appointment.time = this.time;
-    appointment.duration = this.duration;
-    appointment.location = this.location;
-    appointment.doctorName = this.doctorName;
-    appointment.patientName = this.patientName;
-    appointment.patientStreetNameNumber = this.patientStreetNameNumber;
-    appointment.patientDateOfBirth = this.patientDateOfBirth;
-    appointment.patientPostalCode = this.patientPostalCode;
-    appointment.reasonSelection = this.reasonSelection;
-    appointment.reasonText = this.reasonText;
-    appointment.attentionLineText = this.attentionLineText;
+    // appointment.title = 'Ziek';
+    // appointment.start = new Date();
+    // appointment.end = new Date();
+    // appointment.color = this.colors.blue;
+    // appointment.draggable = false;
+    // appointment.resizable = {beforeStart: true, afterEnd: true};
+    // appointment.type = this.type;
+    // appointment.date = this.date;
+    // appointment.time = this.time;
+    // appointment.duration = this.duration;
+    // appointment.location = this.location;
+    // appointment.doctorName = this.doctorName;
+    // appointment.patientName = this.patientName;
+    // appointment.patientStreetNameNumber = this.patientStreetNameNumber;
+    // appointment.patientDateOfBirth = this.patientDateOfBirth;
+    // appointment.patientPostalCode = this.patientPostalCode;
+    // appointment.reasonSelection = this.reasonSelection;
+    // appointment.reasonText = this.reasonText;
+    // appointment.attentionLineText = this.attentionLineText;
     this.addAppointmentEvent.emit(appointment);
   }
 

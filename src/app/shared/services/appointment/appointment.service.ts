@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Appointment} from '../../class/appointment';
+import {Appointment} from '../../models/appointment';
 import {Observable} from 'rxjs';
+import {environment} from '../../../../environments/environment';
 
 const AUTH_API = 'http://localhost:5000/';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({'Content-Type': 'application/json'}),
 };
 
 @Injectable({
@@ -14,35 +15,14 @@ const httpOptions = {
 })
 export class AppointmentService {
 
-  constructor(
-    private http: HttpClient
-  ) { }
-
-  login(appointment: Appointment): Observable<any> {
-    return this.http.post(
-      AUTH_API + 'create',
-      {
-        title: appointment.title,
-        start: appointment.start,
-        end: appointment.end,
-        color: appointment.color,
-        draggable: appointment.draggable,
-        resizable: appointment.resizable,
-        type: appointment.type,
-        date: appointment.date,
-        time: appointment.time,
-        duration: appointment.duration,
-        location: appointment.location,
-        doctorName: appointment.doctorName,
-        patientName: appointment.patientName,
-        patientStreetNameNumber: appointment.patientStreetNameNumber,
-        patientDateOfBirth: appointment.patientDateOfBirth,
-        patientPostalCode: appointment.patientPostalCode,
-        reasonSelection: appointment.reasonSelection,
-        reasonText: appointment.reasonText,
-        attentionLineText: appointment.attentionLineText
-      },
-      httpOptions
-    );
+  constructor(private http: HttpClient) {
   }
+
+  public source = environment.appointmentApi + '/appointments';
+
+  getAppointmentsByEmployeeId(employeeId: number): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(this.source + '/employee-id/' + employeeId);
+  }
+
+
 }

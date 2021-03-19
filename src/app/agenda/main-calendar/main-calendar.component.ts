@@ -1,10 +1,11 @@
 import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {addDays, addHours, endOfMonth, isSameDay, isSameMonth, startOfDay, subDays,} from 'date-fns';
+import {addDays, addHours, endOfMonth, isSameDay, isSameMonth, startOfDay, subDays} from 'date-fns';
 import {Subject} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView,} from 'angular-calendar';
-import {Appointment} from '../../shared/class/appointment';
+import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
+import {Appointment} from '../../shared/models/appointment';
 import {ActivatedRoute} from '@angular/router';
+import {AppointmentService} from '../../shared/services/appointment/appointment.service';
 
 const colors: any = {
   red: {
@@ -42,6 +43,8 @@ export class MainCalendarComponent implements OnInit {
     action: string;
     event: CalendarEvent;
   };
+
+  appointments: Appointment[];
 
   actions: CalendarEventAction[] = [
     {
@@ -106,13 +109,19 @@ export class MainCalendarComponent implements OnInit {
 
   activeDayIsOpen = true;
 
-  constructor(private modal: NgbModal, private route: ActivatedRoute) {
+  constructor(private modal: NgbModal, private route: ActivatedRoute, private appointmentService: AppointmentService) {
     this.viewDate = new Date();
     this.setMonday();
     this.route.params.subscribe(params => {
       this.id = params.id;
     });
-
+    this.appointmentService.getAppointmentsByEmployeeId(1).subscribe(app => {
+      console.log(app);
+      this.appointments = app;
+      console.log(this.appointments);
+    });
+    // todo if the id is send and received comment line above, uncomment line below.
+    // this.appointmentService.getAppointmentsByEmployeeId(this.id);
   }
 
   ngOnInit(): void {
@@ -156,18 +165,18 @@ export class MainCalendarComponent implements OnInit {
   }
 
   addEvent(appointment: Appointment): void {
-    this.events = [
-      ...this.events,
-      {
-        title: appointment.title,
-        start: appointment.start,
-        end: appointment.end,
-        color: appointment.color,
-        draggable: appointment.draggable,
-        resizable: appointment.resizable,
-        actions: this.actions
-      },
-    ];
+    // this.events = [
+    //   ...this.events,
+    //   {
+        // title: appointment.title,
+        // start: appointment.start,
+        // end: appointment.end,
+        // color: appointment.color,
+        // draggable: appointment.draggable,
+        // resizable: appointment.resizable,
+    //     actions: this.actions
+    //   },
+    // ];
   }
 
   deleteEvent(eventToDelete: CalendarEvent): void {
