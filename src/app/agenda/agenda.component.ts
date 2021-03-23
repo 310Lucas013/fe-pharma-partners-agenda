@@ -8,18 +8,22 @@ import {MainCalendarComponent} from './main-calendar/main-calendar.component';
 })
 export class AgendaComponent implements OnInit {
 
-  @ViewChild('main-calendar-component') mainCalendarComponent: MainCalendarComponent;
+  @ViewChild('mainCalendarComponent') mainCalendarComponent: MainCalendarComponent;
 
   selectedDate: Date;
 
-  constructor() { }
+  constructor() {
+    this.selectedDate = new Date();
+  }
 
   ngOnInit(): void {
   }
 
   dateSelectionChanged(date: Date): void {
     this.selectedDate = date;
-    this.mainCalendarComponent.updatedSelectionDate();
+    setTimeout(() => {
+      this.mainCalendarComponent.updatedSelectionDate();
+    }, 0);
   }
 
 }

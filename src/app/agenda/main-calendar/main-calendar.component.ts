@@ -31,13 +31,11 @@ const colors: any = {
 export class MainCalendarComponent implements OnInit {
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
 
-  @Input() selectedDate: Date;
+  @Input() viewDate: Date;
 
   view: CalendarView = CalendarView.Week;
 
   CalendarView = CalendarView;
-
-  viewDate: Date;
 
   id: number;
 
@@ -98,9 +96,10 @@ export class MainCalendarComponent implements OnInit {
     {
       start: addHours(startOfDay(new Date()), 2),
       end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
+      title: '08:50      P. Peterson     Ik heb het gevoel alsof ik dood aan het gaan ben',
       color: colors.yellow,
       actions: this.actions,
+      cssClass: 'calendar-gray',
       resizable: {
         beforeStart: true,
         afterEnd: true,
@@ -216,6 +215,9 @@ export class MainCalendarComponent implements OnInit {
   }
 
   updatedSelectionDate(): void {
-    console.log(this.selectedDate);
+    if (this.view === CalendarView.Week) {
+      this.setMonday();
+    }
+    this.refresh.next();
   }
 }
