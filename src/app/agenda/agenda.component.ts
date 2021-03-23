@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MainCalendarComponent} from './main-calendar/main-calendar.component';
 
 @Component({
   selector: 'app-agenda',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgendaComponent implements OnInit {
 
+  @ViewChild('main-calendar-component') mainCalendarComponent: MainCalendarComponent;
+
+  selectedDate: Date;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  dateSelectionChanged(date: Date): void {
+    this.selectedDate = date;
+    this.mainCalendarComponent.updatedSelectionDate();
   }
 
 }

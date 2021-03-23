@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {addDays, addHours, endOfMonth, isSameDay, isSameMonth, startOfDay, subDays} from 'date-fns';
 import {Subject} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
@@ -30,6 +30,8 @@ const colors: any = {
 })
 export class MainCalendarComponent implements OnInit {
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
+
+  @Input() selectedDate: Date;
 
   view: CalendarView = CalendarView.Week;
 
@@ -211,5 +213,9 @@ export class MainCalendarComponent implements OnInit {
 
   newAppointment(): void {
     this.modal.open(this.modalContent, {size: 'lg'});
+  }
+
+  updatedSelectionDate(): void {
+    console.log(this.selectedDate);
   }
 }
