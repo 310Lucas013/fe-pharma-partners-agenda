@@ -11,15 +11,31 @@ import {Employee} from '../shared/class/employee';
 export class AgendaEmployeeComponent implements OnInit {
 
   employees: Employee[] ;
+  message: string;
 
   constructor(private router: Router, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.getEmployees();
+
   }
 
   getEmployees(): void {
-    this.http.get<Employee[]>('http://localhost:5001/employees/all').subscribe(response => this.employees = response);
+    this.http.get<Employee[]>('http://localhost:5001/employees/all').subscribe(response => { if (response.length === 0){
+                                                                                                        this.message = 'Er zijn geen accounts.';}
+                                                                                                      else {
+                                                                                                        this.message = 'Accounts:';
+                                                                                                        this.employees = response;
+                                                                                                      }});
+  }
+
+  test(employees: Employee[]): void{
+    if (employees.length === 0){
+      this.message = 'Er zijn geen accounts.';
+    }
+    else {
+      this.employees = employees;
+    }
   }
 
 
