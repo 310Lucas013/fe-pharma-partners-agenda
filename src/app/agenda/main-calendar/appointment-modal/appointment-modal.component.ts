@@ -57,8 +57,8 @@ export class AppointmentModalComponent implements OnInit {
 
   saveAppointment(): void {
     console.log(this.appointment);
-    //this.addAppointmentEvent.emit(this.appointment);
-    this.appointmentService.addAppointment(this.appointment).subscribe(data => { console.log(data) }, error => console.log(error));
+    // this.addAppointmentEvent.emit(this.appointment);
+    this.appointmentService.addAppointment(this.appointment).subscribe(data => { console.log(data); }, error => console.log(error));
   }
 
 }
