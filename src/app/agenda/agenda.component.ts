@@ -14,7 +14,9 @@ export class AgendaComponent implements OnInit {
 
   constructor() {
     this.selectedDate = new Date();
-  }
+    setTimeout(() => {
+      this.mainCalendarComponent.updatedSelectionDate();
+    }, 0);  }
 
   ngOnInit(): void {
   }
