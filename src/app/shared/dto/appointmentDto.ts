@@ -1,21 +1,21 @@
 export interface AppointmentDto {
-  //appointment service
+  // appointment service
   appointmentTypeName: string;
   startTime: Date;
   endTime: Date;
   reasonTypeName: string;
   reason: string;
   attention: string;
-  //idfk
+  // idfk
   type: string;
   date: string;
   time: string;
   duration: number;
-  //employee service
+  // employee service
   employeeId: number;
-  //patient service
-  patientId: number
-  //location service
+  // patient service
+  patientId: number;
+  // location service
   location: string;
   patientStreetNameNumber: string;
   patientPostalCode: string;

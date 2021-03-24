@@ -18,7 +18,7 @@ export class AppointmentService {
     private http: HttpClient
   ) { }
 
-  addAppointment(appointment: AppointmentDto) : Observable<any> {
-    return this.http.post<AppointmentDto>(API_KEY + "/add", appointment, httpOptions);
+  addAppointment(appointment: AppointmentDto): Observable<any> {
+    return this.http.post<AppointmentDto>(API_KEY + '/add', appointment, httpOptions);
   }
 }
