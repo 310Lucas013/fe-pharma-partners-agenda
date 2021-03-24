@@ -6,14 +6,15 @@ import {LoginComponent} from './login/login.component';
 import {AppointmentSearchComponent} from './appointment-search/appointment-search.component';
 import {AgendaComponent} from './agenda/agenda.component';
 import {ClientOverviewComponent} from './client-overview/client-overview.component';
+import {AuthguardService} from './shared/services/authGuard/authguard.service';
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'agenda', component: AgendaComponent},
-  {path: 'appointmentsearch', component: AppointmentSearchComponent},
-  {path: 'clientoverview', component: ClientOverviewComponent},
+  {path: 'agenda', component: AgendaComponent, canActivate: [AuthguardService]},
+  {path: 'appointmentsearch', component: AppointmentSearchComponent, canActivate: [AuthguardService]},
+  {path: 'clientoverview', component: ClientOverviewComponent, canActivate: [AuthguardService]},
   {path: '**', component: PageNotFoundComponent}
 ];
 

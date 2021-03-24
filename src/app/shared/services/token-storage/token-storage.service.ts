@@ -22,4 +22,11 @@ export class TokenStorageService {
     sessionStorage.clear();
     window.location.reload();
   }
+
+  public getUsername(): string {
+    let jwtData = this.getToken().split('.')[1];
+    let decodedJwtJsonData = window.atob(jwtData);
+    let decodedJwtData = JSON.parse(decodedJwtJsonData);
+    return decodedJwtData['sub'];
+  }
 }
