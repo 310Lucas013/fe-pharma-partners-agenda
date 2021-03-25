@@ -35,7 +35,7 @@ export class AppointmentModalComponent implements OnInit {
 
   modalData: {
     action: string;
-    event: CalendarEvent;
+    event: CalendarEvent; 
   };
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
@@ -58,7 +58,7 @@ export class AppointmentModalComponent implements OnInit {
   saveAppointment(): void {
     console.log(this.appointment);
     // this.addAppointmentEvent.emit(this.appointment);
-    this.appointmentService.addAppointment(this.appointment).subscribe(data => { console.log(data); }, error => console.log(error));
+    //this.appointmentService.addAppointment(this.appointment).subscribe(data => { console.log(data); }, error => console.log(error));
   }
 
 }
