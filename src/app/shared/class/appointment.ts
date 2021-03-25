@@ -8,6 +8,7 @@ export class Appointment {
     beforeStart: boolean,
     afterEnd: boolean
   };
+
   type: string;
   date: string;
   time: string;
@@ -21,5 +22,4 @@ export class Appointment {
   reasonSelection: string;
   reasonText: string;
   attentionLineText: string;
-
 }
