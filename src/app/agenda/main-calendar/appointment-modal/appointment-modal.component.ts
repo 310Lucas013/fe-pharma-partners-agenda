@@ -3,7 +3,7 @@ import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
 import { addDays, addHours, endOfMonth, startOfDay, subDays } from 'date-fns';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Appointment } from 'src/app/shared/class/appointment';
-import { AppointmentDto } from 'src/app/shared/dto/appointmentDto';
+import { Appointmentdto } from 'src/app/shared/dto/appointmentdto';
 import { AppointmentService } from 'src/app/shared/services/appointment/appointment.service'
 
 @Component({
@@ -14,7 +14,7 @@ import { AppointmentService } from 'src/app/shared/services/appointment/appointm
 
 export class AppointmentModalComponent implements OnInit {
 
-  appointment = {} as AppointmentDto;
+  appointment = {} as Appointment;
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 

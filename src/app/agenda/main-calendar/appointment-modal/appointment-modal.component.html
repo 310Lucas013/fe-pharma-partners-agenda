@@ -1,81 +1,81 @@
-<!--<div class="around">-->
-<!--  <form (ngSubmit)="saveAppointment()">-->
-<!--    <h1>Nieuwe Afspraak</h1>-->
-<!--    <div class="modal-type">-->
-<!--      <h2>Soort afspraak</h2>-->
-<!--      <br>-->
-<!--      <div>-->
-<!--        <mat-select name="type" required [(ngModel)]="appointment.type" class="mat-select-width"-->
-<!--          placeholder="Kies hier de soort afspraak">-->
-<!--          <mat-option value="Patiënt afspraak">Patiënt afspraak</mat-option>-->
-<!--        </mat-select>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="modal-information">-->
-<!--      <span class="material-icons">date_range</span>-->
-<!--      <mat-label name="date" [(ngModel)]="appointment.date">Dinsdag 11 november 2019</mat-label>-->
-<!--      <div class="right-side">-->
-<!--        <span class="material-icons">edit</span>-->
-<!--        Aanpassen-->
-<!--      </div>-->
-<!--      <br>-->
-<!--      <span class="material-icons">schedule</span>-->
-<!--      <mat-label name="time" [(ngModel)]="appointment.time">14:30 - 15:00</mat-label>-->
-<!--      <mat-select name="duration" required [(ngModel)]="appointment.duration" class="mat-select-width"-->
-<!--        placeholder="Tijdsduur afspraak">-->
-<!--        <mat-option value="10">10 min</mat-option>-->
-<!--        <mat-option value="20">20 min</mat-option>-->
-<!--        <mat-option value="30">30 min</mat-option>-->
-<!--        <mat-option value="60">60 min</mat-option>-->
-<!--      </mat-select>-->
-<!--      <div class="right-side">-->
-<!--        <span class="material-icons">edit</span>-->
-<!--        Aanpassen-->
-<!--      </div>-->
-<!--      <span class="material-icons">location_on</span>-->
-<!--      <input name="location" required [(ngModel)]="appointment.location" matInput placeholder="Zoek naar een locatie">-->
-<!--      <div class="right-side">-->
-<!--        <span class="material-icons">edit</span>-->
-<!--        Aanpassen-->
-<!--      </div>-->
-<!--      <br>-->
-<!--      <span class="material-icons">person_add</span>-->
-<!--      <mat-label [(ngModel)]="appointment.doctorName">Dr. W.Janssen</mat-label>-->
-<!--      <div class="right-side">-->
-<!--        <span class="material-icons">edit</span>-->
-<!--        Aanpassen-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="modal-patient">-->
-<!--      <h2><span class="material-icons">search</span>Patiënt zoeken</h2>-->
-<!--      <input name="patientName" required [(ngModel)]="appointment.patientPostalCode" matInput class="input-patient"-->
-<!--        placeholder="Voor- of achternaam" />-->
-<!--      <input name="patientStreetNameNumber" required [(ngModel)]="appointment.patientStreetNameNumber" matInput-->
-<!--        class="input-patient" placeholder="Straatnaam + huisnummer">-->
-<!--      <input name="patientDateOfBirth" required [(ngModel)]="appointment.date" matInput-->
-<!--        class="input-patient" placeholder="Geboortedatum">-->
-<!--      <input name="patientPostalCode" required [(ngModel)]="appointment.patientPostalCode" matInput-->
-<!--        class="input-patient" placeholder="Postcode">-->
-<!--    </div>-->
-<!--    <br>-->
-<!--    <div class="modal-reason">-->
-<!--      <h2>Reden van komst</h2>-->
-<!--      <mat-select name="reasonSelection" required [(ngModel)]="appointment.reasonTypeName" class="mat-select-width"-->
-<!--        placeholder="Geef de reden van de afspraak aan">-->
-<!--        <mat-option value="Ziekte">Ziekte</mat-option>-->
-<!--      </mat-select>-->
-<!--      <br>-->
-<!--      <textarea name="reasonText" [(ngModel)]="appointment.reason" class="text-area-width"-->
-<!--        placeholder="Vul de reden aan met vrije tekst"></textarea>-->
-<!--    </div>-->
-<!--    <div class="modal-attention">-->
-<!--      <h2>Attentieregel</h2>-->
-<!--      <textarea name="attentionLineText" [(ngModel)]="appointment.attention" class="text-area-width"-->
-<!--        placeholder="Typ hier de attentieregel"></textarea>-->
-<!--    </div>-->
-<!--    <div class="modal-buttons">-->
-<!--      <button (click)="cancelAppointment()" class="button-cancel" mat-button>Annuleren</button>-->
-<!--      <button type="submit" class="button-save" mat-button>Opslaan</button>-->
-<!--    </div>-->
-<!--  </form>-->
-<!--</div>-->
+<div class="around">
+  <form (ngSubmit)="saveAppointment()">
+    <h1>Nieuwe Afspraak</h1>
+    <div class="modal-type">
+      <h2>Soort afspraak</h2>
+      <br>
+      <div>
+        <mat-select name="type" required [(ngModel)]="appointment.type" class="mat-select-width"
+          placeholder="Kies hier de soort afspraak">
+          <mat-option value="Patiënt afspraak">Patiënt afspraak</mat-option>
+        </mat-select>
+      </div>
+    </div>
+    <div class="modal-information">
+      <span class="material-icons">date_range</span>
+      <mat-label name="date" [(ngModel)]="appointment.date">Dinsdag 11 november 2019</mat-label>
+      <div class="right-side">
+        <span class="material-icons">edit</span>
+        Aanpassen
+      </div>
+      <br>
+      <span class="material-icons">schedule</span>
+      <mat-label name="time" [(ngModel)]="appointment.time">14:30 - 15:00</mat-label>
+      <mat-select name="duration" required [(ngModel)]="appointment.duration" class="mat-select-width"
+        placeholder="Tijdsduur afspraak">
+        <mat-option value="10">10 min</mat-option>
+        <mat-option value="20">20 min</mat-option>
+        <mat-option value="30">30 min</mat-option>
+        <mat-option value="60">60 min</mat-option>
+      </mat-select>
+      <div class="right-side">
+        <span class="material-icons">edit</span>
+        Aanpassen
+      </div>
+      <span class="material-icons">location_on</span>
+      <input name="location" required [(ngModel)]="appointment.location" matInput placeholder="Zoek naar een locatie">
+      <div class="right-side">
+        <span class="material-icons">edit</span>
+        Aanpassen
+      </div>
+      <br>
+      <span class="material-icons">person_add</span>
+      <mat-label [(ngModel)]="appointment.">Dr. W.Janssen</mat-label>
+      <div class="right-side">
+        <span class="material-icons">edit</span>
+        Aanpassen
+      </div>
+    </div>
+    <div class="modal-patient">
+      <h2><span class="material-icons">search</span>Patiënt zoeken</h2>
+      <input name="patientName" required [(ngModel)]="appointment.patientPostalCode" matInput class="input-patient"
+        placeholder="Voor- of achternaam" />
+      <input name="patientStreetNameNumber" required [(ngModel)]="appointment.patientStreetNameNumber" matInput
+        class="input-patient" placeholder="Straatnaam + huisnummer">
+      <input name="patientDateOfBirth" required [(ngModel)]="appointment.date" matInput
+        class="input-patient" placeholder="Geboortedatum">
+      <input name="patientPostalCode" required [(ngModel)]="appointment.patientPostalCode" matInput
+        class="input-patient" placeholder="Postcode">
+    </div>
+    <br>
+    <div class="modal-reason">
+      <h2>Reden van komst</h2>
+      <mat-select name="reasonSelection" required [(ngModel)]="appointment.reasonSelection" class="mat-select-width"
+        placeholder="Geef de reden van de afspraak aan">
+        <mat-option value="Ziekte">Ziekte</mat-option>
+      </mat-select>
+      <br>
+      <textarea name="reasonText" [(ngModel)]="appointment.reasonText" class="text-area-width"
+        placeholder="Vul de reden aan met vrije tekst"></textarea>
+    </div>
+    <div class="modal-attention">
+      <h2>Attentieregel</h2>
+      <textarea name="attentionLineText" [(ngModel)]="appointment.attentionLineText" class="text-area-width"
+        placeholder="Typ hier de attentieregel"></textarea>
+    </div>
+    <div class="modal-buttons">
+      <button (click)="cancelAppointment()" class="button-cancel" mat-button>Annuleren</button>
+      <button type="submit" class="button-save" mat-button>Opslaan</button>
+    </div>
+  </form>
+</div>

@@ -1,4 +1,4 @@
-export interface AppointmentDto {
+export interface Appointmentdto {
   // appointment service
   appointmentTypeName: string;
   startTime: Date;
