@@ -48,6 +48,13 @@ export class MainCalendarComponent implements OnInit {
 
   actions: CalendarEventAction[] = [
     {
+      label: '<span class="material-icons">done</span>',
+      a11yLabel: 'CheckIn',
+      onClick: ({event}: { event: CalendarEvent }): void => {
+        this.doneEvent(event);
+      }
+    },
+    {
       label: '<i class="fas fa-fw fa-pencil-alt"></i>',
       a11yLabel: 'Edit',
       onClick: ({event}: { event: CalendarEvent }): void => {
@@ -94,9 +101,9 @@ export class MainCalendarComponent implements OnInit {
       allDay: true,
     },
     {
-      start: addHours(startOfDay(new Date()), 2),
+      start: addHours(new Date(), 1),
       end: addHours(new Date(), 2),
-      title: '08:50      P. Peterson     Ik heb het gevoel alsof ik dood aan het gaan ben',
+      title: '08:50 P. Peterson Ik heb het gevoel alsof ik dood aan het gaan ben',
       color: colors.yellow,
       actions: this.actions,
       cssClass: 'calendar-gray',
@@ -126,6 +133,7 @@ export class MainCalendarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.addEvent();
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -165,17 +173,22 @@ export class MainCalendarComponent implements OnInit {
     this.modal.open(this.modalContent, {size: 'lg'});
   }
 
-  addEvent(appointment: Appointment): void {
+  addEvent(): void {
+    // const startTime = subDays(startOfDay(new Date()), 1);
+    // const endTime = addDays(new Date(), 1);
+    // const titleEvent = startTime.getHours().toString() + ':' + startTime.getMinutes().toString() + ' - ' + 'Message';
     // this.events = [
     //   ...this.events,
     //   {
-        // title: appointment.title,
-        // start: appointment.start,
-        // end: appointment.end,
-        // color: appointment.color,
-        // draggable: appointment.draggable,
-        // resizable: appointment.resizable,
-    //     actions: this.actions
+    //     title: titleEvent,
+    //     start: startTime,
+    //     end: endTime,
+    //     color: colors.red,
+    //     actions: this.actions,
+    //     resizable: {
+    //       beforeStart: true,
+    //       afterEnd: true,
+    //     },
     //   },
     // ];
   }
@@ -220,4 +233,23 @@ export class MainCalendarComponent implements OnInit {
     }
     this.refresh.next();
   }
+
+  doneEvent(event: CalendarEvent): void {
+    console.log(event);
+    console.log('hello');
+    this.events = this.events.map((iEvent) => {
+      if (iEvent === event) {
+        const startDate = event.start;
+        const endDate = event.end;
+        startDate.setHours(startDate.getHours() + 1);
+        endDate.setHours(endDate.getHours() + 1);
+        return {
+          ...event,
+          start: startDate,
+          end: endDate,
+        };
+      }
+      return iEvent;
+    });
+}
 }
