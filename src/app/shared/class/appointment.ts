@@ -1,4 +1,9 @@
 export class Appointment {
+  id: number;
+  employeeId: number;
+  patientId: number;
+  locationId: number;
+
   title: string;
   start: Date;
   end: Date;
@@ -10,7 +15,7 @@ export class Appointment {
   };
 
   type: string;
-  date: string;
+  date: Date;
   time: string;
   duration: number;
   location: string;
@@ -22,4 +27,6 @@ export class Appointment {
   reasonSelection: string;
   reasonText: string;
   attentionLineText: string;
+
+
 }

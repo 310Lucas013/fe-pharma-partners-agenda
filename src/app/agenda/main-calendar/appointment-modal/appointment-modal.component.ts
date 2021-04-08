@@ -1,13 +1,12 @@
 import { Component, OnInit, Output, TemplateRef, ViewChild, EventEmitter } from '@angular/core';
 import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
-import { addDays, addHours, endOfMonth, startOfDay, subDays } from 'date-fns';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Appointment } from 'src/app/shared/class/appointment';
-import { Appointmentdto } from 'src/app/shared/dto/appointmentdto';
 import { AppointmentService } from 'src/app/shared/services/appointment/appointment.service'
 import { DatePipe } from '@angular/common'
 import {timeInterval} from 'rxjs/operators';
 import {TimeNumbersPipe} from 'src/app/shared/pipes/time-numbers-pipe'
+import {TokenStorageService} from '../../../shared/services/token-storage/token-storage.service';
 
 @Component({
   selector: 'app-appointment-modal',
@@ -17,10 +16,9 @@ import {TimeNumbersPipe} from 'src/app/shared/pipes/time-numbers-pipe'
 
 export class AppointmentModalComponent implements OnInit {
 
-  date = new Date();
   duration: number;
-  startTime: string;
-  endTime: string;
+  startTime: string = '00:00';
+  endTime: string = '00:00';
   appointment = {} as Appointment;
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
@@ -48,9 +46,12 @@ export class AppointmentModalComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   // todo change the modal private to the modal of the parent
-  constructor(private modal: NgbModal, private appointmentService: AppointmentService) { }
+  constructor(private modal: NgbModal, private appointmentService: AppointmentService, private tokenService: TokenStorageService) { }
 
   ngOnInit(): void {
+    this.appointment.date = new Date();
+    this.appointment.end = new Date();
+    this.appointment.end.setTime(0);
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
@@ -74,15 +75,16 @@ export class AppointmentModalComponent implements OnInit {
     if(this.startTime.includes(':') && this.duration != null){
       let hours = Number(this.startTime.split(':')[0]);
       let min = Number(this.startTime.split(':')[1]);
-      this.appointment.startTime = this.appointment.date;
-      this.appointment.startTime.setHours(hours);
-      this.appointment.startTime.setMinutes(min);
-      let startTime = this.appointment.startTime.getTime();
-      let tempTime : Date = this.appointment.startTime;
+      this.appointment.start = new Date();
+      this.appointment.start = this.appointment.date;
+      this.appointment.start.setHours(hours);
+      this.appointment.start.setMinutes(min);
+      let startTime = this.appointment.start.getTime();
+      let tempTime : Date = this.appointment.start;
       tempTime.setTime(startTime + this.duration * 60000);
       this.endTime = tempTime.getHours().toString() + ":" + tempTime.getMinutes().toString();
-      this.appointment.endTime.setTime(startTime + this.duration * 60000); //60000 time ticks in a minute
-      console.log(this.appointment.endTime);
+      this.appointment.end.setTime(startTime + this.duration * 60000); //60000 time ticks in a minute
+      console.log(this.appointment.end);
     }
   }
 
