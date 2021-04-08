@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Appointment} from '../../models/appointment';
 import {Observable} from 'rxjs';
-import {environment} from '../../../../environments/environment';
+import {Appointmentdto} from '../../dto/appointmentdto';
 
 const API_KEY = 'http://localhost:5004/appointments';
 
@@ -24,6 +24,6 @@ export class AppointmentService {
   }
 
   getAppointmentsByEmployeeId(employeeId: number): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(this.source + '/employee-id/' + employeeId);
+    return this.http.get<Appointment[]>(API_KEY + '/employee-id/' + employeeId);
   }
 }
