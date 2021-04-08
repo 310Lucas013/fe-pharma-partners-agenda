@@ -11,10 +11,25 @@ import { AppointmentService } from 'src/app/shared/services/appointment/appointm
   templateUrl: './appointment-modal.component.html',
   styleUrls: ['./appointment-modal.component.css']
 })
-
 export class AppointmentModalComponent implements OnInit {
 
   appointment = {} as Appointment;
+
+  // Appointment parameters
+  type: string;
+  date: string;
+  time: string;
+  duration: number;
+  location: string;
+  doctorName: string;
+  patientName: string;
+  patientStreetNameNumber: string;
+  patientDateOfBirth: string;
+  patientPostalCode: string;
+  reasonSelection: string;
+  reasonText: string;
+  attentionLineText: string;
+
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 
@@ -35,10 +50,10 @@ export class AppointmentModalComponent implements OnInit {
 
   modalData: {
     action: string;
-    event: CalendarEvent; 
+    event: CalendarEvent;
   };
 
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+  @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
 
   // todo change the modal private to the modal of the parent
   constructor(private modal: NgbModal, private appointmentService: AppointmentService) { }
@@ -47,8 +62,8 @@ export class AppointmentModalComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-    this.modal.open(this.modalContent, { size: 'lg' });
+    this.modalData = {event, action};
+    this.modal.open(this.modalContent, {size: 'lg'});
   }
 
   cancelAppointment(): void {
@@ -56,9 +71,8 @@ export class AppointmentModalComponent implements OnInit {
   }
 
   saveAppointment(): void {
-    console.log(this.appointment);
-    // this.addAppointmentEvent.emit(this.appointment);
-    //this.appointmentService.addAppointment(this.appointment).subscribe(data => { console.log(data); }, error => console.log(error));
+    const appointment = new Appointment();
+    this.addAppointmentEvent.emit(appointment);
   }
 
 }
