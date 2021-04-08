@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {Employee} from '../shared/class/employee';
+import {Employee} from '../shared/models/employee';
 
 @Component({
   selector: 'app-agenda-employee',
