@@ -4,11 +4,7 @@
 
 export const environment = {
   production: false,
-  employeeApi: 'http://localhost:5001',
-  credentialsApi: 'http://localhost:5002',
-  patientApi: 'http://localhost:5003',
-  appointmentApi: 'http://localhost:5004',
-  locationApi: 'http://localhost:5005'
+  gatewayApi: 'http://localhost:8888/'
 };
 
 /*
