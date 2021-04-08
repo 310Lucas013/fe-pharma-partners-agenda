@@ -1,9 +1,18 @@
 .wrapper{
   background: white;
-  margin: 10% auto;
-  width: 25%;
   border-style: solid;
   border-width: 1px;
+
+  width: 20%;
+  height: 50%;
+
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: auto;
 }
 
 mat-nav-list{
