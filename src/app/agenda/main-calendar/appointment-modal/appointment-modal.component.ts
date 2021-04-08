@@ -24,7 +24,6 @@ export class AppointmentModalComponent implements OnInit {
   type: string;
   date: string;
   time: string;
-  duration: number;
   location: string;
   doctorName: string;
   patientName: string;

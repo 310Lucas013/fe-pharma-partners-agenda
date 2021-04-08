@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Credentials } from 'src/app/shared/models/Credentials';
 import {environment} from '../../../../environments/environment';
 
-const API_KEY = environment.gatewayApi + '/credentials';
+const API_KEY = environment.gatewayApi + 'credentials';
 
 
 const httpOptions = {

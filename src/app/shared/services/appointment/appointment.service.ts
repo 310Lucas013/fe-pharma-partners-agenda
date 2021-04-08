@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {Appointmentdto} from '../../dto/appointmentdto';
 import {environment} from '../../../../environments/environment';
 
-const API_KEY = environment.gatewayApi + '/appointments';
+const API_KEY = environment.gatewayApi + 'appointments';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'}),
