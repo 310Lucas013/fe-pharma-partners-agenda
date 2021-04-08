@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AppointmentDto } from 'src/app/shared/dto/AppointmentDto';
+import { Appointmentdto } from 'src/app/shared/dto/appointmentdto';
 import { Observable } from 'rxjs';
 
 const API_KEY = 'http://localhost:5004/appointments';
@@ -18,7 +18,7 @@ export class AppointmentService {
     private http: HttpClient
   ) { }
 
-  addAppointment(appointment: AppointmentDto) : Observable<any> {
-    return this.http.post<AppointmentDto>(API_KEY + "/add", appointment, httpOptions);
+  addAppointment(appointment: Appointmentdto): Observable<any> {
+    return this.http.post<Appointmentdto>(API_KEY + '/add', appointment, httpOptions);
   }
 }

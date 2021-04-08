@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Credentials } from 'src/app/shared/models/Credentials';
 
-const AUTH_API = 'http://localhost:4000/';
+const AUTH_API = 'http://localhost:8082/';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

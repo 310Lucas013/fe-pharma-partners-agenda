@@ -3,7 +3,7 @@ import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
 import { addDays, addHours, endOfMonth, startOfDay, subDays } from 'date-fns';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Appointment } from 'src/app/shared/class/appointment';
-import { AppointmentDto } from 'src/app/shared/dto/AppointmentDto';
+import { Appointmentdto } from 'src/app/shared/dto/appointmentdto';
 import { AppointmentService } from 'src/app/shared/services/appointment/appointment.service'
 import { DatePipe } from '@angular/common'
 import {timeInterval} from 'rxjs/operators';
@@ -17,11 +17,11 @@ import {TimeNumbersPipe} from 'src/app/shared/pipes/time-numbers-pipe'
 
 export class AppointmentModalComponent implements OnInit {
 
-  appointment : AppointmentDto;
   date = new Date();
   duration: number;
   startTime: string;
   endTime: string;
+  appointment = {} as Appointment;
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 
@@ -51,7 +51,6 @@ export class AppointmentModalComponent implements OnInit {
   constructor(private modal: NgbModal, private appointmentService: AppointmentService) { }
 
   ngOnInit(): void {
-    this.appointment = new AppointmentDto()
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
@@ -65,8 +64,8 @@ export class AppointmentModalComponent implements OnInit {
 
   saveAppointment(): void {
     console.log(this.appointment);
-    //this.addAppointmentEvent.emit(this.appointment);
-    this.appointmentService.addAppointment(this.appointment).subscribe(data => { console.log(data) }, error => console.log(error));
+    // this.addAppointmentEvent.emit(this.appointment);
+    //this.appointmentService.addAppointment(this.appointment).subscribe(data => { console.log(data); }, error => console.log(error));
   }
 
   //TODO split up start time
