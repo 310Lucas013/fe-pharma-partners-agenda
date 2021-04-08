@@ -2,11 +2,11 @@
 <div class="body">
 <div class="container-left">
   <app-clock></app-clock>
-  <app-side-calendar></app-side-calendar>
+  <app-side-calendar (dateSelected)="dateSelectionChanged($event)"></app-side-calendar>
   <app-coworker-overview></app-coworker-overview>
 </div>
 <div class="container-right">
-  <app-main-calendar></app-main-calendar>
+  <app-main-calendar #mainCalendarComponent [viewDate]="selectedDate"></app-main-calendar>
 </div>
 </div>
 

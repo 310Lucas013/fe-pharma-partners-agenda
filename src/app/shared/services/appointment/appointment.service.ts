@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Appointmentdto } from 'src/app/shared/dto/appointmentdto';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Appointment} from '../../models/appointment';
+import {Observable} from 'rxjs';
+import {Appointmentdto} from '../../dto/appointmentdto';
 
 const API_KEY = 'http://localhost:5004/appointments';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({'Content-Type': 'application/json'}),
 };
 
 @Injectable({
@@ -20,5 +21,9 @@ export class AppointmentService {
 
   addAppointment(appointment: Appointmentdto): Observable<any> {
     return this.http.post<Appointmentdto>(API_KEY + '/add', appointment, httpOptions);
+  }
+
+  getAppointmentsByEmployeeId(employeeId: number): Observable<Appointment[]> {
+    return this.http.get<Appointment[]>(API_KEY + '/employee-id/' + employeeId);
   }
 }

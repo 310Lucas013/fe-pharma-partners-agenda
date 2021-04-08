@@ -47,7 +47,7 @@ registerLocaleData(localeNl);
     AppointmentModalComponent,
     TimeNumbersPipe,
     AppointmentModalComponent,
-    AgendaEmployeeComponent
+    AgendaEmployeeComponent,
   ],
   imports: [
     BrowserModule,
