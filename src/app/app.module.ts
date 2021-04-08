@@ -44,7 +44,7 @@ registerLocaleData(localeNl);
     MainCalendarComponent,
     CoworkerOverviewComponent,
     AppointmentModalComponent,
-    AgendaEmployeeComponent
+    AgendaEmployeeComponent,
   ],
   imports: [
     BrowserModule,
