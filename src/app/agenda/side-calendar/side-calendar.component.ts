@@ -1,10 +1,13 @@
 import {Component, OnInit, Output, ViewChild, EventEmitter} from '@angular/core';
 import {MatCalendar} from '@angular/material/datepicker';
+import {DateAdapter} from '@angular/material/core';
+import {CustomDateAdapter} from '../../shared/pipes/custom-date-adapter';
 
 @Component({
   selector: 'app-side-calendar',
   templateUrl: './side-calendar.component.html',
-  styleUrls: ['./side-calendar.component.css']
+  styleUrls: ['./side-calendar.component.css'],
+  providers: [{provide: DateAdapter, useClass: CustomDateAdapter }]
 })
 export class SideCalendarComponent implements OnInit {
 
@@ -16,6 +19,7 @@ export class SideCalendarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.calendar);
   }
 
   public dateChanged(date): void {

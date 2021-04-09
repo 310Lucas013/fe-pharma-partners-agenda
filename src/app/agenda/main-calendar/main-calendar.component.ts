@@ -6,6 +6,7 @@ import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, Cale
 import {Appointment} from '../../shared/models/appointment';
 import {ActivatedRoute} from '@angular/router';
 import {AppointmentService} from '../../shared/services/appointment/appointment.service';
+import {WeekDay} from '@angular/common';
 
 const colors: any = {
   red: {
@@ -117,7 +118,10 @@ export class MainCalendarComponent implements OnInit {
 
   activeDayIsOpen = true;
 
+  myWeekDays: WeekDay[];
+
   constructor(private modal: NgbModal, private route: ActivatedRoute, private appointmentService: AppointmentService) {
+    this.myWeekDays = [WeekDay.Monday, WeekDay.Tuesday, WeekDay.Wednesday, WeekDay.Thursday, WeekDay.Friday];
     this.viewDate = new Date();
     this.setMonday();
     this.route.params.subscribe(params => {
