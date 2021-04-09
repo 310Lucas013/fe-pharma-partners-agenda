@@ -19,6 +19,11 @@ export class Appointment {
   time: string;
   duration: number;
   location: string;
+  street: string;
+  houseNumber: string;
+  zipCode: string;
+  city: string;
+  country: string;
   doctorName: string;
   patientName: string;
   patientStreetNameNumber: string;
@@ -27,6 +32,4 @@ export class Appointment {
   reasonSelection: string;
   reasonText: string;
   attentionLineText: string;
-
-
 }
