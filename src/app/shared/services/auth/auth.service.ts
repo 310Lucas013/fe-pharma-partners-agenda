@@ -2,12 +2,18 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Credentials } from 'src/app/shared/models/Credentials';
+import { TokenStorageService } from '../token-storage/token-storage.service';
 
-const AUTH_API = 'http://localhost:8082/';
+const AUTH_API = 'http://localhost:8888/credentials/';
+var jwtstorage: TokenStorageService = new TokenStorageService;
+
+var Authorization = jwtstorage.getToken();
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
+
+
 
 @Injectable({
   providedIn: 'root',

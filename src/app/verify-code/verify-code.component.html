@@ -1,0 +1,13 @@
+<p>verify-code works!</p>
+
+<form (submit)="verify()">
+    <div class="example-container">
+        <mat-form-field hintLabel="Enter your 6 number verification code">
+            <input name="verify-code" type="text" id="verify-code" [(ngModel)]="verificationcode" tabindex="1" class="input" matInput #input maxlength="10" placeholder="Enter verificationcode">
+            <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
+        </mat-form-field>
+    </div>
+    <button class="submit">
+        <input type="submit" name="verify" value="verify" id="verify" class="loginButton">
+    </button>
+</form>

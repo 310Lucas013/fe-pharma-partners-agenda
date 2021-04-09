@@ -26,6 +26,7 @@ import {FlatpickrModule} from 'angularx-flatpickr';
 import { AppointmentModalComponent } from './agenda/main-calendar/appointment-modal/appointment-modal.component';
 import { AgendaEmployeeComponent } from './agenda-employee/agenda-employee.component';
 import localeNl from '@angular/common/locales/nl';
+import { VerifyCodeComponent } from './verify-code/verify-code.component';
 
 registerLocaleData(localeNl);
 
@@ -44,7 +45,8 @@ registerLocaleData(localeNl);
     MainCalendarComponent,
     CoworkerOverviewComponent,
     AppointmentModalComponent,
-    AgendaEmployeeComponent
+    AgendaEmployeeComponent,
+    VerifyCodeComponent
   ],
   imports: [
     BrowserModule,
