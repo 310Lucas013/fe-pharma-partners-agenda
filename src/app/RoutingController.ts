@@ -12,11 +12,8 @@ const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: AgendaEmployeeComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'agenda', component: AgendaComponent, canActivate: [AuthguardService]},
-  {path: 'agenda/:id', component: AgendaComponent, canActivate: [AuthguardService]},
-  {path: 'appointmentsearch', component: AppointmentSearchComponent, canActivate: [AuthguardService]},
-  {path: 'clientoverview', component: ClientOverviewComponent, canActivate: [AuthguardService]},
-  {path: 'agenda', component: AgendaComponent, canActivate: [AuthguardService]},
+  {path: 'agenda', component: AgendaComponent},// canActivate: [AuthguardService]},
+  {path: 'agenda/:id', component: AgendaComponent},// canActivate: [AuthguardService]},
   {path: 'appointmentsearch', component: AppointmentSearchComponent, canActivate: [AuthguardService]},
   {path: 'clientoverview', component: ClientOverviewComponent, canActivate: [AuthguardService]},
   {path: '**', component: PageNotFoundComponent}

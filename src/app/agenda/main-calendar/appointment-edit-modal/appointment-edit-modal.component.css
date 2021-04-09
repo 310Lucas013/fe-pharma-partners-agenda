@@ -1,0 +1,48 @@
+.mat-select-width {
+  width: 40%;
+}
+
+.text-area-width {
+  width: 80%;
+}
+
+.around {
+  padding: 3%;
+}
+
+.right-side {
+  float: right;
+}
+
+.modal-information {
+  width: 57%;
+  margin-left: 0 !important;
+  display: inline-block;
+  padding-right: 5%;
+}
+
+.button-cancel {
+  background-color: #fefeff;
+}
+
+.button-delete {
+  background-color: red;
+}
+
+.button-save {
+  background-color: #e6e9ee;
+  color: #bbbec3;
+}
+
+.modal-patient {
+  width: 35%;
+  display: inline-block;
+}
+
+.input-patient {
+  width: 90%;
+}
+
+.start-time {
+  width: 60px;
+}

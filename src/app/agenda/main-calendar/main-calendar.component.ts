@@ -29,11 +29,13 @@ const colors: any = {
   styleUrls: ['./main-calendar.component.css']
 })
 export class MainCalendarComponent implements OnInit {
-  @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
+  @ViewChild('addModalContent', {static: true}) addModalContent: TemplateRef<any>;
+  @ViewChild('editModalContent', {static: true}) editModalContent: TemplateRef<any>;
 
   @Input() viewDate: Date;
 
   view: CalendarView = CalendarView.Week;
+  selectedAppointment: Appointment;
 
   CalendarView = CalendarView;
 
@@ -138,23 +140,13 @@ export class MainCalendarComponent implements OnInit {
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
-      if (
-        (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-        events.length === 0
-      ) {
-        this.activeDayIsOpen = false;
-      } else {
-        this.activeDayIsOpen = true;
-      }
+      this.activeDayIsOpen = !((isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+        events.length === 0);
       this.viewDate = date;
     }
   }
 
-  eventTimesChanged({
-                      event,
-                      newStart,
-                      newEnd,
-                    }: CalendarEventTimesChangedEvent): void {
+  eventTimesChanged({event, newStart, newEnd,}: CalendarEventTimesChangedEvent): void {
     this.events = this.events.map((iEvent) => {
       if (iEvent === event) {
         return {
@@ -170,7 +162,13 @@ export class MainCalendarComponent implements OnInit {
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = {event, action};
-    this.modal.open(this.modalContent, {size: 'lg'});
+    if (action === 'Edited') {
+      this.modal.open(this.editModalContent, {size: 'lg'});
+    } else if (action === 'Deleted') {
+      this.modal.open(this.editModalContent, {size: 'lg'});
+    } else {
+      this.modal.open(this.addModalContent, {size: 'lg'});
+    }
   }
 
   addEvent(): void {
@@ -224,7 +222,7 @@ export class MainCalendarComponent implements OnInit {
   }
 
   newAppointment(): void {
-    this.modal.open(this.modalContent, {size: 'lg'});
+    this.modal.open(this.addModalContent, {size: 'lg'});
   }
 
   updatedSelectionDate(): void {
@@ -251,5 +249,5 @@ export class MainCalendarComponent implements OnInit {
       }
       return iEvent;
     });
-}
+  }
 }
