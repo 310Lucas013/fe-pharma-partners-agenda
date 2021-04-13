@@ -24,17 +24,15 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    console.log(this.credentials);
     this.authService.login(this.credentials)
       .subscribe(data => {
         this.tokenService.saveToken(data.token);
-        this.router.navigate(['/agenda']);
+        this.router.navigate(['/verify']);
       },
         error => console.log(error));
   }
 
   register(): void {
-    console.log(this.credentials);
     this.authService.register(this.credentials)
       .subscribe(
         error => console.log(error));
