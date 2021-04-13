@@ -23,9 +23,6 @@ export class Appointment {
     afterEnd: boolean
   };
 
-  type: string;
-  time: string;
-  duration: number;
   location: string;
   street: string;
   houseNumber: string;
@@ -37,7 +34,4 @@ export class Appointment {
   patientStreetNameNumber: string;
   patientDateOfBirth: string;
   patientPostalCode: string;
-  reasonSelection: string;
-  reasonText: string;
-  attentionLineText: string;
 }

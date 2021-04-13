@@ -5,9 +5,9 @@
       <h2>Soort afspraak</h2>
       <br>
       <div>
-        <mat-select name="type" required [(ngModel)]="appointment.type" class="mat-select-width"
+        <mat-select name="type" required [(ngModel)]="appointment.appointmentType.id" class="mat-select-width"
           placeholder="Kies hier de soort afspraak">
-          <mat-option value="Patiënt afspraak">Patiënt afspraak</mat-option>
+          <mat-option  value="1">Patiënt afspraak</mat-option>
         </mat-select>
       </div>
     </div>
@@ -42,6 +42,11 @@
       </div>
       <span class="material-icons">location_on</span>
       <input name="location" required [(ngModel)]="appointment.location" matInput placeholder="Zoek naar een locatie">
+      <input name="street" required [(ngModel)]="appointment.street" matInput placeholder="Straatnaam">
+      <input name="house-number" required [(ngModel)]="appointment.houseNumber" matInput placeholder="Huisnummer">
+      <input name="postal-code" required [(ngModel)]="appointment.zipCode" matInput placeholder="Postcode">
+      <input name="city" required [(ngModel)]="appointment.city" matInput placeholder="Stad">
+      <input name="country" required [(ngModel)]="appointment.country" matInput placeholder="Land">
       <div class="right-side">
         <span class="material-icons">edit</span>
         Aanpassen
@@ -68,17 +73,17 @@
     <br>
     <div class="modal-reason">
       <h2>Reden van komst</h2>
-      <mat-select name="reasonSelection" required [(ngModel)]="appointment.reasonSelection" class="mat-select-width"
+      <mat-select name="reasonSelection" required [(ngModel)]="appointment.reasonType.id" class="mat-select-width"
         placeholder="Geef de reden van de afspraak aan">
-        <mat-option value="Ziekte">Ziekte</mat-option>
+        <mat-option value="1">Ziekte</mat-option>
       </mat-select>
       <br>
-      <textarea name="reasonText" [(ngModel)]="appointment.reasonText" class="text-area-width"
+      <textarea name="reasonText" [(ngModel)]="appointment.reason" class="text-area-width"
         placeholder="Vul de reden aan met vrije tekst"></textarea>
     </div>
     <div class="modal-attention">
       <h2>Attentieregel</h2>
-      <textarea name="attentionLineText" [(ngModel)]="appointment.attentionLineText" class="text-area-width"
+      <textarea name="attentionLineText" [(ngModel)]="appointment.attention" class="text-area-width"
         placeholder="Typ hier de attentieregel"></textarea>
     </div>
     <div class="modal-buttons">
