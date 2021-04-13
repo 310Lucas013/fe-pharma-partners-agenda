@@ -23,12 +23,13 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarDateFormatter, CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
-import { AppointmentModalComponent } from './agenda/main-calendar/appointment-modal/appointment-modal.component';
 import { AgendaEmployeeComponent } from './agenda-employee/agenda-employee.component';
 import localeNl from '@angular/common/locales/nl';
 import { CustomDateFormatter } from './shared/pipes/custom-date-formatter';
 import { TimeNumbersPipe } from './shared/pipes/time-numbers-pipe';
 import { VerifyCodeComponent } from './verify-code/verify-code.component';
+import {AppointmentEditModalComponent} from './agenda/main-calendar/appointment-edit-modal/appointment-edit-modal.component';
+import {AppointmentAddModalComponent} from './agenda/main-calendar/appointment-add-modal/appointment-add-modal.component';
 
 registerLocaleData(localeNl);
 
@@ -47,34 +48,37 @@ registerLocaleData(localeNl);
     MainCalendarComponent,
     CoworkerOverviewComponent,
     TimeNumbersPipe,
-    AppointmentModalComponent,
     AgendaEmployeeComponent,
-    VerifyCodeComponent
+    VerifyCodeComponent,
+    AppointmentEditModalComponent,
+    AppointmentAddModalComponent
   ],
-  imports: [
-    BrowserModule,
-    CommonModule,
-    RouterModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    FormsModule,
-    RoutingController,
-    MaterialModule,
-    NgbModalModule,
-    FlatpickrModule.forRoot(),
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }, {
-      dateFormatter: {
-        provide: CalendarDateFormatter,
-        useClass: CustomDateFormatter
-      }
-    })
+    imports: [
+        BrowserModule,
+        CommonModule,
+        RouterModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        RoutingController,
+        MaterialModule,
+        NgbModalModule,
+        FlatpickrModule.forRoot(),
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory,
+        }, {
+            dateFormatter: {
+                provide: CalendarDateFormatter,
+                useClass: CustomDateFormatter
+            }
+        })
 
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    ],
+    providers: [],
+    exports: [
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

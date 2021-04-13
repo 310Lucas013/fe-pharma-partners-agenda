@@ -6,31 +6,33 @@
       <br>
       <div>
         <mat-select name="type" required [(ngModel)]="appointment.appointmentType.id" class="mat-select-width"
-          placeholder="Kies hier de soort afspraak">
+                    placeholder="Kies hier de soort afspraak">
           <mat-option value="Patiënt afspraak">Patiënt afspraak</mat-option>
         </mat-select>
       </div>
     </div>
     <div class="modal-information">
       <div class="date-picker">
-      <span class="material-icons">date_range</span>
-      <mat-form-field appearance="fill">
-        <mat-label>Kies een datum</mat-label>
-        <label>
-          <input name="date" [(ngModel)]="appointment.date" matInput [matDatepicker]="picker">
-        </label>
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
+        <span class="material-icons">date_range</span>
+        <mat-form-field appearance="fill">
+          <mat-label>Kies een datum</mat-label>
+          <label>
+            <input [min]="minDate" name="date" [(ngModel)]="appointment.event.start" matInput [matDatepicker]="picker">
+          </label>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
       </div>
       <br>
       <span class="material-icons">schedule</span>
-      <input matInput class="start-time" name="startTime" placeholder="hh:mm" required (ngModelChange)="calcEndTime()" [(ngModel)]="startTime">
-      <mat-label>- </mat-label>
+      <input matInput class="start-time" name="startTime" placeholder="hh:mm" required (ngModelChange)="calcEndTime()"
+             [(ngModel)]="startTime">
+      <mat-label>-</mat-label>
       <mat-label name="endTime" class="end-time">{{endTime | timeNumbers}}</mat-label>
       <br>
-      <mat-select name="duration" (selectionChange)="calcEndTime()" required [(ngModel)]="duration" class="mat-select-width"
-        placeholder="Tijdsduur afspraak">
+      <mat-select name="duration" (selectionChange)="calcEndTime()" required [(ngModel)]="duration"
+                  class="mat-select-width"
+                  placeholder="Tijdsduur afspraak">
         <mat-option value="10">10 min</mat-option>
         <mat-option value="20">20 min</mat-option>
         <mat-option value="30">30 min</mat-option>
@@ -48,7 +50,7 @@
       </div>
       <br>
       <span class="material-icons">person_add</span>
-        <input matInput name="doctorName" [(ngModel)]="appointment.doctorName">
+      <input matInput name="doctorName" [(ngModel)]="appointment.doctorName">
       <div class="right-side">
         <span class="material-icons">edit</span>
         Aanpassen
@@ -57,29 +59,29 @@
     <div class="modal-patient">
       <h2><span class="material-icons">search</span>Patiënt zoeken</h2>
       <input name="patientName" required [(ngModel)]="appointment.patientName" matInput class="input-patient"
-        placeholder="Voor- of achternaam" />
+             placeholder="Voor- of achternaam"/>
       <input name="patientStreetNameNumber" required [(ngModel)]="appointment.patientStreetNameNumber" matInput
-        class="input-patient" placeholder="Straatnaam + huisnummer">
+             class="input-patient" placeholder="Straatnaam + huisnummer">
       <input name="patientDateOfBirth" required [(ngModel)]="appointment.patientDateOfBirth" matInput
-        class="input-patient" placeholder="Geboortedatum">
+             class="input-patient" placeholder="Geboortedatum">
       <input name="patientPostalCode" required [(ngModel)]="appointment.patientPostalCode" matInput
-        class="input-patient" placeholder="Postcode">
+             class="input-patient" placeholder="Postcode">
     </div>
     <br>
     <div class="modal-reason">
       <h2>Reden van komst</h2>
       <mat-select name="reasonSelection" required [(ngModel)]="appointment.reasonType.id" class="mat-select-width"
-        placeholder="Geef de reden van de afspraak aan">
+                  placeholder="Geef de reden van de afspraak aan">
         <mat-option value="Ziekte">Ziekte</mat-option>
       </mat-select>
       <br>
       <textarea name="reasonText" [(ngModel)]="appointment.reason" class="text-area-width"
-        placeholder="Vul de reden aan met vrije tekst"></textarea>
+                placeholder="Vul de reden aan met vrije tekst"></textarea>
     </div>
     <div class="modal-attention">
       <h2>Attentieregel</h2>
       <textarea name="attentionLineText" [(ngModel)]="appointment.attention" class="text-area-width"
-        placeholder="Typ hier de attentieregel"></textarea>
+                placeholder="Typ hier de attentieregel"></textarea>
     </div>
     <div class="modal-buttons">
       <button (click)="cancelAppointment()" class="button-cancel" mat-button>Annuleren</button>

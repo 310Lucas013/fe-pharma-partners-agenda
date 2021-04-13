@@ -30,6 +30,8 @@ export class AppointmentEditModalComponent implements OnInit {
   reasonText: string;
   attentionLineText: string;
 
+  minDate: Date;
+
   @Output() editAppointmentEvent = new EventEmitter<Appointment>();
 
   colors: any = {
@@ -57,16 +59,11 @@ export class AppointmentEditModalComponent implements OnInit {
 
   // todo change the modal private to the modal of the parent
   constructor(private modal: NgbModal, private appointmentService: AppointmentService, private tokenService: TokenStorageService) {
+
   }
 
   ngOnInit(): void {
-    // this.appointment.date = new Date();
-    // this.appointment.end = new Date();
-    // this.appointment.end.setTime(0);
-    this.appointment.date = new Date();
-    this.appointment.startTime = new Date();
-    this.appointment.endTime = new Date();
-    this.appointment.endTime.setTime(0);
+    this.minDate = new Date();
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
