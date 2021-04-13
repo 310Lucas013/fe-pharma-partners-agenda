@@ -15,6 +15,7 @@ export class Appointment {
   patientId: number;
   locationId: number;
 
+
   title: string;
   color: any;
   draggable: boolean;

@@ -125,7 +125,7 @@ export class MainCalendarComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params.id;
     });
-    this.appointmentService.getAppointmentsByEmployeeId(1).subscribe(app => {
+    this.appointmentService.getAppointmentsByEmployeeId(this.id).subscribe(app => {
       console.log(app);
       this.appointments = app;
       console.log(this.appointments);

@@ -5,7 +5,7 @@
       <h2>Soort afspraak</h2>
       <br>
       <div>
-        <mat-select name="type" required [(ngModel)]="appointment.type" class="mat-select-width"
+        <mat-select name="type" required [(ngModel)]="appointment.appointmentType.id" class="mat-select-width"
           placeholder="Kies hier de soort afspraak">
           <mat-option value="Patiënt afspraak">Patiënt afspraak</mat-option>
         </mat-select>
@@ -68,17 +68,17 @@
     <br>
     <div class="modal-reason">
       <h2>Reden van komst</h2>
-      <mat-select name="reasonSelection" required [(ngModel)]="appointment.reasonSelection" class="mat-select-width"
+      <mat-select name="reasonSelection" required [(ngModel)]="appointment.reasonType.id" class="mat-select-width"
         placeholder="Geef de reden van de afspraak aan">
         <mat-option value="Ziekte">Ziekte</mat-option>
       </mat-select>
       <br>
-      <textarea name="reasonText" [(ngModel)]="appointment.reasonText" class="text-area-width"
+      <textarea name="reasonText" [(ngModel)]="appointment.reason" class="text-area-width"
         placeholder="Vul de reden aan met vrije tekst"></textarea>
     </div>
     <div class="modal-attention">
       <h2>Attentieregel</h2>
-      <textarea name="attentionLineText" [(ngModel)]="appointment.attentionLineText" class="text-area-width"
+      <textarea name="attentionLineText" [(ngModel)]="appointment.attention" class="text-area-width"
         placeholder="Typ hier de attentieregel"></textarea>
     </div>
     <div class="modal-buttons">

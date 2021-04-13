@@ -76,6 +76,7 @@
       <mat-select name="reasonSelection" required [(ngModel)]="appointment.reasonType.id" class="mat-select-width"
         placeholder="Geef de reden van de afspraak aan">
         <mat-option value="1">Ziekte</mat-option>
+        <mat-option value="2">Hypochondriac</mat-option>
       </mat-select>
       <br>
       <textarea name="reasonText" [(ngModel)]="appointment.reason" class="text-area-width"
