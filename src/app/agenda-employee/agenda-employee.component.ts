@@ -21,7 +21,7 @@ export class AgendaEmployeeComponent implements OnInit {
   }
 
   getEmployees(): void {
-    this.http.get<Employee[]>('http://localhost:5001/employees/all').subscribe(response => { if (response.length === 0){
+    this.http.get<Employee[]>('http://localhost:8888/employees/all').subscribe(response => { if (response.length === 0){
                                                                                                         this.message = 'Er zijn geen accounts.';}
                                                                                                       else {
                                                                                                         this.message = 'Accounts:';
