@@ -12,6 +12,7 @@ export class TokenStorageService {
   public saveToken(token: string): void{
     sessionStorage.removeItem(TOKEN_KEY);
     sessionStorage.setItem(TOKEN_KEY, token);
+    console.log(token);
   }
 
   public getToken(): string {

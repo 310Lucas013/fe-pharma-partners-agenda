@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Credentials } from 'src/app/shared/models/Credentials';
+import {environment} from '../../../../environments/environment';
 
-const AUTH_API = 'http://localhost:8082/';
+const API_KEY = environment.gatewayApi + 'credentials';
+
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -19,7 +21,7 @@ export class AuthService {
 
   login(credentials: Credentials): Observable<any> {
     return this.http.post(
-      AUTH_API + 'authenticate',
+      API_KEY + '/authenticate',
       {
         username: credentials.username,
         password: credentials.password,
@@ -30,7 +32,7 @@ export class AuthService {
 
   register(credentials: Credentials): Observable<any> {
     return this.http.post(
-      AUTH_API + 'register',
+      API_KEY + '/register',
       {
         username: credentials.username,
         password: credentials.password,
