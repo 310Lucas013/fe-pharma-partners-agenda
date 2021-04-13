@@ -1,15 +1,18 @@
 .container-right{
   float: left;
   margin: 2%;
+  width: 66vw;
+
 
 }
 .container-left{
  float: left;
   margin-top: 2%;
   margin-left: 5vw;
+  width: 24vw;
 }
 .body{
   background-color: #f3f3f9;
-  height: 108vh;
+  height: 92vh;
   width: 100vw;
 }
