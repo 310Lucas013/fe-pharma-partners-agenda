@@ -20,12 +20,13 @@ import { SideCalendarComponent } from './agenda/side-calendar/side-calendar.comp
 import { MainCalendarComponent } from './agenda/main-calendar/main-calendar.component';
 import { CoworkerOverviewComponent } from './agenda/coworker-overview/coworker-overview.component';
 import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
-import {CalendarModule, DateAdapter} from 'angular-calendar';
+import {CalendarDateFormatter, CalendarModule, DateAdapter} from 'angular-calendar';
 import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
 import {FlatpickrModule} from 'angularx-flatpickr';
 import { AppointmentModalComponent } from './agenda/main-calendar/appointment-modal/appointment-modal.component';
 import { AgendaEmployeeComponent } from './agenda-employee/agenda-employee.component';
 import localeNl from '@angular/common/locales/nl';
+import {CustomDateFormatter} from './shared/pipes/custom-date-formatter';
 import {TimeNumbersPipe} from './shared/pipes/time-numbers-pipe';
 
 registerLocaleData(localeNl);
@@ -44,7 +45,6 @@ registerLocaleData(localeNl);
     SideCalendarComponent,
     MainCalendarComponent,
     CoworkerOverviewComponent,
-    AppointmentModalComponent,
     TimeNumbersPipe,
     AppointmentModalComponent,
     AgendaEmployeeComponent,
@@ -64,6 +64,11 @@ registerLocaleData(localeNl);
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
+    }, {
+      dateFormatter: {
+        provide: CalendarDateFormatter,
+        useClass: CustomDateFormatter
+      }
     })
 
   ],
