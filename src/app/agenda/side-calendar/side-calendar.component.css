@@ -1,7 +1,7 @@
 .calendar-wrapper{
   width: 19vw;
-  height: 47vh;
   text-align: center;
+  height: fit-content;
 }
 .body{
   margin-top:10vh;
