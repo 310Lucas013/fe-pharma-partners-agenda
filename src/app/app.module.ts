@@ -3,13 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
-import {CommonModule, registerLocaleData} from '@angular/common';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {RouterModule} from '@angular/router';
-import {RoutingController} from './RoutingController';
-import {MaterialModule} from './material-module';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { RoutingController } from './RoutingController';
+import { MaterialModule } from './material-module';
 import { LoginComponent } from './login/login.component';
 import { AgendaComponent } from './agenda/agenda.component';
 import { AppointmentSearchComponent } from './appointment-search/appointment-search.component';
@@ -19,14 +19,16 @@ import { ClockComponent } from './agenda/clock/clock.component';
 import { SideCalendarComponent } from './agenda/side-calendar/side-calendar.component';
 import { MainCalendarComponent } from './agenda/main-calendar/main-calendar.component';
 import { CoworkerOverviewComponent } from './agenda/coworker-overview/coworker-overview.component';
-import {NgbModalModule} from '@ng-bootstrap/ng-bootstrap';
-import {CalendarModule, DateAdapter} from 'angular-calendar';
-import {adapterFactory} from 'angular-calendar/date-adapters/date-fns';
-import {FlatpickrModule} from 'angularx-flatpickr';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { CalendarDateFormatter, CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FlatpickrModule } from 'angularx-flatpickr';
 import { AppointmentModalComponent } from './agenda/main-calendar/appointment-modal/appointment-modal.component';
 import { AgendaEmployeeComponent } from './agenda-employee/agenda-employee.component';
 import localeNl from '@angular/common/locales/nl';
-import {TimeNumbersPipe} from './shared/pipes/time-numbers-pipe';
+import { CustomDateFormatter } from './shared/pipes/custom-date-formatter';
+import { TimeNumbersPipe } from './shared/pipes/time-numbers-pipe';
+import { VerifyCodeComponent } from './verify-code/verify-code.component';
 
 registerLocaleData(localeNl);
 
@@ -44,10 +46,10 @@ registerLocaleData(localeNl);
     SideCalendarComponent,
     MainCalendarComponent,
     CoworkerOverviewComponent,
-    AppointmentModalComponent,
     TimeNumbersPipe,
     AppointmentModalComponent,
     AgendaEmployeeComponent,
+    VerifyCodeComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +66,11 @@ registerLocaleData(localeNl);
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
+    }, {
+      dateFormatter: {
+        provide: CalendarDateFormatter,
+        useClass: CustomDateFormatter
+      }
     })
 
   ],

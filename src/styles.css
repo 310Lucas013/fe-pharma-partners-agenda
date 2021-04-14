@@ -5,6 +5,10 @@
   z-index: 10000 !important;
 }
 
+html{
+  font-family: sans-serif !important;
+}
+
 html,
 .wrapper, body {
     height: 100%;

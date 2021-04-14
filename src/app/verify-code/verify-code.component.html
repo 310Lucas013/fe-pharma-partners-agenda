@@ -1,0 +1,40 @@
+
+<div class="wrapper">
+  <form (submit)="verify() ">
+    <div class="login-control-container">
+      <table id="loginControl">
+        <tbody>
+        <tr>
+          <td>
+            <div class="login-container">
+              <table >
+                <tbody>
+                <tr>
+                  <td>
+                    <div class="logo"></div>
+                  </td>
+                  <td class="header">Welkom op mijn.pharmapartners.nl</td>
+                </tr>
+                </tbody>
+              </table>
+              <div class="example-container verify-container">
+                <mat-form-field class="hintlabel" hintLabel="Enter your 6 number verification code">
+                  <input name="verify-code" type="text" id="verify-code" [(ngModel)]="verificationcode" tabindex="1" class="input" matInput #input maxlength="10" placeholder="Enter verificationcode">
+                  <mat-hint align="end">{{input.value?.length || 0}}/6</mat-hint>
+                </mat-form-field>
+              </div>
+              <button class="submit">
+                <input type="submit" name="verify" value="verify" id="verify" class="loginButton">
+              </button>
+              <div class="error-message">
+                <span id="failuretext" class="login-error-message"></span>
+              </div>
+
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </form>
+</div>
