@@ -1,3 +1,22 @@
+dl.form {
+  width:100%;
+  float:left;
+  clear:both;
+}
+dl.form dt {
+  width:50%;
+  float:left;
+  clear:left;
+  text-align:right;
+}
+dl.form dd {
+  width:50%;
+  float:left;
+  clear:right;
+  text-align:left;
+}
+
+
 .mat-select-width {
   width: 40%;
 }
@@ -30,8 +49,13 @@
   color: #bbbec3;
 }
 
+mat-form-field-flex{
+  width: 300px;
+}
+
 .modal-patient {
   width: 35%;
+  float: right;
   display: inline-block;
 }
 
