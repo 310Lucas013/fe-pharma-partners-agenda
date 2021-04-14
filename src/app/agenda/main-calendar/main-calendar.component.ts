@@ -220,7 +220,6 @@ export class MainCalendarComponent implements OnInit {
   setDayView(idk: any): void {
     this.view = CalendarView.Day;
     this.viewDate = idk.day.date;
-    console.log(idk);
   }
 
   closeOpenMonthViewDay(): void {

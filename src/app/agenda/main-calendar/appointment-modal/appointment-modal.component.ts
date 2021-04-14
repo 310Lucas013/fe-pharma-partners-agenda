@@ -1,11 +1,11 @@
-import {Component, OnInit, Output, TemplateRef, ViewChild, EventEmitter, Input} from '@angular/core';
-import {CalendarEvent, CalendarEventAction} from 'angular-calendar';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Appointment} from 'src/app/shared/models/appointment';
-import {AppointmentService} from 'src/app/shared/services/appointment/appointment.service';
-import {TokenStorageService} from '../../../shared/services/token-storage/token-storage.service';
-import {AppointmentType} from '../../../shared/models/appointment-type';
-import {ReasonType} from '../../../shared/models/reason-type';
+import { Component, OnInit, Output, TemplateRef, ViewChild, EventEmitter, Input } from '@angular/core';
+import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Appointment } from 'src/app/shared/models/appointment';
+import { AppointmentService } from 'src/app/shared/services/appointment/appointment.service';
+import { TokenStorageService } from '../../../shared/services/token-storage/token-storage.service';
+import { AppointmentType } from '../../../shared/models/appointment-type';
+import { ReasonType } from '../../../shared/models/reason-type';
 
 @Component({
   selector: 'app-appointment-modal',
@@ -41,7 +41,7 @@ export class AppointmentModalComponent implements OnInit {
     event: CalendarEvent;
   };
 
-  @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
+  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   // todo change the modal private to the modal of the parent
   constructor(private modal: NgbModal, private appointmentService: AppointmentService, private tokenService: TokenStorageService) {
@@ -56,8 +56,8 @@ export class AppointmentModalComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = {event, action};
-    this.modal.open(this.modalContent, {size: 'lg'});
+    this.modalData = { event, action };
+    this.modal.open(this.modalContent, { size: 'lg' });
   }
 
   cancelAppointment(): void {
