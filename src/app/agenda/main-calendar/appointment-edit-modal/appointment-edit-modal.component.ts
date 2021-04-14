@@ -4,11 +4,13 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Appointment} from '../../../shared/models/appointment';
 import {AppointmentService} from 'src/app/shared/services/appointment/appointment.service';
 import {TokenStorageService} from '../../../shared/services/token-storage/token-storage.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-appointment-edit-modal',
   templateUrl: './appointment-edit-modal.component.html',
-  styleUrls: ['./appointment-edit-modal.component.css']
+  styleUrls: ['./appointment-edit-modal.component.css'],
+  providers: [DatePipe]
 })
 export class AppointmentEditModalComponent implements OnInit {
 
@@ -58,12 +60,14 @@ export class AppointmentEditModalComponent implements OnInit {
   @Input() appointment: Appointment;
 
   // todo change the modal private to the modal of the parent
-  constructor(private modal: NgbModal, private appointmentService: AppointmentService, private tokenService: TokenStorageService) {
+  constructor(private modal: NgbModal, private appointmentService: AppointmentService,
+              private tokenService: TokenStorageService, private datePipe: DatePipe) {
 
   }
 
   ngOnInit(): void {
     this.minDate = new Date();
+    this.appointment.date = this.appointment.event.start;
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
@@ -75,10 +79,17 @@ export class AppointmentEditModalComponent implements OnInit {
 
   }
 
-  saveAppointment(): void {
+  updateAppointment(): void {
     // const appointment = new Appointment();
     // this.editAppointmentEvent.emit(appointment);
-    this.appointmentService.addAppointment(this.appointment).subscribe(
+    // this.appointment.date = new Date(this.appointment.date);
+    this.appointment.date = this.appointment.event.start;
+    console.log('before');
+    console.log(this.appointment.date);
+    this.appointment.date = new Date(this.datePipe.transform(this.appointment.date, 'yyyy-MM-dd'));
+    console.log('after');
+    console.log(this.appointment.date);
+    this.appointmentService.updateAppointment(this.appointment).subscribe(
       data => {
         console.log(data);
         location.reload();
@@ -87,7 +98,7 @@ export class AppointmentEditModalComponent implements OnInit {
         console.log(error);
       }
     );
-    // TODO: MAKE THIS TO UPDATO
+    // TODO: MAKE THIS TO UPDATE
   }
 
   // TODO split up start time

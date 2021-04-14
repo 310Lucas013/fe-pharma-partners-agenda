@@ -170,7 +170,7 @@ export class MainCalendarComponent implements OnInit {
   // draggable?: boolean;
 
   ngOnInit(): void {
-    //this.addEvent();
+    // this.addEvent();
     console.log(this.events);
   }
 

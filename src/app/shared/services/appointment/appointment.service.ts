@@ -29,10 +29,11 @@ export class AppointmentService {
   }
 
   deleteAppointment(appointmentId: number): Observable<any> {
-    console.log('deleting ' + appointmentId);
     const aaa = API_KEY + '/' + appointmentId;
-
-    console.log(aaa);
     return this.http.delete(aaa);
+  }
+
+  updateAppointment(appointment: Appointment): Observable<any> {
+    return this.http.put<Appointment>(API_KEY + '/update/', appointment, httpOptions);
   }
 }

@@ -90,10 +90,13 @@ export class AppointmentAddModalComponent implements OnInit {
     // this.addAppointmentEvent.emit(appointment);
     // const appointment = new Appointment();
     // this.editAppointmentEvent.emit(appointment);
+
+    console.log('new appointment');
+    console.log(this.appointment);
     this.appointmentService.addAppointment(this.appointment).subscribe(
       data => {
         console.log(data);
-        location.reload();
+        // location.reload();
       },
       error => {
         console.log(error);

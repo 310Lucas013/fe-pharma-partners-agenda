@@ -1,5 +1,5 @@
 <div class="around">
-  <form (ngSubmit)="saveAppointment()">
+  <form (ngSubmit)="updateAppointment()">
     <h1>Afspraak bewerken</h1>
     <div class="modal-type">
       <h2>Soort afspraak</h2>
@@ -17,7 +17,7 @@
         <mat-form-field appearance="fill">
           <mat-label>Kies een datum</mat-label>
           <label>
-            <input [min]="minDate" name="date" [(ngModel)]="appointment.event.start" matInput [matDatepicker]="picker">
+            <input [min]="minDate" name="date" [(ngModel)]="appointment.event.start | date: 'yyyy-MM-dd'" matInput [matDatepicker]="picker">
           </label>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
