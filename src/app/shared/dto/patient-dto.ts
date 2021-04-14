@@ -8,5 +8,9 @@ export class PatientDto {
   dateOfBirth: Date;
   phoneNumber: string;
   dossierInformation: string;
-  locationId: number;
+  streetName: string;
+  houseNumber: string;
+  zipCode: string;
+  city: string;
+  country: string;
 }

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {Gender} from '../shared/models/gender.enum';
 import {ThirdPartyService} from '../shared/services/third-party/third-party.service';
+import {PatientDto} from '../shared/dto/patient-dto';
+import {PatientService} from '../shared/services/patient/patient.service';
+import {Patient} from '../shared/models/patient';
 
 @Component({
   selector: 'app-client-overview',
@@ -23,7 +26,9 @@ export class ClientOverviewComponent implements OnInit {
   city: string;
   country: string;
 
-  constructor(private router: Router, private thirdPartyService: ThirdPartyService) {
+  createdPatient: Patient;
+
+  constructor(private router: Router, private thirdPartyService: ThirdPartyService, private patientService: PatientService) {
 
   }
 
@@ -83,6 +88,40 @@ export class ClientOverviewComponent implements OnInit {
         this.dossierInformation += dossier.toString();
       }
       console.log(this.dossierInformation);
+    });
+    const genderNumber = this.thirdPartyService.getRandomGender();
+    if (genderNumber === 0) {
+      this.gender = Gender.MALE;
+    } else if (genderNumber === 1) {
+      this.gender = Gender.FEMALE;
+    } else {
+      this.gender = Gender.OTHER;
+    }
+  }
+
+  savePatientInformation(): void {
+    const patientDto: PatientDto = new PatientDto();
+    patientDto.firstName = this.firstName;
+    patientDto.lastName = this.lastName;
+    if (this.middleName !== undefined) {
+      patientDto.middleName = this.middleName;
+    } else {
+      patientDto.middleName = '';
+    }
+    patientDto.gender = this.gender;
+    patientDto.dateOfBirth = this.dateOfBirth;
+    patientDto.phoneNumber = this.phoneNumber;
+    patientDto.dossierInformation = this.dossierInformation;
+    patientDto.streetName = this.streetName;
+    patientDto.houseNumber = this.houseNumber;
+    patientDto.zipCode = this.zipCode;
+    patientDto.city = this.city;
+    patientDto.country = this.country;
+    console.log(patientDto);
+
+    this.patientService.createPatient(patientDto).subscribe(patient => {
+      this.createdPatient = patient;
+      console.log(this.createdPatient);
     });
 
   }

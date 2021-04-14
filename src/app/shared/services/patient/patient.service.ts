@@ -24,4 +24,8 @@ export class PatientService {
     return this.http.post<Patient>(this.API_KEY, patientDto, this.httpOptions);
   }
 
+  getAllPatients(): Observable<Patient[]> {
+    return this.http.get<Patient[]>(this.API_KEY, this.httpOptions);
+  }
+
 }

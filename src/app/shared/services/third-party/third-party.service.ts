@@ -49,4 +49,8 @@ export class ThirdPartyService {
     const yearNumber: number = yearDate.getFullYear();
     return (Math.floor(Math.random() * 100) + (yearNumber - 101));
   }
+
+  getRandomGender(): number {
+    return (Math.floor(Math.random() * 3));
+  }
 }
