@@ -76,8 +76,18 @@ export class AppointmentEditModalComponent implements OnInit {
   }
 
   saveAppointment(): void {
-    const appointment = new Appointment();
-    this.editAppointmentEvent.emit(appointment);
+    // const appointment = new Appointment();
+    // this.editAppointmentEvent.emit(appointment);
+    this.appointmentService.addAppointment(this.appointment).subscribe(
+      data => {
+        console.log(data);
+        location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    // TODO: MAKE THIS TO UPDATO
   }
 
   // TODO split up start time
@@ -111,6 +121,14 @@ export class AppointmentEditModalComponent implements OnInit {
   }
 
   deleteAppointment(): void {
-
+    this.appointmentService.deleteAppointment(this.appointment.id).subscribe(
+      data => {
+        console.log(data);
+        location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

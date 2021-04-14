@@ -7,6 +7,8 @@ import {DatePipe} from '@angular/common';
 import {timeInterval} from 'rxjs/operators';
 import {TimeNumbersPipe} from 'src/app/shared/pipes/time-numbers-pipe';
 import {TokenStorageService} from '../../../shared/services/token-storage/token-storage.service';
+import {AppointmentType} from '../../../shared/models/appointment-type';
+import {ReasonType} from '../../../shared/models/reason-type';
 
 @Component({
   selector: 'app-appointment-add-modal',
@@ -34,8 +36,6 @@ export class AppointmentAddModalComponent implements OnInit {
   reasonText: string;
   attentionLineText: string;
 
-  isNew: boolean;
-
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 
   colors: any = {
@@ -62,6 +62,8 @@ export class AppointmentAddModalComponent implements OnInit {
 
   // todo change the modal private to the modal of the parent
   constructor(private modal: NgbModal, private appointmentService: AppointmentService, private tokenService: TokenStorageService) {
+    this.appointment.appointmentType = {} as AppointmentType;
+    this.appointment.reasonType = {} as ReasonType;
   }
 
   ngOnInit(): void {
@@ -84,8 +86,19 @@ export class AppointmentAddModalComponent implements OnInit {
   }
 
   saveAppointment(): void {
-    const appointment = new Appointment();
-    this.addAppointmentEvent.emit(appointment);
+    // const appointment = new Appointment();
+    // this.addAppointmentEvent.emit(appointment);
+    // const appointment = new Appointment();
+    // this.editAppointmentEvent.emit(appointment);
+    this.appointmentService.addAppointment(this.appointment).subscribe(
+      data => {
+        console.log(data);
+        location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   // TODO split up start time
