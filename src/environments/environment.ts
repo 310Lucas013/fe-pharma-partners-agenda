@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  gatewayApi: 'http://localhost:8888/'
+  gatewayApi: 'http://localhost:8888/',
+  randommerKey: '9200566444a343e3a422cee9183bc993',
+  randommerApi: 'https://randommer.io/api/'
 };
 
 /*
