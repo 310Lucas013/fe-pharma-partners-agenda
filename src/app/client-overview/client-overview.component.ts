@@ -85,7 +85,7 @@ export class ClientOverviewComponent implements OnInit {
       this.dossierInformation = '';
       const allDossiers = dossierInformation.split('<br>');
       for (const dossier of allDossiers) {
-        this.dossierInformation += dossier.toString();
+        this.dossierInformation += dossier.toString().substring(0, 250);
       }
       console.log(this.dossierInformation);
     });
