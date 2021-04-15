@@ -23,9 +23,10 @@ export class VerifyCodeComponent implements OnInit {
       .subscribe(data => {
         sessionStorage.clear();
 
-        setTimeout(() => {                           //<<<---using ()=> syntax
+        setTimeout(() => {
           this.tokenService.saveToken(data.token);
-          this.router.navigate(['/agenda']);
+          // TODO use the logged in id
+          this.router.navigate(['/agenda/0']);
         }, 1000);
       }, error => console.log(error));
   }

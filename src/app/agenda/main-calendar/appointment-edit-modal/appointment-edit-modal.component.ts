@@ -62,12 +62,12 @@ export class AppointmentEditModalComponent implements OnInit {
   // todo change the modal private to the modal of the parent
   constructor(private modal: NgbModal, private appointmentService: AppointmentService,
               private tokenService: TokenStorageService, private datePipe: DatePipe) {
+    this.datePipe = new DatePipe('nl');
 
   }
 
   ngOnInit(): void {
     this.minDate = new Date();
-    this.appointment.date = this.appointment.event.start;
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
@@ -80,19 +80,11 @@ export class AppointmentEditModalComponent implements OnInit {
   }
 
   updateAppointment(): void {
-    // const appointment = new Appointment();
-    // this.editAppointmentEvent.emit(appointment);
-    // this.appointment.date = new Date(this.appointment.date);
-    this.appointment.date = this.appointment.event.start;
-    console.log('before');
-    console.log(this.appointment.date);
-    this.appointment.date = new Date(this.datePipe.transform(this.appointment.date, 'yyyy-MM-dd'));
-    console.log('after');
-    console.log(this.appointment.date);
+    this.appointment.dateString = this.datePipe.transform(this.appointment.event.start, 'yyyy-MM-dd');
     this.appointmentService.updateAppointment(this.appointment).subscribe(
       data => {
         console.log(data);
-        location.reload();
+        //location.reload();
       },
       error => {
         console.log(error);
