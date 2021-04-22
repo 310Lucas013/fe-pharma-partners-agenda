@@ -10,7 +10,7 @@ import { AgendaEmployeeComponent } from './agenda-employee/agenda-employee.compo
 import { VerifyCodeComponent } from './verify-code/verify-code.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'home', component: AgendaEmployeeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'verify', component: VerifyCodeComponent, canActivate: [AuthguardService] },
