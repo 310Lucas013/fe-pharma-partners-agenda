@@ -149,7 +149,7 @@ export class MainCalendarComponent implements OnInit {
           beforeStart: true,
           afterEnd: true,
         };
-        a.event.draggable = true;
+        a.event.draggable = false;
         a.event.actions = this.actions;
         this.events.push(a.event);
         this.appointments[i] = a;
