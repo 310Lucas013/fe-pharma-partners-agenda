@@ -30,6 +30,7 @@ import { TimeNumbersPipe } from './shared/pipes/time-numbers-pipe';
 import { VerifyCodeComponent } from './verify-code/verify-code.component';
 import {AppointmentEditModalComponent} from './agenda/main-calendar/appointment-edit-modal/appointment-edit-modal.component';
 import {AppointmentAddModalComponent} from './agenda/main-calendar/appointment-add-modal/appointment-add-modal.component';
+import {AppointmentInformationModalComponent} from './agenda/main-calendar/appointment-information-modal/appointment-information-modal.component';
 
 registerLocaleData(localeNl);
 
@@ -51,7 +52,8 @@ registerLocaleData(localeNl);
     AgendaEmployeeComponent,
     VerifyCodeComponent,
     AppointmentEditModalComponent,
-    AppointmentAddModalComponent
+    AppointmentAddModalComponent,
+    AppointmentInformationModalComponent
   ],
     imports: [
         BrowserModule,

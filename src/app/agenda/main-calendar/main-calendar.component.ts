@@ -171,7 +171,8 @@ export class MainCalendarComponent implements OnInit {
 
   ngOnInit(): void {
     // this.addEvent();
-    console.log(this.events);
+    console.log(this.selectedAppointment.id);
+    console.log(this.selectedAppointment + 'ásdasdadsadsada');
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {

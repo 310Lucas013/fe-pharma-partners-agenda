@@ -99,6 +99,7 @@
 
 <!--  <ng-template #editModalContent let-close="close" *ngIf="(this.selectedAppointment | json) != {}">-->
   <ng-template #editModalContent let-close="close">
-  <app-appointment-edit-modal [appointment]="this.selectedAppointment"></app-appointment-edit-modal>
-  </ng-template>
-</div>
+    <app-appointment-information-modal></app-appointment-information-modal>
+    <!--<app-appointment-edit-modal [appointment]="this.selectedAppointment"></app-appointment-edit-modal>!-->
+   </ng-template>
+ </div>
