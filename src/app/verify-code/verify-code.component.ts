@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { VerificationcodeService } from '../shared/services/auth/verificationcode.service';
-import { TokenStorageService } from '../shared/services/token-storage/token-storage.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {VerificationcodeService} from '../shared/services/auth/verificationcode.service';
+import {TokenStorageService} from '../shared/services/token-storage/token-storage.service';
 
 @Component({
   selector: 'app-verify-code',
@@ -9,9 +9,10 @@ import { TokenStorageService } from '../shared/services/token-storage/token-stor
   styleUrls: ['./verify-code.component.css']
 })
 export class VerifyCodeComponent implements OnInit {
-  verificationcode: string = '';
+  verificationcode = '';
 
-  constructor(private verifyService: VerificationcodeService, private tokenService: TokenStorageService, private router: Router) { }
+  constructor(private verifyService: VerificationcodeService, private tokenService: TokenStorageService, private router: Router) {
+  }
 
   ngOnInit(): void {
   }
@@ -23,10 +24,8 @@ export class VerifyCodeComponent implements OnInit {
 
         setTimeout(() => {                           // <<<---using ()=> syntax
           this.tokenService.saveToken(data.token);
-          this.router.navigate(['/agenda/' + this.tokenService.getId()]);
+          this.router.navigate(['/agenda/']); // + this.tokenService.getId()]);
         }, 1000);
       }, error => console.log(error));
   }
-
-
 }

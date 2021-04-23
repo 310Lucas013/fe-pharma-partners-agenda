@@ -24,10 +24,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    console.log('a');
     this.authService.login(this.credentials)
       .subscribe(data => {
+          console.log('b');
           if (data.token !== null && data.token !== undefined) {
+            console.log('c');
             this.tokenService.saveToken(data.token);
+            console.log('d');
             this.router.navigate(['/verify']);
           } else {
             alert(data);
