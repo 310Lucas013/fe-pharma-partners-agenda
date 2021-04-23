@@ -120,16 +120,35 @@ export class AppointmentAddModalComponent implements OnInit {
       // this.endTime = tempTime.getHours().toString() + ':' + tempTime.getMinutes().toString();
       // this.appointment.end.setTime(startTime + this.duration * 60000); // 60000 time ticks in a minute
       // console.log(this.appointment.end);
-      this.appointment.date = new Date();
-      this.appointment.startTime = new Date();
+      if(this.appointment.date === null || this.appointment.date === undefined){
+        this.appointment.date = new Date();
+      }
+
+      this.appointment.startTime = this.appointment.date;
       this.appointment.startTime.setHours(hours);
       this.appointment.startTime.setMinutes(min);
-      const startTime = this.appointment.startTime.getTime();
-      const tempTime: Date = this.appointment.startTime;
-      tempTime.setTime(startTime + this.duration * 60000);
-      this.endTime = tempTime.getHours().toString() + ':' + tempTime.getMinutes().toString();
-      this.appointment.endTime.setTime(startTime + this.duration * 60000); // 60000 time ticks in a minute
+      this.appointment.endTime.setTime(this.appointment.startTime.getTime() + this.duration * 60000); // 60000 time ticks in a minute
+      this.endTime = this.appointment.endTime.getHours().toString() + ':' + this.appointment.endTime.getMinutes().toString();
+      this.appointment.startTime.setHours(this.appointment.startTime.getHours() + 2)
+      this.appointment.endTime.setHours(this.appointment.endTime.getHours() + 2)
+      console.log(this.appointment.startTime.getTimezoneOffset());
       console.log(this.appointment.endTime);
+
+/*      //Create Date object from ISO string
+      let date = new Date(value);
+      //Get ms for date
+      let time = date.getTime();
+      //Check if timezoneOffset is positive or negative
+      if (date.getTimezoneOffset() <= 0) {
+        //Convert timezoneOffset to hours and add to Date value in milliseconds
+        let final = time + (Math.abs(date.getTimezoneOffset() * 60000));
+        //Convert from milliseconds to date and convert date back to ISO string
+        this._date = new Date(final).toISOString();
+      } else {
+        let final = time + (-Math.abs(date.getTimezoneOffset() * 60000));
+        this._date = new Date(final).toISOString();
+      }
+      */
     }
   }
 
