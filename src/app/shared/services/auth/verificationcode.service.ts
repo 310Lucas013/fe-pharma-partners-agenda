@@ -16,10 +16,10 @@ export class VerificationcodeService {
     ) { }
 
     verify(verificationcode: string): Observable<any> {
-        var header = {
+        const header = {
             headers: new HttpHeaders()
                 .set('Authorization', this.tokenStorage.getToken())
-        }
+        };
 
         return this.http.post(
             AUTH_API + 'verify',

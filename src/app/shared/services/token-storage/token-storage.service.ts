@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 const TOKEN_KEY = 'Authorization';
 
@@ -7,11 +7,12 @@ const TOKEN_KEY = 'Authorization';
 })
 export class TokenStorageService {
 
-  constructor() { }
+  constructor() {
+  }
 
   public saveToken(token: string): void {
     sessionStorage.removeItem(TOKEN_KEY);
-    sessionStorage.setItem(TOKEN_KEY, "Bearer " + token);
+    sessionStorage.setItem(TOKEN_KEY, 'Bearer ' + token);
   }
 
   public getToken(): string {
@@ -24,9 +25,16 @@ export class TokenStorageService {
   }
 
   public getUsername(): string {
-    let jwtData = this.getToken().split('.')[1];
-    let decodedJwtJsonData = window.atob(jwtData);
-    let decodedJwtData = JSON.parse(decodedJwtJsonData);
-    return decodedJwtData['sub'];
+    const jwtData = this.getToken().split('.')[1];
+    const decodedJwtJsonData = window.atob(jwtData);
+    const decodedJwtData = JSON.parse(decodedJwtJsonData);
+    return decodedJwtData.sub;
+  }
+
+  public getId(): string {
+    const jwtData = this.getToken().split('.')[1];
+    const decodedJwtJsonData = window.atob(jwtData);
+    const decodedJwtData = JSON.parse(decodedJwtJsonData);
+    return decodedJwtData.jti;
   }
 }

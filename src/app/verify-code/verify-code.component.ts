@@ -9,8 +9,6 @@ import { TokenStorageService } from '../shared/services/token-storage/token-stor
   styleUrls: ['./verify-code.component.css']
 })
 export class VerifyCodeComponent implements OnInit {
-
-
   verificationcode: string = '';
 
   constructor(private verifyService: VerificationcodeService, private tokenService: TokenStorageService, private router: Router) { }
@@ -23,9 +21,9 @@ export class VerifyCodeComponent implements OnInit {
       .subscribe(data => {
         sessionStorage.clear();
 
-        setTimeout(() => {                           //<<<---using ()=> syntax
+        setTimeout(() => {                           // <<<---using ()=> syntax
           this.tokenService.saveToken(data.token);
-          this.router.navigate(['/agenda']);
+          this.router.navigate(['/agenda/' + this.tokenService.getId()]);
         }, 1000);
       }, error => console.log(error));
   }
