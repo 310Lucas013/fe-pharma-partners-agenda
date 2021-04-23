@@ -204,6 +204,7 @@ export class MainCalendarComponent implements OnInit {
       if (JSON.stringify(this.appointments[i].event) === JSON.stringify(event)) {
         console.log('a');
         this.selectedAppointment = this.appointments[i];
+        console.log(this.selectedAppointment);
         break;
       }
     }
