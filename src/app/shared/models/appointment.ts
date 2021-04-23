@@ -16,6 +16,7 @@ export class Appointment {
   employeeId: number;
   patientId: number;
   locationId: number;
+  dateString: string;
 
   event: CalendarEvent;
 

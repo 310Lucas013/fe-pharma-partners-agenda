@@ -1,6 +1,7 @@
 .home-button {
   background-color: #c4057a;
   color: #ffffff;
+  margin: 5px 10px 0 0;
 }
 
 .not-found-header-text {
@@ -8,9 +9,17 @@
 }
 
 .vertical-center {
-  margin-top: 10%;
+  margin-top: 5%;
 }
 
 .horizontal-center {
-  margin-left: 10%
+  margin-left: 5%
+}
+
+.gender-select {
+  width: 10%;
+}
+
+.span-spacing {
+  margin-bottom: 5px;
 }

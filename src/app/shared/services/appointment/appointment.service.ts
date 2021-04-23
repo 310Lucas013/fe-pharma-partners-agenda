@@ -34,6 +34,9 @@ export class AppointmentService {
   }
 
   updateAppointment(appointment: Appointment): Observable<any> {
-    return this.http.put<Appointment>(API_KEY + '/update/', appointment, httpOptions);
+    return this.http.put<Appointment>(API_KEY + '/update/', {
+      appointment,
+      date: appointment.dateString
+    }, httpOptions);
   }
 }

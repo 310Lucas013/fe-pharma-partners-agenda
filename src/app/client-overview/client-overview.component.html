@@ -1,7 +1,59 @@
+<app-navigation></app-navigation>
 <div class="vertical-center horizontal-center">
-  <h1 class="not-found-header-text">Deze pagina bestaat nog niet in de momentele versie van de website.</h1>
-  <br/>
-  <button class="home-button" mat-raised-button (click)="navigateToHome()">Klik hier om terug naar de home pagina te
-    gaan
-  </button>
+  <h1 class="not-found-header-text">Patiënten genereren</h1>
+
+  <div class="span-spacing">
+    <mat-label>Voornaam</mat-label>
+    <input matInput type="text" placeholder="Voornaam" [(ngModel)]="firstName"/>
+  </div>
+  <div class="span-spacing">
+  <mat-label>Tussenvoegsel</mat-label>
+  <input matInput type="text" placeholder="Tussenvoegsel" [(ngModel)]="middleName"/>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Achternaam</mat-label>
+    <input matInput type="text" placeholder="Achternaam" [(ngModel)]="lastName"/>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Geslacht</mat-label>
+    <mat-select class="gender-select" [(ngModel)]="gender">
+      <mat-option value="MALE">Male</mat-option>
+      <mat-option value="FEMALE">Female</mat-option>
+      <mat-option value="OTHER">Other</mat-option>
+    </mat-select>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Geboortedatum</mat-label>
+    <input matInput type="date" placeholder="Geboortedatum" [(ngModel)]="dateOfBirth"/>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Telefoonnummer</mat-label>
+    <input matInput type="text" placeholder="Telefoonnummer" [(ngModel)]="phoneNumber"/>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Dossier informatie</mat-label>
+    <input matInput type="text" placeholder="Dossier informatie" [(ngModel)]="dossierInformation"/>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Straatnaam</mat-label>
+    <input matInput type="text" placeholder="Straatnaam" [(ngModel)]="streetName"/>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Huisnummer</mat-label>
+    <input matInput type="text" placeholder="Huisnummer" [(ngModel)]="houseNumber"/>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Postcode</mat-label>
+    <input matInput type="text" placeholder="Postcode" [(ngModel)]="zipCode"/>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Stad</mat-label>
+    <input matInput type="text" placeholder="Stad" [(ngModel)]="city"/>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Land</mat-label>
+    <input matInput type="text" placeholder="Land" [(ngModel)]="country"/>
+  </div>
+  <button class="home-button" mat-raised-button (click)="generateRandomInformation()">Generate Information</button>
+  <button class="home-button" mat-raised-button (click)="savePatientInformation()">Save Patient</button>
 </div>
