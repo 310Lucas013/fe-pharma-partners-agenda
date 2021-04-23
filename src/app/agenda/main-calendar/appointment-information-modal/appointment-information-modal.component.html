@@ -1,16 +1,64 @@
 <div class="around">
   <!-- Appointment information !-->
-  <div class="wrapper">
-    <mat-icon>event</mat-icon>
-    <mat-label></mat-label>
-  </div>
-  <div class="wrapper">
-    <mat-icon>schedule</mat-icon>
-    <mat-label>10:20 - 10:30</mat-label>
-  </div>
-  <div class="wrapper">
-    <mat-label>Reden van komst</mat-label>
-    <mat-label>{{test}}</mat-label>
+  <div class="container">
+    <h2>Afspraakinformatie</h2>
+    <div class="above">
+      <a><span class="material-icons">login</span><br>Moet nog komen</a>
+      <a><span class="material-icons">apartment</span><br>Aangemeld</a>
+      <a><span class="material-icons">check</span><br>Afgerond</a>
+      <a><span (click)="edit()" ) class="material-icons">edit</span><br>Wijzigen </a>
+      <a><span class="material-icons">delete</span><br>Verwijderen</a>
+      <a><span class="material-icons">checklist</span><br>Actielijst openen</a>
+      <a><span class="material-icons">info</span><br>Patient informatie</a>
+      <a><span><button>Dossier</button></span></a>
+    </div>
+
+    <div class="left">
+      <div class="wrapper-">
+        <mat-icon>event</mat-icon>
+        <mat-label>{{appointment.date | date:'EEEE dd MMMM yyyy': '' :'nl'}}</mat-label>
+      </div>
+
+      <div class="wrapper-">
+        <mat-icon>schedule</mat-icon>
+        <mat-label>{{appointment.startTime | date:'hh:mm'}}-{{appointment.endTime | date:'hh:mm'}}uur </mat-label>
+      </div>
+
+      <div class="wrapper-">
+        <mat-icon>brush</mat-icon>
+        <mat-label>{{appointment.appointmentType.name}}</mat-label>
+      </div>
+
+      <div class="wrapper-">
+        <mat-label><b>Reden van komst: </b></mat-label><br>
+        <mat-label>{{appointment.reason}}</mat-label>
+      </div>
+
+      <div class="wrapper-">
+        <mat-label><b>Attentieregel: </b></mat-label><br>
+        <mat-label>{{appointment.attention}}</mat-label>
+      </div>
+
+      <div class="wrapper-">
+        <mat-checkbox>Prioriteit</mat-checkbox>
+      </div>
+      <div class="wrapper-">
+        <mat-checkbox>Afspraak zichtbaar voor patient(MGn)</mat-checkbox>
+      </div>
+
+    </div>
+    <div class="right">
+      <div class="wrapper-">
+        <mat-label><b>Patient: </b></mat-label>
+        <mat-label>{{appointment.patientName}}</mat-label>
+        <br>
+        <mat-label>{{appointment.patientDateOfBirth}}</mat-label>
+        <br>
+        <mat-label>{{appointment.patientStreetNameNumber}}</mat-label>
+        <br>
+        <mat-label>{{appointment.patientPostalCode}}</mat-label>
+      </div>
+    </div>
   </div>
 </div>
 
