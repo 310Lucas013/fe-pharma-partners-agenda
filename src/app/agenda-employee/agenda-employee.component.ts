@@ -10,7 +10,7 @@ import {Employee} from '../shared/models/employee';
 })
 export class AgendaEmployeeComponent implements OnInit {
 
-  employees: Employee[];
+  employees: Employee[] ;
   message: string;
 
   constructor(private router: Router, private http: HttpClient) {
