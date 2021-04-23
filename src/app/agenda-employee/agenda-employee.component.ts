@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Employee} from '../shared/models/employee';
@@ -10,10 +10,11 @@ import {Employee} from '../shared/models/employee';
 })
 export class AgendaEmployeeComponent implements OnInit {
 
-  employees: Employee[] ;
+  employees: Employee[];
   message: string;
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient) {
+  }
 
   ngOnInit(): void {
     this.getEmployees();
@@ -21,19 +22,20 @@ export class AgendaEmployeeComponent implements OnInit {
   }
 
   getEmployees(): void {
-    this.http.get<Employee[]>('http://localhost:5001/employees/all').subscribe(response => { if (response.length === 0){
-                                                                                                        this.message = 'Er zijn geen accounts.';}
-                                                                                                      else {
-                                                                                                        this.message = 'Accounts:';
-                                                                                                        this.employees = response;
-                                                                                                      }});
+    this.http.get<Employee[]>('http://localhost:5001/employees/all').subscribe(response => {
+      if (response.length === 0) {
+        this.message = 'Er zijn geen accounts.';
+      } else {
+        this.message = 'Accounts:';
+        this.employees = response;
+      }
+    });
   }
 
-  test(employees: Employee[]): void{
-    if (employees.length === 0){
+  test(employees: Employee[]): void {
+    if (employees.length === 0) {
       this.message = 'Er zijn geen accounts.';
-    }
-    else {
+    } else {
       this.employees = employees;
     }
   }

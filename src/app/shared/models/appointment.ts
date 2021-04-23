@@ -1,5 +1,7 @@
 import {AppointmentType} from './appointment-type';
 import {ReasonType} from './reason-type';
+import {CalendarEvent} from 'angular-calendar';
+import {EventAction, EventColor} from 'calendar-utils';
 
 export class Appointment {
   id: number;
@@ -15,13 +17,15 @@ export class Appointment {
   patientId: number;
   locationId: number;
 
-  title: string;
-  color: any;
-  draggable: boolean;
-  resizable: {
-    beforeStart: boolean,
-    afterEnd: boolean
-  };
+  event: CalendarEvent;
+
+  // title: string;
+  //  color: any;
+  // draggable: boolean;
+  // resizable: {
+  //   beforeStart: boolean,
+  //   afterEnd: boolean
+  // };
 
   location: string;
   street: string;

@@ -69,10 +69,10 @@
       [dayEndHour]="17"
       [dayEndMinute]="0"
       [locale]="'nl'"
-      [events]="events"
+      [events]="this.events"
       [refresh]="refresh"
       (dayHeaderClicked)="setDayView($event)"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="handleEvent('Edited', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-week-view>
@@ -84,16 +84,21 @@
       [dayStartMinute]="0"
       [dayEndHour]="17"
       [dayEndMinute]="0"
-      [events]="events"
+      [events]="this.events"
       [refresh]="refresh"
       [locale]="'nl'"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="handleEvent('Edited', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-day-view>
   </div>
 
-  <ng-template #modalContent let-close="close">
-    <app-appointment-modal (addAppointmentEvent)="addEvent($event)"></app-appointment-modal>
+  <ng-template #addModalContent let-close="close">
+    <app-appointment-add-modal></app-appointment-add-modal>
+  </ng-template>
+
+<!--  <ng-template #editModalContent let-close="close" *ngIf="(this.selectedAppointment | json) != {}">-->
+  <ng-template #editModalContent let-close="close">
+  <app-appointment-edit-modal [appointment]="this.selectedAppointment"></app-appointment-edit-modal>
   </ng-template>
 </div>

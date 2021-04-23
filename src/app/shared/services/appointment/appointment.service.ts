@@ -17,7 +17,8 @@ export class AppointmentService {
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
   addAppointment(appointment: Appointment): Observable<any> {
     return this.http.post<Appointment>(API_KEY + '/create', appointment, httpOptions);
@@ -25,5 +26,14 @@ export class AppointmentService {
 
   getAppointmentsByEmployeeId(employeeId: number): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(API_KEY + '/employee-id/' + employeeId);
+  }
+
+  deleteAppointment(appointmentId: number): Observable<any> {
+    const aaa = API_KEY + '/' + appointmentId;
+    return this.http.delete(aaa);
+  }
+
+  updateAppointment(appointment: Appointment): Observable<any> {
+    return this.http.put<Appointment>(API_KEY + '/update/', appointment, httpOptions);
   }
 }
