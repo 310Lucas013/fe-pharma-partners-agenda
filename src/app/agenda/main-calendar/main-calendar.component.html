@@ -72,7 +72,7 @@
       [events]="this.events"
       [refresh]="refresh"
       (dayHeaderClicked)="setDayView($event)"
-      (eventClicked)="handleEvent('Edited', $event.event)"
+      (eventClicked)="handleEvent('Info', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-week-view>
@@ -87,7 +87,7 @@
       [events]="this.events"
       [refresh]="refresh"
       [locale]="'nl'"
-      (eventClicked)="handleEvent('Edited', $event.event)"
+      (eventClicked)="handleEvent('Info', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-day-view>
@@ -98,7 +98,7 @@
   </ng-template>
 
 <!--  <ng-template #editModalContent let-close="close" *ngIf="(this.selectedAppointment | json) != {}">-->
-  <ng-template #editModalContent let-close="close">
+  <ng-template #appointmentInformationModal let-close="close">
     <app-appointment-information-modal [appointment]="this.selectedAppointment" ></app-appointment-information-modal>
     <!-- <app-appointment-edit-modal [appointment]="this.selectedAppointment"></app-appointment-edit-modal> !-->
    </ng-template>

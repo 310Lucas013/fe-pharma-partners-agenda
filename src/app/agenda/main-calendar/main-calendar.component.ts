@@ -32,7 +32,7 @@ const colors: any = {
 })
 export class MainCalendarComponent implements OnInit {
   @ViewChild('addModalContent', {static: true}) addModalContent: TemplateRef<any>;
-  @ViewChild('editModalContent', {static: true}) editModalContent: TemplateRef<any>;
+  @ViewChild('appointmentInformationModal', {static: true}) appointmentInformationModal: TemplateRef<any>;
 
   @Input() viewDate: Date;
 
@@ -210,10 +210,10 @@ export class MainCalendarComponent implements OnInit {
     }
 
     this.modalData = {event, action};
-    if (action === 'Edited') {
-      this.modal.open(this.editModalContent, {size: 'lg'});
+    if (action === 'Info') {
+      this.modal.open(this.appointmentInformationModal, {size: 'lg'});
     } else if (action === 'Deleted') {
-      this.modal.open(this.editModalContent, {size: 'lg'});
+      this.modal.open(this.appointmentInformationModal, {size: 'lg'});
     } else {
       this.modal.open(this.addModalContent, {size: 'lg'});
     }
