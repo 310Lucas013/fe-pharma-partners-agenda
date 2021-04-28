@@ -53,6 +53,7 @@ export class AppointmentModalComponent implements OnInit {
     this.appointment.endTime.setTime(0);
     this.appointment.appointmentType = {} as AppointmentType;
     this.appointment.reasonType = {} as ReasonType;
+    this.appointment.attention = '';
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
@@ -65,11 +66,14 @@ export class AppointmentModalComponent implements OnInit {
   }
 
   saveAppointment(): void {
-    if (this.employeeId === null) {
-      this.employeeId = 1;
-    } else {
-      this.appointment.employeeId = this.employeeId;
+    if(!this.setAppointmentTimes()){
+      // EndTime is not later than startTime, Show error
+      return;
     }
+    if (this.employeeId === null || this.employeeId === undefined) {
+      this.employeeId = 1;
+    }
+    this.appointment.employeeId = this.employeeId;
     console.log(this.appointment);
     this.appointmentService.addAppointment(this.appointment).subscribe(
       data => {
@@ -80,28 +84,22 @@ export class AppointmentModalComponent implements OnInit {
       }
     );
     this.addAppointmentEvent.emit(this.appointment);
+    //location.reload();
   }
 
-  //TODO split up start time
-  // And endTime updates 1 tick too late
-  calcEndTime(): void {
-    if (this.startTime.includes(':') && this.duration != null) {
-      let hours = Number(this.startTime.split(':')[0]);
-      let min = Number(this.startTime.split(':')[1]);
+  setAppointmentTimes(): boolean {
+    if (this.startTime.includes(':') && this.endTime.includes(':')) {
+      let startHours = Number(this.startTime.split(':')[0]);
+      let startMin = Number(this.startTime.split(':')[1]);
+      let endHours = Number(this.endTime.split(':')[0]);
+      let endMin = Number(this.endTime.split(':')[1]);
       this.appointment.startTime = new Date();
-      this.appointment.startTime = this.appointment.date;
-      this.appointment.startTime.setHours(hours);
-      this.appointment.startTime.setMinutes(min);
-      let startTime = this.appointment.startTime.getTime();
-      let tempTime: Date = this.appointment.startTime;
-      tempTime.setTime(startTime + this.duration * 60000);
-      this.endTime = tempTime.getHours().toString() + ':' + tempTime.getMinutes().toString();
-      this.appointment.endTime.setTime(startTime + this.duration * 60000); //60000 time ticks in a minute
-      console.log(this.appointment.endTime);
+      this.appointment.endTime = new Date();
+      this.appointment.startTime.setHours(startHours);
+      this.appointment.startTime.setMinutes(startMin);
+      this.appointment.endTime.setHours(endHours);
+      this.appointment.endTime.setMinutes(endMin);
+      return this.appointment.endTime > this.appointment.startTime;
     }
-  }
-
-  updateEndTime(): void {
-    console.log('AAAA');
   }
 }

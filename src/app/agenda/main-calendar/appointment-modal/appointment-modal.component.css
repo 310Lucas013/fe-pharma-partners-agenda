@@ -133,3 +133,7 @@ mat-form-field-flex{
 p{
   margin: 2%;
 }
+
+.modal-attention input{
+  background-color: white;
+}
