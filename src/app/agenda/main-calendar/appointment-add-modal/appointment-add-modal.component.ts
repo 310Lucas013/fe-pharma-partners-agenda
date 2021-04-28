@@ -16,25 +16,11 @@ import {ReasonType} from '../../../shared/models/reason-type';
   styleUrls: ['./appointment-add-modal.component.css']
 })
 export class AppointmentAddModalComponent implements OnInit {
-
-  duration: number;
+  employeeId: number;
   startTime = '00:00';
   endTime = '00:00';
-  appointment = {} as Appointment;
-
-  // Appointment parameters
-  type: string;
   date: string;
-  time: string;
-  location: string;
-  doctorName: string;
-  patientName: string;
-  patientStreetNameNumber: string;
-  patientDateOfBirth: string;
-  patientPostalCode: string;
-  reasonSelection: string;
-  reasonText: string;
-  attentionLineText: string;
+  appointment = {} as Appointment;
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 
@@ -67,9 +53,6 @@ export class AppointmentAddModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.appointment.date = new Date();
-    // this.appointment.end = new Date();
-    // this.appointment.end.setTime(0);
     this.appointment.date = new Date();
     this.appointment.startTime = new Date();
     this.appointment.endTime = new Date();
@@ -86,73 +69,39 @@ export class AppointmentAddModalComponent implements OnInit {
   }
 
   saveAppointment(): void {
-    // const appointment = new Appointment();
-    // this.addAppointmentEvent.emit(appointment);
-    // const appointment = new Appointment();
-    // this.editAppointmentEvent.emit(appointment);
-
-    console.log('new appointment');
+    if(!this.setAppointmentTimes()){
+      // TODO EndTime is not later than startTime, Show error
+      return;
+    }
+    if (this.employeeId === null || this.employeeId === undefined) {
+      this.employeeId = 1;
+    }
+    this.appointment.employeeId = this.employeeId;
     console.log(this.appointment);
     this.appointmentService.addAppointment(this.appointment).subscribe(
       data => {
-        console.log(data);
-        // location.reload();
+        location.reload();
       },
       error => {
         console.log(error);
       }
     );
+    this.addAppointmentEvent.emit(this.appointment);
   }
 
-  // TODO split up start time
-  // And endTime updates 1 tick too late
-  calcEndTime(): void {
-    if (this.startTime.includes(':') && this.duration != null) {
-      const hours = Number(this.startTime.split(':')[0]);
-      const min = Number(this.startTime.split(':')[1]);
-      // this.appointment.start = new Date();
-      // this.appointment.start = this.appointment.date;
-      // this.appointment.start.setHours(hours);
-      // this.appointment.start.setMinutes(min);
-      // const startTime = this.appointment.start.getTime();
-      // const tempTime: Date = this.appointment.start;
-      // tempTime.setTime(startTime + this.duration * 60000);
-      // this.endTime = tempTime.getHours().toString() + ':' + tempTime.getMinutes().toString();
-      // this.appointment.end.setTime(startTime + this.duration * 60000); // 60000 time ticks in a minute
-      // console.log(this.appointment.end);
-      if(this.appointment.date === null || this.appointment.date === undefined){
-        this.appointment.date = new Date();
-      }
-
-      this.appointment.startTime = this.appointment.date;
-      this.appointment.startTime.setHours(hours);
-      this.appointment.startTime.setMinutes(min);
-      this.appointment.endTime.setTime(this.appointment.startTime.getTime() + this.duration * 60000); // 60000 time ticks in a minute
-      this.endTime = this.appointment.endTime.getHours().toString() + ':' + this.appointment.endTime.getMinutes().toString();
-      this.appointment.startTime.setHours(this.appointment.startTime.getHours() + 2)
-      this.appointment.endTime.setHours(this.appointment.endTime.getHours() + 2)
-      console.log(this.appointment.startTime.getTimezoneOffset());
-      console.log(this.appointment.endTime);
-
-/*      //Create Date object from ISO string
-      let date = new Date(value);
-      //Get ms for date
-      let time = date.getTime();
-      //Check if timezoneOffset is positive or negative
-      if (date.getTimezoneOffset() <= 0) {
-        //Convert timezoneOffset to hours and add to Date value in milliseconds
-        let final = time + (Math.abs(date.getTimezoneOffset() * 60000));
-        //Convert from milliseconds to date and convert date back to ISO string
-        this._date = new Date(final).toISOString();
-      } else {
-        let final = time + (-Math.abs(date.getTimezoneOffset() * 60000));
-        this._date = new Date(final).toISOString();
-      }
-      */
+  setAppointmentTimes(): boolean {
+    if (this.startTime.includes(':') && this.endTime.includes(':')) {
+      let startHours = Number(this.startTime.split(':')[0]);
+      let startMin = Number(this.startTime.split(':')[1]);
+      let endHours = Number(this.endTime.split(':')[0]);
+      let endMin = Number(this.endTime.split(':')[1]);
+      this.appointment.startTime = new Date();
+      this.appointment.endTime = new Date();
+      this.appointment.startTime.setHours(startHours);
+      this.appointment.startTime.setMinutes(startMin);
+      this.appointment.endTime.setHours(endHours);
+      this.appointment.endTime.setMinutes(endMin);
+      return this.appointment.endTime > this.appointment.startTime;
     }
-  }
-
-  updateEndTime(): void {
-    console.log('AAAA');
   }
 }

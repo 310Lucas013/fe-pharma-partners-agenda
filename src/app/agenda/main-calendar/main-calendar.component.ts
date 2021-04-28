@@ -37,7 +37,7 @@ export class MainCalendarComponent implements OnInit {
   @Input() viewDate: Date;
 
   view: CalendarView = CalendarView.Week;
-  selectedAppointment: Appointment;
+  selectedAppointment = {} as Appointment;
 
   CalendarView = CalendarView;
 
@@ -157,22 +157,7 @@ export class MainCalendarComponent implements OnInit {
     });
   }
 
-  // start: Date;
-  // end?: Date;
-  // title: string;
-  // color?: EventColor;
-  // actions?: EventAction[];
-  // cssClass?: string;
-  // resizable?: {
-  //   beforeStart?: boolean;
-  //   afterEnd?: boolean;
-  // };
-  // draggable?: boolean;
-
   ngOnInit(): void {
-    // this.addEvent();
-    console.log(this.selectedAppointment.id);
-    console.log(this.selectedAppointment + 'ásdasdadsadsada');
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {

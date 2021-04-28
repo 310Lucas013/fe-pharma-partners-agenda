@@ -19,7 +19,6 @@ export class SideCalendarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.calendar);
   }
 
   public dateChanged(date): void {
