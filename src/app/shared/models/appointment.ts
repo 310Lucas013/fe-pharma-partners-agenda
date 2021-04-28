@@ -8,7 +8,6 @@ export class Appointment {
   date: Date;
   startTime: Date;
   endTime: Date;
-  description: string;
   appointmentType: AppointmentType;
   reasonType: ReasonType;
   reason: string;
@@ -17,6 +16,8 @@ export class Appointment {
   patientId: number;
   locationId: number;
   dateString: string;
+  priority: boolean;
+  mgn: boolean;
 
   event: CalendarEvent;
 
