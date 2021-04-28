@@ -18,19 +18,66 @@ dl.form dd {
 
 
 .mat-select-width {
-  width: 40%;
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 17px;
+  padding-left: 5px;
+  margin-bottom: 2%;
+}
+.time-input{
+  width: 23%;
+  float: left;
 }
 
 .text-area-width {
-  width: 80%;
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 17px;
+  padding-left: 5px;
 }
-
+label{
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 17px;
+  padding-left: 5px;
+}
+input{
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 17px;
+  padding-left: 5px;
+  margin: 2%;
+}
+.mat-form-field{
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 17px;
+  padding-left: 5px;
+  margin: 2%;
+}
 .around {
   padding: 3%;
 }
 
 .right-side {
   float: right;
+}
+.left-side{
+  float:left;
+}
+.date{
+  border: none  ;
+  width: 60%;
+}
+.date-picker{
+  width: fit-content;
+}
+.date-box{
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 17px;
+  padding-left: 5px;
+  height: 35px;
 }
 
 .modal-information {
@@ -65,4 +112,24 @@ mat-form-field-flex{
 
 .start-time {
   width: 60px;
+}
+.left-side{
+  float: left;
+  width: 20vw;
+}
+.top-box{
+  height: 40vh;
+  padding: 2%;
+}
+.box{
+  display: block;
+}
+.table{
+  border: none !important;
+}
+.checkbox{
+  width: 2vw;
+}
+p{
+  margin: 2%;
 }
