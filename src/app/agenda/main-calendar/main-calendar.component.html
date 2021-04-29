@@ -1,59 +1,65 @@
 <div class="body">
   <div class="row text-center">
-    <div class="col-md-4">
+    <div class="col-md-4 new-appointment-box">
       <div class="btn-group">
-        <div
-          class="btn btn-primary"
-          mwlCalendarPreviousView
-          [view]="view"
-          [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
-        >
-          Vorige
-        </div>
-        <div
-          (click)="resetViewDate()"
-          class="btn btn-outline-secondary"
-          mwlCalendarToday
-          [(viewDate)]="viewDate"
-        >
-          Vandaag
-        </div>
-        <div
-          class="btn btn-primary"
-          mwlCalendarNextView
-          [view]="view"
-          [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
-        >
-          Volgende
-        </div>
+        <button (click)="newAppointment()" class="button-new-appointment"> + Nieuwe afspraak</button>
       </div>
     </div>
-    <div class="col-md-4">
-      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'nl': 1: [] : 5 }}</h3>
-    </div>
-    <div class="col-md-4">
-      <div class="btn-group">
-        <div
-          class="btn btn-primary"
-          (click)="setView(CalendarView.Week)"
-          [class.active]="view === CalendarView.Week"
-        >
-          Week
-        </div>
-        <div
-          class="btn btn-primary"
-          (click)="setView(CalendarView.Day)"
-          [class.active]="view === CalendarView.Day"
-        >
-          Dag
-        </div>
+    <div>
+      <div class="col-md-4 date-box">
+        <h4>{{ viewDate | calendarDate:(view + 'ViewTitle'):'nl': 1: [] : 5 }}</h4>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="btn-group">
-        <button (click)="newAppointment()" class="button-new-appointment">+ Nieuwe afspraak</button>
+    <div class="right-box">
+      <div class="top-box">
+        <div class="col-md-4 back-today-tomorrow-box">
+          <div class="btn-group">
+            <div
+              class="btn btn-primary"
+              mwlCalendarPreviousView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()">
+              <
+            </div>
+            <div
+              class="btn btn-primary"
+              mwlCalendarNextView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()">
+              >
+            </div>
+            <div
+              (click)="resetViewDate()"
+              class="btn btn-outline-secondary"
+              mwlCalendarToday
+              [(viewDate)]="viewDate">
+              Vandaag
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-box">
+        <div class="col-md-4 day-week-view-box">
+          <div class="btn-group">
+
+            <div
+              class="btn btn-primary btn-view"
+              (click)="setView(CalendarView.Week)"
+              [class.active]="view === CalendarView.Week">
+              Week
+            </div>
+            <div
+              class="btn btn-primary btn-view"
+              (click)="setView(CalendarView.Day)"
+              [class.active]="view === CalendarView.Day">
+              Dag
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -72,7 +78,7 @@
       [events]="this.events"
       [refresh]="refresh"
       (dayHeaderClicked)="setDayView($event)"
-      (eventClicked)="handleEvent('Edited', $event.event)"
+      (eventClicked)="handleEvent('Info', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-week-view>
@@ -87,7 +93,7 @@
       [events]="this.events"
       [refresh]="refresh"
       [locale]="'nl'"
-      (eventClicked)="handleEvent('Edited', $event.event)"
+      (eventClicked)="handleEvent('Info', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-day-view>
@@ -98,7 +104,8 @@
   </ng-template>
 
 <!--  <ng-template #editModalContent let-close="close" *ngIf="(this.selectedAppointment | json) != {}">-->
-  <ng-template #editModalContent let-close="close">
-  <app-appointment-edit-modal [appointment]="this.selectedAppointment"></app-appointment-edit-modal>
-  </ng-template>
-</div>
+  <ng-template #appointmentInformationModal let-close="close">
+    <app-appointment-information-modal [appointment]="this.selectedAppointment" ></app-appointment-information-modal>
+    <!-- <app-appointment-edit-modal [appointment]="this.selectedAppointment"></app-appointment-edit-modal> !-->
+   </ng-template>
+ </div>

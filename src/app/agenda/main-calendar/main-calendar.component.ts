@@ -32,12 +32,12 @@ const colors: any = {
 })
 export class MainCalendarComponent implements OnInit {
   @ViewChild('addModalContent', {static: true}) addModalContent: TemplateRef<any>;
-  @ViewChild('editModalContent', {static: true}) editModalContent: TemplateRef<any>;
+  @ViewChild('appointmentInformationModal', {static: true}) appointmentInformationModal: TemplateRef<any>;
 
   @Input() viewDate: Date;
 
   view: CalendarView = CalendarView.Week;
-  selectedAppointment: Appointment;
+  selectedAppointment = {} as Appointment;
 
   CalendarView = CalendarView;
 
@@ -157,21 +157,7 @@ export class MainCalendarComponent implements OnInit {
     });
   }
 
-  // start: Date;
-  // end?: Date;
-  // title: string;
-  // color?: EventColor;
-  // actions?: EventAction[];
-  // cssClass?: string;
-  // resizable?: {
-  //   beforeStart?: boolean;
-  //   afterEnd?: boolean;
-  // };
-  // draggable?: boolean;
-
   ngOnInit(): void {
-    // this.addEvent();
-    console.log(this.events);
   }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
@@ -203,15 +189,16 @@ export class MainCalendarComponent implements OnInit {
       if (JSON.stringify(this.appointments[i].event) === JSON.stringify(event)) {
         console.log('a');
         this.selectedAppointment = this.appointments[i];
+        console.log(this.selectedAppointment);
         break;
       }
     }
 
     this.modalData = {event, action};
-    if (action === 'Edited') {
-      this.modal.open(this.editModalContent, {size: 'lg'});
+    if (action === 'Info') {
+      this.modal.open(this.appointmentInformationModal, {size: 'lg'});
     } else if (action === 'Deleted') {
-      this.modal.open(this.editModalContent, {size: 'lg'});
+      this.modal.open(this.appointmentInformationModal, {size: 'lg'});
     } else {
       this.modal.open(this.addModalContent, {size: 'lg'});
     }

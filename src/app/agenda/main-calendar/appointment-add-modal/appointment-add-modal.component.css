@@ -1,21 +1,87 @@
+dl.form {
+  width:100%;
+  float:left;
+  clear:both;
+}
+dl.form dt {
+  width:50%;
+  float:left;
+  clear:left;
+  text-align:right;
+}
+dl.form dd {
+  width:50%;
+  float:left;
+  clear:right;
+  text-align:left;
+}
+
+
 .mat-select-width {
-  width: 40%;
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 17px;
+  padding-left: 5px;
+  margin-bottom: 2%;
+}
+.time-input{
+  width: 23%;
+  float: left;
 }
 
 .text-area-width {
-  width: 80%;
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 17px;
+  padding-left: 5px;
 }
-
+label{
+  width: 100%;
+  border-radius: 17px;
+  padding-left: 5px;
+}
+input{
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 17px;
+  padding-left: 5px;
+  margin: 2%;
+}
+.mat-form-field{
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 17px;
+  padding-left: 5px;
+  margin: 2%;
+}
 .around {
   padding: 3%;
 }
 
 .right-side {
   float: right;
+  width: 85%;
+}
+.left-side{
+  float:left;
+}
+.date{
+  border: none  ;
+  width: 60%;
+}
+.date-picker{
+  width: fit-content;
+}
+.date-box{
+  width: 100%;
+  border: 1px solid lightgray;
+  border-radius: 17px;
+  padding-left: 5px;
+  height: 35px;
 }
 
 .modal-information {
-  width: 57%;
+  width: 100%;
   margin-left: 0 !important;
   display: inline-block;
   padding-right: 5%;
@@ -30,8 +96,13 @@
   color: #bbbec3;
 }
 
+mat-form-field-flex{
+  width: 300px;
+}
+
 .modal-patient {
   width: 35%;
+  float: right;
   display: inline-block;
 }
 
@@ -41,4 +112,36 @@
 
 .start-time {
   width: 60px;
+}
+.left-side{
+  float: left;
+  width: 20vw;
+}
+.top-box{
+  height: 30vh;
+  padding: 2%;
+}
+.box{
+  display: block;
+}
+.table{
+  border: none !important;
+}
+.table tr{
+
+  border: none !important;
+}
+.table td{
+  padding: 0 !important;
+  vertical-align: unset;
+}
+.checkbox{
+  width: 2vw;
+}
+p{
+  margin: 2%;
+}
+
+.modal-attention input{
+  background-color: white;
 }
