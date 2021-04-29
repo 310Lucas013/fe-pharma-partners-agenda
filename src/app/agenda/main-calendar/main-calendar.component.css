@@ -10,17 +10,20 @@ pre {
 .body{
   background-color: white;
   border-radius: 5px;
-  padding: 5%;
+  padding: 3%;
   width: 67vw;
-  max-height: 850px;
+  max-width: 67vw;
+  min-width: 48vw;
+  max-height: 87vh;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .button-new-appointment {
   background-color: #004496;
   color: #ffffff;
   border-radius: 10px;
-  width: 250px;
+  width: 10vw;
   padding: 10px 0;
   text-align: center;
   float: right;
@@ -33,9 +36,37 @@ pre {
 }
 
 .row {
-  margin-left: 10%;
+  flex-wrap: nowrap !important;
 }
 
 .calendar-gray {
   background-color: gray;
 }
+
+.new-appointment-box{
+width: 25%;
+}
+.date-box{
+  float: left;
+  width: 40vw;
+}
+.back-today-tomorrow-box{
+  float: left;
+}
+
+.day-week-view-box{
+
+}
+
+.top-box{
+  float: right;
+  margin-right: -20vw;
+}
+.bottem-box{
+float: right;
+  margin-right: 5vw;
+}
+.btn{
+  margin: 2%;
+}
+

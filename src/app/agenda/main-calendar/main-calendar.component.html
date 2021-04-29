@@ -1,59 +1,62 @@
 <div class="body">
   <div class="row text-center">
-    <div class="col-md-4">
-      <div class="btn-group">
-        <div
-          class="btn btn-primary"
-          mwlCalendarPreviousView
-          [view]="view"
-          [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
-        >
-          Vorige
-        </div>
-        <div
-          (click)="resetViewDate()"
-          class="btn btn-outline-secondary"
-          mwlCalendarToday
-          [(viewDate)]="viewDate"
-        >
-          Vandaag
-        </div>
-        <div
-          class="btn btn-primary"
-          mwlCalendarNextView
-          [view]="view"
-          [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
-        >
-          Volgende
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'nl': 1: [] : 5 }}</h3>
-    </div>
-    <div class="col-md-4">
-      <div class="btn-group">
-        <div
-          class="btn btn-primary"
-          (click)="setView(CalendarView.Week)"
-          [class.active]="view === CalendarView.Week"
-        >
-          Week
-        </div>
-        <div
-          class="btn btn-primary"
-          (click)="setView(CalendarView.Day)"
-          [class.active]="view === CalendarView.Day"
-        >
-          Dag
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
+    <div class="col-md-4 new-appointment-box">
       <div class="btn-group">
         <button (click)="newAppointment()" class="button-new-appointment">+ Nieuwe afspraak</button>
+      </div>
+    </div>
+    <div class="right-box">
+      <div class="top-box">
+        <div class="col-md-4 date-box">
+          <h4>{{ viewDate | calendarDate:(view + 'ViewTitle'):'nl': 1: [] : 5 }}</h4>
+        </div>
+        <div class="col-md-4 back-today-tomorrow-box">
+          <div class="btn-group">
+            <div
+              class="btn btn-primary"
+              mwlCalendarPreviousView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()">
+              <
+            </div>
+            <div
+              class="btn btn-primary"
+              mwlCalendarNextView
+              [view]="view"
+              [(viewDate)]="viewDate"
+              (viewDateChange)="closeOpenMonthViewDay()">
+              >
+            </div>
+            <div
+              (click)="resetViewDate()"
+              class="btn btn-outline-secondary"
+              mwlCalendarToday
+              [(viewDate)]="viewDate">
+              Vandaag
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="bottem-box">
+        <div class="col-md-4 day-week-view-box">Weergave
+          <div class="btn-group">
+
+            <div
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Week)"
+              [class.active]="view === CalendarView.Week">
+              Week
+            </div>
+            <div
+              class="btn btn-primary"
+              (click)="setView(CalendarView.Day)"
+              [class.active]="view === CalendarView.Day">
+              Dag
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

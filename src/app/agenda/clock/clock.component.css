@@ -1,16 +1,17 @@
 .clock {
-  background: #4379ba;
+  background: #e8ebed;
   float:left;
   border-radius: 5px;
-  color: white;
+  color: #416e9b;
   padding: 10px;
-  width: 20vw;
+  width: 24vw;
+  max-width: 24vw;
   max-height: 7vh;
   height: 7vh;
 }
 
 .clock-date {
-  font-size: 14px;
+  font-size: 17px;
   display: inline-block;
   width: 60%;
   text-align: center;
@@ -23,3 +24,4 @@
   float: right;
   padding-right: 10px;
 }
+
