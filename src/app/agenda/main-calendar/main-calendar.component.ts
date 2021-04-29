@@ -282,4 +282,8 @@ export class MainCalendarComponent implements OnInit {
       return iEvent;
     });
   }
+
+  changeAgenda(): void {
+
+  }
 }
