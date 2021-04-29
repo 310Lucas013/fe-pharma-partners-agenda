@@ -80,7 +80,8 @@ export class AppointmentAddModalComponent implements OnInit {
     console.log(this.appointment);
     this.appointmentService.addAppointment(this.appointment).subscribe(
       data => {
-        location.reload();
+        //location.reload();
+        console.log(data);
       },
       error => {
         console.log(error);
