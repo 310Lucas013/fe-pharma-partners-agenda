@@ -2,14 +2,16 @@
   <div class="row text-center">
     <div class="col-md-4 new-appointment-box">
       <div class="btn-group">
-        <button (click)="newAppointment()" class="button-new-appointment">+ Nieuwe afspraak</button>
+        <button (click)="newAppointment()" class="button-new-appointment"> + Nieuwe afspraak</button>
+      </div>
+    </div>
+    <div>
+      <div class="col-md-4 date-box">
+        <h4>{{ viewDate | calendarDate:(view + 'ViewTitle'):'nl': 1: [] : 5 }}</h4>
       </div>
     </div>
     <div class="right-box">
       <div class="top-box">
-        <div class="col-md-4 date-box">
-          <h4>{{ viewDate | calendarDate:(view + 'ViewTitle'):'nl': 1: [] : 5 }}</h4>
-        </div>
         <div class="col-md-4 back-today-tomorrow-box">
           <div class="btn-group">
             <div
@@ -39,18 +41,19 @@
           </div>
         </div>
       </div>
-      <div class="bottem-box">
-        <div class="col-md-4 day-week-view-box">Weergave
+
+      <div class="bottom-box">
+        <div class="col-md-4 day-week-view-box">
           <div class="btn-group">
 
             <div
-              class="btn btn-primary"
+              class="btn btn-primary btn-view"
               (click)="setView(CalendarView.Week)"
               [class.active]="view === CalendarView.Week">
               Week
             </div>
             <div
-              class="btn btn-primary"
+              class="btn btn-primary btn-view"
               (click)="setView(CalendarView.Day)"
               [class.active]="view === CalendarView.Day">
               Dag
