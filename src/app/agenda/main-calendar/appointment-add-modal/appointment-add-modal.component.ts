@@ -21,6 +21,7 @@ export class AppointmentAddModalComponent implements OnInit {
   endTime = '00:00';
   date: string;
   appointment = {} as Appointment;
+  error = '' as string;
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 
@@ -70,18 +71,25 @@ export class AppointmentAddModalComponent implements OnInit {
 
   saveAppointment(): void {
     if(!this.setAppointmentTimes()){
-      // TODO EndTime is not later than startTime, Show error
+      this.error = "Tijden niet goed ingevuld."
       return;
     }
+
+    // TODO set patient and location if from respective services
     if (this.employeeId === null || this.employeeId === undefined) {
       this.employeeId = 1;
     }
+    if (this.appointment.patientId === null || this.appointment.patientId  === undefined) {
+      this.appointment.patientId = 1;
+    }
+    if (this.appointment.locationId === null || this.appointment.locationId  === undefined) {
+      this.appointment.locationId = 1;
+    }
+
     this.appointment.employeeId = this.employeeId;
-    console.log(this.appointment);
     this.appointmentService.addAppointment(this.appointment).subscribe(
       data => {
-        //location.reload();
-        console.log(data);
+        location.reload();
       },
       error => {
         console.log(error);

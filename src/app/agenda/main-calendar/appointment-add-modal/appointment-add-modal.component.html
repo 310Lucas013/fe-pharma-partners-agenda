@@ -115,7 +115,7 @@
       <button (click)="cancelAppointment()" class="button-cancel" mat-button>Annuleren</button>
       <button type="submit" class="button-save" mat-button>Opslaan</button>
     </div>
-
+    <mat-error *ngIf="error != ''">{{error}}</mat-error>
   </form>
 </div>
 
