@@ -18,6 +18,7 @@ export class Appointment {
   dateString: string;
   priority: boolean;
   mgn: boolean;
+  color: any;
 
   event: CalendarEvent;
 
