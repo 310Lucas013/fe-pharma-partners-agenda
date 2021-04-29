@@ -1,87 +1,3 @@
-<!--<div class="around">-->
-<!--  <form (ngSubmit)="saveAppointment()">-->
-<!--    <div class="row">-->
-<!--      <div style="float: left;width: 5%;" class="column">-->
-<!--        <h2>Soort afspraak</h2>-->
-<!--      <mat-form-field appearance="fill">-->
-<!--        <mat-label>Selecteer een afspraaktype</mat-label>-->
-<!--        <mat-select disableRipple>-->
-<!--          <mat-option value="1">Option 1</mat-option>-->
-<!--          <mat-option value="2">Option 2</mat-option>-->
-<!--          <mat-option value="3">Option 3</mat-option>-->
-<!--        </mat-select>-->
-<!--      </mat-form-field>-->
-<!--        <div class="date-picker">-->
-<!--          <span class="material-icons">date_range</span>-->
-<!--          <mat-form-field appearance="fill">-->
-<!--            <mat-label>Kies een datum</mat-label>-->
-<!--            <label>-->
-<!--              <input name="date" [(ngModel)]="appointment.date" matInput [matDatepicker]="picker">-->
-<!--            </label>-->
-<!--            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-<!--            <mat-datepicker #picker></mat-datepicker>-->
-<!--          </mat-form-field>-->
-<!--        </div>-->
-
-<!--        <table class="example-full-width" cellspacing="0"><tr>-->
-<!--          <td><mat-form-field class="example-full-width">-->
-<!--            <mat-label>uur</mat-label>-->
-<!--            <input matInput placeholder="uur">-->
-<!--          </mat-form-field></td>-->
-<!--          <td><mat-form-field class="example-full-width">-->
-<!--            <mat-label>minuut</mat-label>-->
-<!--            <input matInput placeholder="minuut">-->
-<!--          </mat-form-field></td>-->
-<!--          <td><mat-form-field class="uur">-->
-<!--            <mat-label>uur</mat-label>-->
-<!--            <input matInput maxlength="4" placeholder="uur">-->
-<!--          </mat-form-field></td>-->
-<!--          <td><mat-form-field class="uur">-->
-<!--            <mat-label>minuut</mat-label>-->
-<!--            <input matInput maxlength="4" placeholder="uur">-->
-<!--          </mat-form-field></td>-->
-<!--        </tr></table>-->
-
-
-<!--        <span class="material-icons">schedule</span>-->
-<!--        <input matInput class="start-time" name="startTime" placeholder="hh:mm" required (ngModelChange)="calcEndTime()" [(ngModel)]="startTime">-->
-<!--        <mat-label>- </mat-label>-->
-<!--        <mat-label name="endTime" class="end-time">{{endTime | timeNumbers}}</mat-label>-->
-<!--        <br>-->
-<!--        <mat-select name="duration" (selectionChange)="calcEndTime()" required [(ngModel)]="duration" class="mat-select-width"-->
-<!--                    placeholder="Tijdsduur afspraak">-->
-<!--          <mat-option value="10">10 min</mat-option>-->
-<!--          <mat-option value="20">20 min</mat-option>-->
-<!--          <mat-option value="30">30 min</mat-option>-->
-<!--          <mat-option value="60">60 min</mat-option>-->
-<!--        </mat-select>-->
-
-
-<!--&lt;!&ndash;        <div>&ndash;&gt;-->
-<!--&lt;!&ndash;          <mat-form-field>&ndash;&gt;-->
-<!--&lt;!&ndash;            <mat-icon matSuffix>schedule</mat-icon>&ndash;&gt;-->
-<!--&lt;!&ndash;            <input matInput class="start-time" name="startTime" placeholder="hh:mm" required (ngModelChange)="calcEndTime()" [(ngModel)]="startTime">&ndash;&gt;-->
-<!--&lt;!&ndash;            <mat-label>- </mat-label>&ndash;&gt;-->
-<!--&lt;!&ndash;          </mat-form-field>&ndash;&gt;-->
-<!--&lt;!&ndash;          <mat-form-field>&ndash;&gt;-->
-<!--&lt;!&ndash;              <mat-label name="endTime" class="end-time">{{endTime | timeNumbers}}</mat-label>&ndash;&gt;-->
-<!--&lt;!&ndash;          </mat-form-field>&ndash;&gt;-->
-<!--&lt;!&ndash;          <mat-form-field>&ndash;&gt;-->
-<!--&lt;!&ndash;            <mat-select name="duration" (selectionChange)="calcEndTime()" required [(ngModel)]="duration" class="mat-select-width"&ndash;&gt;-->
-<!--&lt;!&ndash;                        placeholder="Tijdsduur afspraak">&ndash;&gt;-->
-<!--&lt;!&ndash;              <mat-option value="10">10 min</mat-option>&ndash;&gt;-->
-<!--&lt;!&ndash;              <mat-option value="20">20 min</mat-option>&ndash;&gt;-->
-<!--&lt;!&ndash;              <mat-option value="30">30 min</mat-option>&ndash;&gt;-->
-<!--&lt;!&ndash;              <mat-option value="60">60 min</mat-option>&ndash;&gt;-->
-<!--&lt;!&ndash;            </mat-select>&ndash;&gt;-->
-<!--&lt;!&ndash;          </mat-form-field>&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    -->
-<!--  </form>-->
-<!--</div>-->
-
 <div class="around">
   <form (ngSubmit)="saveAppointment()">
     <h1>Nieuwe Afspraak</h1>
@@ -99,33 +15,20 @@
           </div>
         </div>
         <div class="modal-information date-picker">
-          <div class="left-side">
-            <span class="material-icons left-side ">date_range</span>
-          </div>
-          <div class="date-box left-side">
-            <label>
-              <input class="date right-side" name="date" [(ngModel)]="appointment.date" matInput
-                     [matDatepicker]="picker">
-            </label>
-
-            <mat-datepicker-toggle class="right-side" matSuffix [for]="picker"></mat-datepicker-toggle>
+          <div style="float:left;">
+            <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </div>
+          <div class="right-side">
+            <label>
+              <input class="date " name="date" [(ngModel)]="appointment.date" matInput
+                     [matDatepicker]="picker">
+            </label>
+          </div>
+
+
 
           <br>
-          <!--            <input matInput class="start-time" name="startTime" placeholder="hh:mm" required-->
-          <!--                   (ngModelChange)="calcEndTime()" [(ngModel)]="startTime">-->
-          <!--            <mat-label>-</mat-label>-->
-          <!--            <mat-label name="endTime" class="end-time">{{endTime | timeNumbers}}</mat-label>-->
-          <!--            <br>-->
-          <!--            <mat-select name="duration" (selectionChange)="calcEndTime()" required [(ngModel)]="duration"-->
-          <!--                        class="mat-select-width time-input"-->
-          <!--                        placeholder="Uur">-->
-          <!--              <mat-option value="10">10 min</mat-option>-->
-          <!--              <mat-option value="20">20 min</mat-option>-->
-          <!--              <mat-option value="30">30 min</mat-option>-->
-          <!--              <mat-option value="60">60 min</mat-option>-->
-          <!--            </mat-select>-->
           <table class="table">
             <tbody>
             <tr>
@@ -133,18 +36,17 @@
                 <span class="material-icons">schedule</span>
               </td>
               <td>
-                <label for="starttimeHour"></label><input type="time" class="time" min="00:00" max="23:59"
+                <label for="starttimeHour"><input type="time" class="time" min="00:00" max="23:59"
                                                           id="starttimeHour"
                                                           value=" " placeholder="Uur"
                                                           name="startTime"
-                                                          [(ngModel)]="startTime">
+                                                          [(ngModel)]="startTime"></label>
               </td>
-              <p> - </p>
               <td>
-                <label for="endtimeHour"></label><input type="time" class="time" min="00:00" max="23:59"
+                <label for="endtimeHour"><input type="time" class="time" min="00:00" max="23:59"
                                                         id="endtimeHour"
                                                         name="endTime"
-                                                        value="" placeholder="Uur" [(ngModel)]="endTime">
+                                                        value="" placeholder="Uur" [(ngModel)]="endTime"></label>
               </td>
               <!--                        <input type="time" class="time" min="00" max="59" id="breaktime${{i}}">-->
             </tr>
@@ -153,12 +55,6 @@
 
 
           <br>
-          <!--            <span class="material-icons">person_add</span>-->
-          <!--            <input matInput name="doctorName" [(ngModel)]="appointment.doctorName">-->
-          <!--            <div class="right-side">-->
-          <!--              <span class="material-icons">edit</span>-->
-          <!--              Aanpassen-->
-          <!--            </div>-->
 
         </div>
       </div>
@@ -205,13 +101,14 @@
     <div class="modal-attention">
       <h2>Attentieregel</h2>
       <label>
-      <input name="attention" disabled="disabled" [ngModel]="appointment.attention">
-    </label>
+        <input name="attention" disabled="disabled" [ngModel]="appointment.attention">
+      </label>
     </div>
     <label for="Prioriteit"></label><input class="left-side checkbox" type="checkbox" id="Prioriteit" name="priority"
                                            [(ngModel)]="appointment.priority">
     <p><b> Prioriteit</b></p>
-    <label for="MGN"></label><input class="left-side checkbox" type="checkbox" id="MGN" [(ngModel)]="appointment.mgn" name="mgn">
+    <label for="MGN"></label><input class="left-side checkbox" type="checkbox" id="MGN" [(ngModel)]="appointment.mgn"
+                                    name="mgn">
     <p><b> Afspraak zichtbaar voor patient (MGn)</b></p>
 
     <div class="modal-buttons">
