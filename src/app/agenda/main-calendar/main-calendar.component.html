@@ -108,4 +108,7 @@
     <app-appointment-information-modal [appointment]="this.selectedAppointment" ></app-appointment-information-modal>
     <!-- <app-appointment-edit-modal [appointment]="this.selectedAppointment"></app-appointment-edit-modal> !-->
    </ng-template>
+  <ng-template #editModalContent let-close="close">
+    <app-appointment-edit-modal [appointment]="this.selectedAppointment"></app-appointment-edit-modal>
+  </ng-template>
  </div>

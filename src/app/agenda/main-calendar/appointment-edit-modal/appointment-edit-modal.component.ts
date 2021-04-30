@@ -17,6 +17,7 @@ export class AppointmentEditModalComponent implements OnInit {
   duration: number;
   startTime = '00:00';
   endTime = '00:00';
+  appointmentDate: Date;
 
   // Appointment parameters
   type: string;
@@ -68,6 +69,7 @@ export class AppointmentEditModalComponent implements OnInit {
 
   ngOnInit(): void {
     this.minDate = new Date();
+    console.log(this.appointment);
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
@@ -95,6 +97,7 @@ export class AppointmentEditModalComponent implements OnInit {
 
   // TODO split up start time
   // And endTime updates 1 tick too late
+
   calcEndTime(): void {
     if (this.startTime.includes(':') && this.duration != null) {
       const hours = Number(this.startTime.split(':')[0]);
