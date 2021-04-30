@@ -10,22 +10,22 @@
           <div>
             <mat-select name="type" required [(ngModel)]="appointment.appointmentType.id" class="mat-select-width"
                         placeholder="Kies hier de soort afspraak">
-              <mat-option value="1">Patiënt afspraak</mat-option>
+              <mat-option [value]="1">Patiënt afspraak</mat-option>
             </mat-select>
           </div>
         </div>
         <div class="modal-information date-picker">
           <div style="float:left;">
-            <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </div>
           <div class="right-side">
             <label>
-              <input class="date" [value]="appointment.date | date: 'dd/MM/yyyy'" name="date" [(ngModel)]="appointment.date" matInput
+              <input class="date" name="date"
+                     [ngModel]="appointmentDate" (ngModelChange)="appointmentDate = $event" matInput
                      [matDatepicker]="picker">
             </label>
           </div>
-
 
 
           <br>
@@ -40,13 +40,15 @@
                                                   id="starttimeHour"
                                                   value=" " placeholder="Uur"
                                                   name="startTime"
-                                                  [(ngModel)]="appointment.startTime"></label>
+                                                  [ngModel]="startTime"
+                                                  (ngModelChange)="startTime = $event"></label>
               </td>
               <td>
                 <label for="endtimeHour"><input type="time" class="time" min="00:00" max="23:59"
                                                 id="endtimeHour"
                                                 name="endTime"
-                                                value="" placeholder="Uur" [(ngModel)]="appointment.endTime"></label>
+                                                value="" placeholder="Uur" [ngModel]="endTime"
+                                                (ngModelChange)="endTime = $event"></label>
               </td>
               <!--                        <input type="time" class="time" min="00" max="59" id="breaktime${{i}}">-->
             </tr>
@@ -63,19 +65,23 @@
       <div class="modal-patient">
         <h2><span class="material-icons">search</span>Patiënt zoeken</h2>
         <label>
-          <input disabled="disabled" name="patientName" required [(ngModel)]="appointment.patientName" matInput class="input-patient"
+          <input disabled="disabled" name="patientName" required [(ngModel)]="appointment.patientName" matInput
+                 class="input-patient"
                  placeholder="Voor- of achternaam"/>
         </label>
         <label>
-          <input disabled="disabled" name="patientStreetNameNumber" required [(ngModel)]="appointment.patientStreetNameNumber" matInput
+          <input disabled="disabled" name="patientStreetNameNumber" required
+                 [(ngModel)]="appointment.patientStreetNameNumber" matInput
                  class="input-patient" placeholder="Straatnaam + huisnummer">
         </label>
         <label>
-          <input disabled="disabled" name="patientDateOfBirth" required [(ngModel)]="appointment.patientDateOfBirth" matInput
+          <input disabled="disabled" name="patientDateOfBirth" required [(ngModel)]="appointment.patientDateOfBirth"
+                 matInput
                  class="input-patient" placeholder="Geboortedatum">
         </label>
         <label>
-          <input disabled="disabled" name="patientPostalCode" required [(ngModel)]="appointment.patientPostalCode" matInput
+          <input disabled="disabled" name="patientPostalCode" required [(ngModel)]="appointment.patientPostalCode"
+                 matInput
                  class="input-patient" placeholder="Postcode">
         </label>
       </div>
@@ -87,8 +93,8 @@
       <h2>Reden van komst</h2>
       <mat-select name="reasonSelection" required [(ngModel)]="appointment.reasonType.id" class="mat-select-width"
                   placeholder="Geef de reden van de afspraak aan">
-        <mat-option value="1">Ziekte</mat-option>
-        <mat-option value="2">Hypochondriac</mat-option>
+        <mat-option [value]="1">Ziekte</mat-option>
+        <mat-option [value]="2">Hypochondriac</mat-option>
       </mat-select>
       <br>
       <label>
@@ -104,10 +110,12 @@
         <input name="attention" disabled="disabled" [ngModel]="appointment.attention">
       </label>
     </div>
-    <label for="Prioriteit"></label><input disabled="disabled" class="left-side checkbox" type="checkbox" id="Prioriteit" name="priority"
+    <label for="Prioriteit"></label><input disabled="disabled" class="left-side checkbox" type="checkbox"
+                                           id="Prioriteit" name="priority"
                                            [(ngModel)]="appointment.priority">
     <p><b> Prioriteit</b></p>
-    <label for="MGN"></label><input disabled="disabled" class="left-side checkbox" type="checkbox" id="MGN" [(ngModel)]="appointment.mgn"
+    <label for="MGN"></label><input disabled="disabled" class="left-side checkbox" type="checkbox" id="MGN"
+                                    [(ngModel)]="appointment.mgn"
                                     name="mgn">
     <p><b> Afspraak zichtbaar voor patient (MGn)</b></p>
 
@@ -118,7 +126,6 @@
 
   </form>
 </div>
-
 
 
 <!--<div class="around">-->

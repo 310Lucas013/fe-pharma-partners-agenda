@@ -1,10 +1,22 @@
-import {Component, OnInit, Output, TemplateRef, ViewChild, EventEmitter, Input} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewChild,
+  EventEmitter,
+  Input,
+  AfterViewInit,
+  AfterContentInit
+} from '@angular/core';
 import {CalendarEvent, CalendarEventAction} from 'angular-calendar';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Appointment} from '../../../shared/models/appointment';
 import {AppointmentService} from 'src/app/shared/services/appointment/appointment.service';
 import {TokenStorageService} from '../../../shared/services/token-storage/token-storage.service';
 import {DatePipe} from '@angular/common';
+import * as moment from 'moment';
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-appointment-edit-modal',
@@ -12,7 +24,7 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./appointment-edit-modal.component.css'],
   providers: [DatePipe]
 })
-export class AppointmentEditModalComponent implements OnInit {
+export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
 
   duration: number;
   startTime = '00:00';
@@ -67,9 +79,17 @@ export class AppointmentEditModalComponent implements OnInit {
 
   }
 
+  ngAfterContentInit(): void {
+    // Internal Screaming Intensifies aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+    moment.locale('nl');
+    this.appointmentDate = moment(this.appointment.date).toDate();
+    this.startTime = moment(this.appointment.startTime).format('LT').toString();
+    this.endTime = moment(this.appointment.endTime).format('LT').toString();
+  }
+
   ngOnInit(): void {
     this.minDate = new Date();
-    console.log(this.appointment);
+
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
@@ -97,6 +117,7 @@ export class AppointmentEditModalComponent implements OnInit {
 
   // TODO split up start time
   // And endTime updates 1 tick too late
+
 
   calcEndTime(): void {
     if (this.startTime.includes(':') && this.duration != null) {
