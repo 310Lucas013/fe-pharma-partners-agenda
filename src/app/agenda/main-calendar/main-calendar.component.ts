@@ -144,7 +144,7 @@ export class MainCalendarComponent implements OnInit {
         a.event.start = new Date(a.startTime);
         a.event.end = new Date(a.endTime);
 
-        a.event.color = colors.yellow; // TODO: save colours somewhere
+        a.event.color = a.color; // TODO: save colours somewhere
         a.event.cssClass = 'calendar-gray'; // TODO: save cssClass somewhere?
         a.event.resizable = {
           beforeStart: true,
@@ -284,5 +284,9 @@ export class MainCalendarComponent implements OnInit {
       }
       return iEvent;
     });
+  }
+
+  changeAgenda(): void {
+
   }
 }
