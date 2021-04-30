@@ -1,0 +1,9 @@
+<p>Afspraak verwijderen?</p>
+<button (click)="confirm()" type="submit">Ja</button>
+<button (click)="close()" type="button">Nee</button>
+
+<!--  <ng-template #editModalContent let-close="close" *ngIf="(this.selectedAppointment | json) != {}">-->
+<ng-template #appointmentInformationModal let-close="close">
+  <app-appointment-information-modal [appointment]="this.appointment" ></app-appointment-information-modal>
+  <!-- <app-appointment-edit-modal [appointment]="this.selectedAppointment"></app-appointment-edit-modal> !-->
+</ng-template>
