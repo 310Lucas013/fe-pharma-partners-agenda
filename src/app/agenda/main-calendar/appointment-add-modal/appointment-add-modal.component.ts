@@ -23,21 +23,6 @@ export class AppointmentAddModalComponent implements OnInit {
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 
-  colors = [
-    {
-      name: 'yellow',
-      value: '#ffff00'
-    },
-    {
-      name: 'red',
-      value: '#ff3300'
-    },
-    {
-      name: 'blue',
-      value: '#0000ff'
-    }
-  ];
-
   modalData: {
     action: string;
     event: CalendarEvent;
@@ -59,7 +44,6 @@ export class AppointmentAddModalComponent implements OnInit {
     this.appointment.startTime = new Date();
     this.appointment.endTime = new Date();
     this.appointment.endTime.setTime(0);
-    this.appointment.color = this.colors[0].value;
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
