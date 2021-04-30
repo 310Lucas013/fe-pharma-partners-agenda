@@ -10,6 +10,8 @@ import {TokenStorageService} from '../../../shared/services/token-storage/token-
 import {AppointmentType} from '../../../shared/models/appointment-type';
 import {ReasonType} from '../../../shared/models/reason-type';
 
+
+
 @Component({
   selector: 'app-appointment-add-modal',
   templateUrl: './appointment-add-modal.component.html',
@@ -22,6 +24,7 @@ export class AppointmentAddModalComponent implements OnInit {
   date: string;
   appointment = {} as Appointment;
   error = '' as string;
+  selectedColor: any ;
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 
@@ -70,6 +73,20 @@ export class AppointmentAddModalComponent implements OnInit {
   }
 
   saveAppointment(): void {
+    if (this.selectedColor == "red"){
+      this.appointment.colorSecondary = this.colors.red.secondary;
+      this.appointment.colorPrimary = this.colors.red.primary;
+    }
+    if (this.selectedColor == "blue"){
+      this.appointment.colorSecondary = this.colors.blue.secondary;
+      this.appointment.colorPrimary = this.colors.blue.primary;
+    }
+    if (this.selectedColor == "yellow"){
+      this.appointment.colorSecondary = this.colors.yellow.secondary;
+      this.appointment.colorPrimary = this.colors.yellow.primary;
+    }
+
+
     if(!this.setAppointmentTimes()){
       this.error = "Tijden niet goed ingevuld."
       return;
@@ -87,6 +104,11 @@ export class AppointmentAddModalComponent implements OnInit {
     }
 
     this.appointment.employeeId = this.employeeId;
+
+
+
+
+
     this.appointmentService.addAppointment(this.appointment).subscribe(
       data => {
         location.reload();
@@ -104,7 +126,7 @@ export class AppointmentAddModalComponent implements OnInit {
       let startMin = Number(this.startTime.split(':')[1]);
       let endHours = Number(this.endTime.split(':')[0]);
       let endMin = Number(this.endTime.split(':')[1]);
-      this.appointment.startTime = new Date();
+      this.appointment.startTime = new Date(); //todo fix date
       this.appointment.endTime = new Date();
       this.appointment.startTime.setHours(startHours);
       this.appointment.startTime.setMinutes(startMin);
