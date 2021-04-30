@@ -24,7 +24,7 @@ export class VerifyCodeComponent implements OnInit {
 
         setTimeout(() => {                           // <<<---using ()=> syntax
           this.tokenService.saveToken(data.token);
-          this.router.navigate(['/agenda/']); // + this.tokenService.getId()]);
+          this.router.navigate(['/agenda/' + this.tokenService.getId()]);
         }, 1000);
       }, error => console.log(error));
   }

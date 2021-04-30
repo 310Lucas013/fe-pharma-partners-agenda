@@ -1,16 +1,15 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Credentials } from 'src/app/shared/models/Credentials';
-import { environment } from '../../../../environments/environment';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Credentials} from 'src/app/shared/models/Credentials';
+import {environment} from '../../../../environments/environment';
 
 const API_KEY = environment.gatewayApi + 'credentials';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({'Content-Type': 'application/json'}),
 };
-
 
 
 @Injectable({
@@ -19,7 +18,8 @@ const httpOptions = {
 export class AuthService {
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+  }
 
   login(credentials: Credentials): Observable<any> {
     return this.http.post(
