@@ -7,7 +7,7 @@
       <a><span class="material-icons">apartment</span><br>Aangemeld</a>
       <a><span class="material-icons">check</span><br>Afgerond</a>
       <a><span (click)="edit()" class="material-icons">edit</span><br>Wijzigen </a>
-      <a><span class="material-icons">delete</span><br>Verwijderen</a>
+      <a><span (click)="delete()" class="material-icons">delete</span><br>Verwijderen</a>
       <a><span class="material-icons">checklist</span><br>Actielijst openen</a>
       <a><span class="material-icons">info</span><br>Patient informatie</a>
       <a><span><button>Dossier</button></span></a>
@@ -64,6 +64,10 @@
   <!--  <ng-template #editModalContent let-close="close" *ngIf="(this.selectedAppointment | json) != {}">-->
   <ng-template #editModalContent let-close="close">
     <app-appointment-edit-modal [appointment]="this.appointment"></app-appointment-edit-modal>
+  </ng-template>
+
+  <ng-template #confirmationModalContent let-close="close">
+    <app-confirmation-modal [appointment]="this.appointment"></app-confirmation-modal>
   </ng-template>
 
 </div>
