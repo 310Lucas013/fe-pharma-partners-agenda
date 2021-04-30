@@ -86,26 +86,24 @@ export class AppointmentAddModalComponent implements OnInit {
   }
 
   setAppointmentTimes(): boolean {
-    if (this.startTime.includes(':') && this.endTime.includes(':')) {
+    if (!this.startTime.includes(':') || !this.endTime.includes(':')) return false;
+    let startHours = Number(this.startTime.split(':')[0]);
+    let startMin = Number(this.startTime.split(':')[1]);
+    let endHours = Number(this.endTime.split(':')[0]);
+    let endMin = Number(this.endTime.split(':')[1]);
 
-      let startHours = Number(this.startTime.split(':')[0]);
-      let startMin = Number(this.startTime.split(':')[1]);
-      let endHours = Number(this.endTime.split(':')[0]);
-      let endMin = Number(this.endTime.split(':')[1]);
+    this.appointment.startTime = new Date();
+    this.appointment.endTime = new Date();
+    this.appointment.startTime.setHours(startHours);
+    this.appointment.startTime.setMinutes(startMin);
+    this.appointment.endTime.setHours(endHours);
+    this.appointment.endTime.setMinutes(endMin);
 
-      this.appointment.startTime = new Date();
-      this.appointment.endTime = new Date();
-      this.appointment.startTime.setHours(startHours);
-      this.appointment.startTime.setMinutes(startMin);
-      this.appointment.endTime.setHours(endHours);
-      this.appointment.endTime.setMinutes(endMin);
+    this.appointment.date = this.convertTZ(this.appointment.date, Intl.DateTimeFormat().resolvedOptions().timeZone);
+    this.appointment.startTime = this.convertTZ(this.appointment.startTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
+    this.appointment.endTime = this.convertTZ(this.appointment.endTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
 
-      this.appointment.date = this.convertTZ(this.appointment.date, Intl.DateTimeFormat().resolvedOptions().timeZone)
-      this.appointment.startTime = this.convertTZ(this.appointment.startTime, Intl.DateTimeFormat().resolvedOptions().timeZone)
-      this.appointment.endTime = this.convertTZ(this.appointment.endTime, Intl.DateTimeFormat().resolvedOptions().timeZone)
-
-      return this.appointment.endTime > this.appointment.startTime;
-    }
+    return this.appointment.endTime > this.appointment.startTime;
   }
 
   convertTZ(date: any, tzString: string) {

@@ -92,38 +92,31 @@ export class AppointmentEditModalComponent implements OnInit {
         console.log(error);
       }
     );
-    // TODO: MAKE THIS TO UPDATE
   }
 
-  // TODO split up start time
-  // And endTime updates 1 tick too late
+  setAppointmentTimes(): boolean {
+    if (!this.startTime.includes(':') || !this.endTime.includes(':')) return false;
+    let startHours = Number(this.startTime.split(':')[0]);
+    let startMin = Number(this.startTime.split(':')[1]);
+    let endHours = Number(this.endTime.split(':')[0]);
+    let endMin = Number(this.endTime.split(':')[1]);
 
-  calcEndTime(): void {
-    if (this.startTime.includes(':') && this.duration != null) {
-      const hours = Number(this.startTime.split(':')[0]);
-      const min = Number(this.startTime.split(':')[1]);
-      // this.appointment.start = new Date();
-      // this.appointment.start = this.appointment.date;
-      // this.appointment.start.setHours(hours);
-      // this.appointment.start.setMinutes(min);
-      this.appointment.date = new Date();
-      this.appointment.startTime = new Date();
-      this.appointment.startTime.setHours(hours);
-      this.appointment.startTime.setMinutes(min);
-      // const startTime = this.appointment.start.getTime();
-      // const tempTime: Date = this.appointment.start;
-      const startTime = this.appointment.startTime.getTime();
-      const tempTime: Date = this.appointment.startTime;
-      tempTime.setTime(startTime + this.duration * 60000);
-      this.endTime = tempTime.getHours().toString() + ':' + tempTime.getMinutes().toString();
-      // this.appointment.end.setTime(startTime + this.duration * 60000); // 60000 time ticks in a minute
-      this.appointment.endTime.setTime(startTime + this.duration * 60000); // 60000 time ticks in a minute
-      // console.log(this.appointment.end);
-      console.log(this.appointment.endTime);
-    }
+    this.appointment.startTime = new Date();
+    this.appointment.endTime = new Date();
+    this.appointment.startTime.setHours(startHours);
+    this.appointment.startTime.setMinutes(startMin);
+    this.appointment.endTime.setHours(endHours);
+    this.appointment.endTime.setMinutes(endMin);
+
+    this.appointment.date = this.convertTZ(this.appointment.date, Intl.DateTimeFormat().resolvedOptions().timeZone);
+    this.appointment.startTime = this.convertTZ(this.appointment.startTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
+    this.appointment.endTime = this.convertTZ(this.appointment.endTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
+
+    return this.appointment.endTime > this.appointment.startTime;
   }
 
-  updateEndTime(): void {
+  convertTZ(date: any, tzString: string) {
+    return new Date((typeof date === 'string' ? new Date(date) : date).toLocaleString('en-US', {timeZone: tzString}));
   }
 
   deleteAppointment(): void {
