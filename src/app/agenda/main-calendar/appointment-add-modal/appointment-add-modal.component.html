@@ -82,6 +82,14 @@
       <br>
     </div>
 
+    <mat-select name="type" [(ngModel)]="appointment.color" [ngClass]="{'background-color': appointment.color.value}" class="mat-select-width">
+      <option *ngFor="let color of colors"
+              [ngClass]="{'background': color.value}" [ngValue]="color.value">
+        {{color.name}}
+      </option>
+    </mat-select>
+
+
     <!--      reden van komst-->
     <div class="modal-reason box">
       <h2>Reden van komst</h2>
