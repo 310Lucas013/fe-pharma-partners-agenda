@@ -15,6 +15,7 @@ export class AppointmentInformationModalComponent implements OnInit {
   constructor(private modal: NgbModal) { }
 
   @ViewChild('editModalContent', {static: true}) editModalContent: TemplateRef<any>;
+  @ViewChild('confirmationModalContent', {static: true}) confirmationModalContent: TemplateRef<any>;
   @Input() appointment: Appointment;
 
   appointmentTime: string;
@@ -26,6 +27,10 @@ export class AppointmentInformationModalComponent implements OnInit {
   edit(): void {
     this.modal.dismissAll();
     this.modal.open(this.editModalContent, {size: 'lg'});
+  }
+
+  delete(){
+    this.modal.open(this.confirmationModalContent, {size: 'sm'});
   }
 
 }

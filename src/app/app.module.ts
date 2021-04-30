@@ -19,7 +19,7 @@ import { ClockComponent } from './agenda/clock/clock.component';
 import { SideCalendarComponent } from './agenda/side-calendar/side-calendar.component';
 import { MainCalendarComponent } from './agenda/main-calendar/main-calendar.component';
 import { CoworkerOverviewComponent } from './agenda/coworker-overview/coworker-overview.component';
-import {NgbModalModule, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModalModule, NgbModalRef, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CalendarDateFormatter, CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FlatpickrModule } from 'angularx-flatpickr';
@@ -66,6 +66,7 @@ registerLocaleData(localeNl);
         RoutingController,
         MaterialModule,
         NgbModalModule,
+        NgbModule,
         FlatpickrModule.forRoot(),
         CalendarModule.forRoot({
             provide: DateAdapter,
