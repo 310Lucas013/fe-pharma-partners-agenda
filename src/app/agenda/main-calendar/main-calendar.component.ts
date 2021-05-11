@@ -9,7 +9,20 @@ import {AppointmentService} from '../../shared/services/appointment/appointment.
 import {WeekDay} from '@angular/common';
 import {EventAction, EventColor} from 'calendar-utils';
 
-
+const colors: any = {
+  red: {
+    primary: '#ad2121',
+    secondary: '#FAE3E3',
+  },
+  blue: {
+    primary: '#1e90ff',
+    secondary: '#D1E8FF',
+  },
+  yellow: {
+    primary: '#e3bc08',
+    secondary: '#FDF1BA',
+  },
+};
 
 @Component({
   selector: 'app-main-calendar',
@@ -21,6 +34,7 @@ export class MainCalendarComponent implements OnInit {
   @ViewChild('addModalContent', {static: true}) addModalContent: TemplateRef<any>;
   @ViewChild('appointmentInformationModal', {static: true}) appointmentInformationModal: TemplateRef<any>;
   @ViewChild('editModalContent', {static: true}) editModalContent: TemplateRef<any>;
+  @ViewChild('changeAgendaModal', {static: true}) changeAgendaModal: TemplateRef<any>;
 
   @Input() viewDate: Date;
 
@@ -263,6 +277,6 @@ export class MainCalendarComponent implements OnInit {
   }
 
   changeAgenda(): void {
-
+    this.modal.open(this.changeAgendaModal, {size: 'lg'});
   }
 }

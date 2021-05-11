@@ -1,0 +1,10 @@
+<div class="around">
+  <div class="container">
+    <h2>Medewerkers</h2>
+  </div>
+  <mat-selection-list [multiple]="false">
+    <mat-list-option *ngFor="let employee of employees">
+      <span (click)="navigateToAgenda(employee)">{{employee.firstName}}</span>
+    </mat-list-option>
+  </mat-selection-list>
+</div>
