@@ -17,6 +17,7 @@ import {TokenStorageService} from '../../../shared/services/token-storage/token-
 import {DatePipe} from '@angular/common';
 import * as moment from 'moment';
 import {FormControl} from "@angular/forms";
+import {DateService} from '../../../shared/services/date/date.service';
 
 @Component({
   selector: 'app-appointment-edit-modal',
@@ -74,15 +75,16 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
 
   // todo change the modal private to the modal of the parent
   constructor(private modal: NgbModal, private appointmentService: AppointmentService,
-              private tokenService: TokenStorageService, private datePipe: DatePipe) {
+              private tokenService: TokenStorageService, private datePipe: DatePipe, private dateService: DateService) {
     this.datePipe = new DatePipe('nl');
 
   }
 
   ngAfterContentInit(): void {
-    // Internal Screaming Intensifies aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     moment.locale('nl');
+
     this.appointmentDate = moment(this.appointment.date).toDate();
+    this.date = moment(this.appointment.date).format('LT').toString();
     this.startTime = moment(this.appointment.startTime).format('LT').toString();
     this.endTime = moment(this.appointment.endTime).format('LT').toString();
   }
@@ -128,15 +130,11 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
     this.appointment.endTime.setHours(endHours);
     this.appointment.endTime.setMinutes(endMin);
 
-    this.appointment.date = this.convertTZ(this.appointment.date, Intl.DateTimeFormat().resolvedOptions().timeZone);
-    this.appointment.startTime = this.convertTZ(this.appointment.startTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
-    this.appointment.endTime = this.convertTZ(this.appointment.endTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
+    this.appointment.date = this.dateService.convertTZ(this.appointment.date, Intl.DateTimeFormat().resolvedOptions().timeZone);
+    this.appointment.startTime = this.dateService.convertTZ(this.appointment.startTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
+    this.appointment.endTime = this.dateService.convertTZ(this.appointment.endTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
 
     return this.appointment.endTime > this.appointment.startTime;
-  }
-
-  convertTZ(date: any, tzString: string) {
-    return new Date((typeof date === 'string' ? new Date(date) : date).toLocaleString('en-US', {timeZone: tzString}));
   }
 
   deleteAppointment(): void {
