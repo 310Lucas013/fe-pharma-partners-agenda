@@ -16,7 +16,6 @@ import {AppointmentService} from 'src/app/shared/services/appointment/appointmen
 import {TokenStorageService} from '../../../shared/services/token-storage/token-storage.service';
 import {DatePipe} from '@angular/common';
 import * as moment from 'moment';
-import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'app-appointment-edit-modal',
