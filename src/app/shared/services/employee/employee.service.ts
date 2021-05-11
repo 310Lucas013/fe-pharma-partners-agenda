@@ -13,8 +13,8 @@ export class EmployeeService {
     private http: HttpClient
   ) { }
 
-  getAllEmployees(): Observable<any> {
-    let url = 'http://localhost:8888/employees/all';
+  getAllEmployees(): Observable<Employee[]> {
+    let url = environment.gatewayApi + 'employees/all';
     return this.http.get<Employee[]>(url);
   }
 }
