@@ -32,6 +32,7 @@ import {AppointmentEditModalComponent} from './agenda/main-calendar/appointment-
 import {AppointmentAddModalComponent} from './agenda/main-calendar/appointment-add-modal/appointment-add-modal.component';
 import {AppointmentInformationModalComponent} from './agenda/main-calendar/appointment-information-modal/appointment-information-modal.component';
 import {ConfirmationModalComponent} from './agenda/main-calendar/appointment-information-modal/confirmation-modal/confirmation-modal.component';
+import {ChangeAgendaEmployeeComponent} from './agenda/main-calendar/change-agenda-employee/change-agenda-employee.component';
 
 registerLocaleData(localeNl);
 
@@ -55,7 +56,8 @@ registerLocaleData(localeNl);
     AppointmentEditModalComponent,
     AppointmentAddModalComponent,
     AppointmentInformationModalComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    ChangeAgendaEmployeeComponent,
   ],
     imports: [
         BrowserModule,

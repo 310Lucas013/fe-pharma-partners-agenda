@@ -18,6 +18,7 @@ import {DatePipe} from '@angular/common';
 import * as moment from 'moment';
 import {FormControl} from "@angular/forms";
 import {DateService} from '../../../shared/services/date/date.service';
+import {DateAdapter} from '@angular/material/core';
 
 @Component({
   selector: 'app-appointment-edit-modal',
@@ -75,8 +76,9 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
 
   // todo change the modal private to the modal of the parent
   constructor(private modal: NgbModal, private appointmentService: AppointmentService,
-              private tokenService: TokenStorageService, private datePipe: DatePipe, private dateService: DateService) {
+              private tokenService: TokenStorageService, private datePipe: DatePipe, private dateService: DateService, private dateAdapter: DateAdapter<Date>) {
     this.datePipe = new DatePipe('nl');
+    this.dateAdapter.setLocale('nl');
 
   }
 

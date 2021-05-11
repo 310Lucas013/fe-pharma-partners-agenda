@@ -22,6 +22,7 @@ export class MainCalendarComponent implements OnInit {
   @ViewChild('addModalContent', {static: true}) addModalContent: TemplateRef<any>;
   @ViewChild('appointmentInformationModal', {static: true}) appointmentInformationModal: TemplateRef<any>;
   @ViewChild('editModalContent', {static: true}) editModalContent: TemplateRef<any>;
+  @ViewChild('changeAgendaModal', {static: true}) changeAgendaModal: TemplateRef<any>;
 
   @Input() viewDate: Date;
 
@@ -244,6 +245,6 @@ export class MainCalendarComponent implements OnInit {
   }
 
   changeAgenda(): void {
-
+    this.modal.open(this.changeAgendaModal, {size: 'lg'});
   }
 }
