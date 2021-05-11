@@ -88,8 +88,8 @@ export class MainCalendarComponent implements OnInit {
         a.event = {} as CalendarEvent;
         a.event.title = a.reason;
 
-        a.event.start = new Date(a.startTime);
-        a.event.end = new Date(a.endTime);
+        a.event.start = this.checkTimezones(new Date(a.startTime));
+        a.event.end = this.checkTimezones(new Date(a.endTime));
         // @ts-ignore
       //  a.event.color = new EventColor();
 
@@ -242,7 +242,12 @@ export class MainCalendarComponent implements OnInit {
     });
   }
 
+  convertTZ(date: any, tzString: string) {
+    return new Date((typeof date === 'string' ? new Date(date) : date).toLocaleString('en-US', {timeZone: tzString}));
+  }
+
   checkTimezones(date: Date): Date {
+    date = this.convertTZ(date, Intl.DateTimeFormat().resolvedOptions().timeZone);
     let time = date.getTime();
     //Check if timezoneOffset is positive or negative
     if (date.getTimezoneOffset() <= 0) {
