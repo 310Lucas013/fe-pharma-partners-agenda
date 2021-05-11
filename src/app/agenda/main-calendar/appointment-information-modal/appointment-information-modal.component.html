@@ -40,10 +40,10 @@
       </div>
 
       <div class="wrapper-">
-        <mat-checkbox value="{{appointment.priority}}">Prioriteit</mat-checkbox>
+        <mat-checkbox disabled="disabled" [checked]="appointment.priority">Prioriteit</mat-checkbox>
       </div>
       <div class="wrapper-">
-        <mat-checkbox>Afspraak zichtbaar voor patient(MGn)</mat-checkbox>
+        <mat-checkbox disabled="disabled" [checked]="appointment.mgn">Afspraak zichtbaar voor patient(MGn)</mat-checkbox>
       </div>
 
     </div>

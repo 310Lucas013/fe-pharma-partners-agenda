@@ -16,6 +16,8 @@ import {AppointmentService} from 'src/app/shared/services/appointment/appointmen
 import {TokenStorageService} from '../../../shared/services/token-storage/token-storage.service';
 import {DatePipe} from '@angular/common';
 import * as moment from 'moment';
+import {FormControl} from "@angular/forms";
+import {DateService} from '../../../shared/services/date/date.service';
 
 @Component({
   selector: 'app-appointment-edit-modal',
@@ -73,15 +75,16 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
 
   // todo change the modal private to the modal of the parent
   constructor(private modal: NgbModal, private appointmentService: AppointmentService,
-              private tokenService: TokenStorageService, private datePipe: DatePipe) {
+              private tokenService: TokenStorageService, private datePipe: DatePipe, private dateService: DateService) {
     this.datePipe = new DatePipe('nl');
 
   }
 
   ngAfterContentInit(): void {
-    // Internal Screaming Intensifies aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     moment.locale('nl');
+
     this.appointmentDate = moment(this.appointment.date).toDate();
+    this.date = moment(this.appointment.date).format('LT').toString();
     this.startTime = moment(this.appointment.startTime).format('LT').toString();
     this.endTime = moment(this.appointment.endTime).format('LT').toString();
   }
@@ -105,7 +108,7 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
     this.appointmentService.updateAppointment(this.appointment).subscribe(
       data => {
         console.log(data);
-        // location.reload();
+        //location.reload();
       },
       error => {
         console.log(error);
@@ -114,36 +117,24 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
     // TODO: MAKE THIS TO UPDATE
   }
 
-  // TODO split up start time
-  // And endTime updates 1 tick too late
+  setAppointmentTimes(): boolean {
+    if (!this.startTime.includes(':') || !this.endTime.includes(':')) return false;
+    let startHours = Number(this.startTime.split(':')[0]);
+    let startMin = Number(this.startTime.split(':')[1]);
+    let endHours = Number(this.endTime.split(':')[0]);
+    let endMin = Number(this.endTime.split(':')[1]);
+    this.appointment.startTime = new Date();
+    this.appointment.endTime = new Date();
+    this.appointment.startTime.setHours(startHours);
+    this.appointment.startTime.setMinutes(startMin);
+    this.appointment.endTime.setHours(endHours);
+    this.appointment.endTime.setMinutes(endMin);
 
+    this.appointment.date = this.dateService.convertTZ(this.appointment.date, Intl.DateTimeFormat().resolvedOptions().timeZone);
+    this.appointment.startTime = this.dateService.convertTZ(this.appointment.startTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
+    this.appointment.endTime = this.dateService.convertTZ(this.appointment.endTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
 
-  calcEndTime(): void {
-    if (this.startTime.includes(':') && this.duration != null) {
-      const hours = Number(this.startTime.split(':')[0]);
-      const min = Number(this.startTime.split(':')[1]);
-      // this.appointment.start = new Date();
-      // this.appointment.start = this.appointment.date;
-      // this.appointment.start.setHours(hours);
-      // this.appointment.start.setMinutes(min);
-      this.appointment.date = new Date();
-      this.appointment.startTime = new Date();
-      this.appointment.startTime.setHours(hours);
-      this.appointment.startTime.setMinutes(min);
-      // const startTime = this.appointment.start.getTime();
-      // const tempTime: Date = this.appointment.start;
-      const startTime = this.appointment.startTime.getTime();
-      const tempTime: Date = this.appointment.startTime;
-      tempTime.setTime(startTime + this.duration * 60000);
-      this.endTime = tempTime.getHours().toString() + ':' + tempTime.getMinutes().toString();
-      // this.appointment.end.setTime(startTime + this.duration * 60000); // 60000 time ticks in a minute
-      this.appointment.endTime.setTime(startTime + this.duration * 60000); // 60000 time ticks in a minute
-      // console.log(this.appointment.end);
-      console.log(this.appointment.endTime);
-    }
-  }
-
-  updateEndTime(): void {
+    return this.appointment.endTime > this.appointment.startTime;
   }
 
   deleteAppointment(): void {

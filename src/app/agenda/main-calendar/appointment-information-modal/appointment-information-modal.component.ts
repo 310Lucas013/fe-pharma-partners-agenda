@@ -3,6 +3,7 @@ import {Appointment} from '../../../shared/models/appointment';
 import {DateAdapter} from '@angular/material/core';
 import {CustomDateAdapter} from '../../../shared/pipes/custom-date-adapter';
 import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {DateService} from '../../../shared/services/date/date.service';
 
 @Component({
   selector: 'app-appointment-information-modal',
@@ -12,16 +13,19 @@ import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 })
 export class AppointmentInformationModalComponent implements OnInit {
 
-  constructor(private modal: NgbModal) { }
+  constructor(private modal: NgbModal, private dateService: DateService) {
+  }
 
   @ViewChild('editModalContent', {static: true}) editModalContent: TemplateRef<any>;
   @ViewChild('confirmationModalContent', {static: true}) confirmationModalContent: TemplateRef<any>;
   @Input() appointment: Appointment;
-
   appointmentTime: string;
 
   ngOnInit(): void {
-    // console.log(this.appointment);
+    this.appointment = JSON.parse(JSON.stringify(this.appointment));
+    this.appointment.date = this.dateService.checkTimezones(this.appointment.date);
+    this.appointment.startTime = this.dateService.checkTimezones(this.appointment.startTime);
+    this.appointment.endTime = this.dateService.checkTimezones(this.appointment.endTime);
   }
 
   edit(): void {

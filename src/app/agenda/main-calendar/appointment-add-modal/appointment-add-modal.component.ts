@@ -7,8 +7,8 @@ import {TokenStorageService} from '../../../shared/services/token-storage/token-
 import {AppointmentType} from '../../../shared/models/appointment-type';
 import {ReasonType} from '../../../shared/models/reason-type';
 import {ActivatedRoute} from '@angular/router';
-
-
+import {DateService} from '../../../shared/services/date/date.service';
+import {DateAdapter} from '@angular/material/core';
 
 @Component({
   selector: 'app-appointment-add-modal',
@@ -49,13 +49,15 @@ export class AppointmentAddModalComponent implements OnInit {
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
 
   // todo change the modal private to the modal of the parent
-  constructor(private modal: NgbModal, private appointmentService: AppointmentService, private activedRoute: ActivatedRoute) {
+  constructor(private modal: NgbModal, private appointmentService: AppointmentService, private activedRoute: ActivatedRoute, private dateService: DateService, private dateAdapter: DateAdapter<Date>) {
     this.appointment.appointmentType = {} as AppointmentType;
     this.appointment.reasonType = {} as ReasonType;
     activedRoute.params.subscribe(params => {
       this.employeeId = +params['id'];
     });
+    this.dateAdapter.setLocale('nl');
   }
+
 
   ngOnInit(): void {
     this.appointment.date = new Date();
@@ -130,22 +132,18 @@ export class AppointmentAddModalComponent implements OnInit {
       let startMin = Number(this.startTime.split(':')[1]);
       let endHours = Number(this.endTime.split(':')[0]);
       let endMin = Number(this.endTime.split(':')[1]);
-      this.appointment.startTime = new Date(); //todo fix date
-      this.appointment.endTime = new Date();
+      this.appointment.startTime = new Date(this.appointment.date);
+      this.appointment.endTime = new Date(this.appointment.date);
       this.appointment.startTime.setHours(startHours);
       this.appointment.startTime.setMinutes(startMin);
       this.appointment.endTime.setHours(endHours);
       this.appointment.endTime.setMinutes(endMin);
 
-      this.appointment.date = this.convertTZ(this.appointment.date, Intl.DateTimeFormat().resolvedOptions().timeZone)
-      this.appointment.startTime = this.convertTZ(this.appointment.startTime, Intl.DateTimeFormat().resolvedOptions().timeZone)
-      this.appointment.endTime = this.convertTZ(this.appointment.endTime, Intl.DateTimeFormat().resolvedOptions().timeZone)
+      this.appointment.date = this.dateService.convertTZ(this.appointment.date, Intl.DateTimeFormat().resolvedOptions().timeZone)
+      this.appointment.startTime = this.dateService.convertTZ(this.appointment.startTime, Intl.DateTimeFormat().resolvedOptions().timeZone)
+      this.appointment.endTime = this.dateService.convertTZ(this.appointment.endTime, Intl.DateTimeFormat().resolvedOptions().timeZone)
 
       return this.appointment.endTime > this.appointment.startTime;
     }
-  }
-
-  convertTZ(date: any, tzString: string) {
-    return new Date((typeof date === "string" ? new Date(date) : date).toLocaleString("en-US", {timeZone: tzString}));
   }
 }
