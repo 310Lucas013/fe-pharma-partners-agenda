@@ -106,7 +106,7 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
     this.appointmentService.updateAppointment(this.appointment).subscribe(
       data => {
         console.log(data);
-        //location.reload();
+        // location.reload();
       },
       error => {
         console.log(error);
