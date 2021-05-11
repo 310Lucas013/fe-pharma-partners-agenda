@@ -20,8 +20,24 @@ export class AppointmentAddModalComponent implements OnInit {
   date: string;
   appointment = {} as Appointment;
   error = '' as string;
+  selectedColor: any ;
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
+
+  colors: any = {
+    red: {
+      primary: '#ad2121',
+      secondary: '#FAE3E3',
+    },
+    blue: {
+      primary: '#1e90ff',
+      secondary: '#D1E8FF',
+    },
+    yellow: {
+      primary: '#e3bc08',
+      secondary: '#FDF1BA',
+    },
+  };
 
   modalData: {
     action: string;
@@ -56,7 +72,21 @@ export class AppointmentAddModalComponent implements OnInit {
   }
 
   saveAppointment(): void {
-    if (!this.setAppointmentTimes()) {
+    if (this.selectedColor == "red"){
+      this.appointment.colorSecondary = this.colors.red.secondary;
+      this.appointment.colorPrimary = this.colors.red.primary;
+    }
+    if (this.selectedColor == "blue"){
+      this.appointment.colorSecondary = this.colors.blue.secondary;
+      this.appointment.colorPrimary = this.colors.blue.primary;
+    }
+    if (this.selectedColor == "yellow"){
+      this.appointment.colorSecondary = this.colors.yellow.secondary;
+      this.appointment.colorPrimary = this.colors.yellow.primary;
+    }
+
+
+    if(!this.setAppointmentTimes()){
       this.error = "Tijden niet goed ingevuld."
       return;
     }
@@ -74,6 +104,12 @@ export class AppointmentAddModalComponent implements OnInit {
       this.appointment.locationId = 1;
     }
 
+    this.appointment.employeeId = this.employeeId;
+
+
+
+
+
     this.appointmentService.addAppointment(this.appointment).subscribe(
       data => {
         location.reload();
@@ -86,24 +122,25 @@ export class AppointmentAddModalComponent implements OnInit {
   }
 
   setAppointmentTimes(): boolean {
-    if (!this.startTime.includes(':') || !this.endTime.includes(':')) return false;
-    let startHours = Number(this.startTime.split(':')[0]);
-    let startMin = Number(this.startTime.split(':')[1]);
-    let endHours = Number(this.endTime.split(':')[0]);
-    let endMin = Number(this.endTime.split(':')[1]);
+    if (this.startTime.includes(':') && this.endTime.includes(':')) {
 
-    this.appointment.startTime = new Date();
-    this.appointment.endTime = new Date();
-    this.appointment.startTime.setHours(startHours);
-    this.appointment.startTime.setMinutes(startMin);
-    this.appointment.endTime.setHours(endHours);
-    this.appointment.endTime.setMinutes(endMin);
+      let startHours = Number(this.startTime.split(':')[0]);
+      let startMin = Number(this.startTime.split(':')[1]);
+      let endHours = Number(this.endTime.split(':')[0]);
+      let endMin = Number(this.endTime.split(':')[1]);
+      this.appointment.startTime = new Date(); //todo fix date
+      this.appointment.endTime = new Date();
+      this.appointment.startTime.setHours(startHours);
+      this.appointment.startTime.setMinutes(startMin);
+      this.appointment.endTime.setHours(endHours);
+      this.appointment.endTime.setMinutes(endMin);
 
-    this.appointment.date = this.convertTZ(this.appointment.date, Intl.DateTimeFormat().resolvedOptions().timeZone);
-    this.appointment.startTime = this.convertTZ(this.appointment.startTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
-    this.appointment.endTime = this.convertTZ(this.appointment.endTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
+      this.appointment.date = this.convertTZ(this.appointment.date, Intl.DateTimeFormat().resolvedOptions().timeZone)
+      this.appointment.startTime = this.convertTZ(this.appointment.startTime, Intl.DateTimeFormat().resolvedOptions().timeZone)
+      this.appointment.endTime = this.convertTZ(this.appointment.endTime, Intl.DateTimeFormat().resolvedOptions().timeZone)
 
-    return this.appointment.endTime > this.appointment.startTime;
+      return this.appointment.endTime > this.appointment.startTime;
+    }
   }
 
   convertTZ(date: any, tzString: string) {

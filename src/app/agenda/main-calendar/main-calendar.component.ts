@@ -9,20 +9,7 @@ import {AppointmentService} from '../../shared/services/appointment/appointment.
 import {WeekDay} from '@angular/common';
 import {EventAction, EventColor} from 'calendar-utils';
 
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
+
 
 @Component({
   selector: 'app-main-calendar',
@@ -79,47 +66,7 @@ export class MainCalendarComponent implements OnInit {
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [];
-  // = [
-  //   {
-  //     start: subDays(startOfDay(new Date()), 1),
-  //     end: addDays(new Date(), 1),
-  //     title: 'A 3 day event',
-  //     color: colors.red,
-  //     actions: this.actions,
-  //     allDay: true,
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true,
-  //     },
-  //     draggable: true,
-  //   },
-  //   {
-  //     start: startOfDay(new Date()),
-  //     title: 'An event with no end date',
-  //     color: colors.yellow,
-  //     actions: this.actions,
-  //   },
-  //   {
-  //     start: subDays(endOfMonth(new Date()), 3),
-  //     end: addDays(endOfMonth(new Date()), 3),
-  //     title: 'A long event that spans 2 months',
-  //     color: colors.blue,
-  //     allDay: true,
-  //   },
-  //   {
-  //     start: addHours(new Date(), 1),
-  //     end: addHours(new Date(), 2),
-  //     title: '08:50 P. Peterson Ik heb het gevoel alsof ik dood aan het gaan ben',
-  //     color: colors.yellow,
-  //     actions: this.actions,
-  //     cssClass: 'calendar-gray',
-  //     resizable: {
-  //       beforeStart: true,
-  //       afterEnd: true,
-  //     },
-  //     draggable: true,
-  //   },
-  // ];
+
 
   activeDayIsOpen = true;
 
@@ -143,8 +90,17 @@ export class MainCalendarComponent implements OnInit {
 
         a.event.start = this.checkTimezones(new Date(a.startTime));
         a.event.end = this.checkTimezones(new Date(a.endTime));
+        // @ts-ignore
+      //  a.event.color = new EventColor();
 
-        a.event.color = a.color; // TODO: save colours somewhere
+        const color: any = {
+          color: {
+            primary: a.colorPrimary,
+            secondary: a.colorSecondary,
+          }
+        };
+        a.event.color = color.color ; // TODO: save colours somewhere
+       // console.log(a.color);
         a.event.cssClass = 'calendar-gray'; // TODO: save cssClass somewhere?
         a.event.resizable = {
           beforeStart: true,
@@ -286,7 +242,12 @@ export class MainCalendarComponent implements OnInit {
     });
   }
 
+  convertTZ(date: any, tzString: string) {
+    return new Date((typeof date === 'string' ? new Date(date) : date).toLocaleString('en-US', {timeZone: tzString}));
+  }
+
   checkTimezones(date: Date): Date {
+    date = this.convertTZ(date, Intl.DateTimeFormat().resolvedOptions().timeZone);
     let time = date.getTime();
     //Check if timezoneOffset is positive or negative
     if (date.getTimezoneOffset() <= 0) {
