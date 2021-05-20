@@ -21,7 +21,7 @@
 
       <div class="wrapper-">
         <mat-icon>schedule</mat-icon>
-        <mat-label>{{appointment.startTime | date:'hh:mm'}}-{{appointment.endTime | date:'hh:mm'}}uur </mat-label>
+        <mat-label>{{appointment.startTime | date:'hh:mm'}}-{{appointment.endTime | date:'hh:mm'}} uur </mat-label>
       </div>
 
       <div class="wrapper-">
@@ -50,13 +50,19 @@
     <div class="right">
       <div class="wrapper-">
         <mat-label><b>Patient: </b></mat-label>
-        <mat-label>{{appointment.patientName}}</mat-label>
+        <mat-label>{{appointment.patient.firstName}} {{appointment.patient.middleName}} {{appointment.patient.lastName}}</mat-label>
         <br>
-        <mat-label>{{appointment.patientDateOfBirth}}</mat-label>
+        <mat-label><b>Geslacht: </b></mat-label>
+        <mat-label>{{appointment.patient.gender}}</mat-label>
         <br>
-        <mat-label>{{appointment.patientStreetNameNumber}}</mat-label>
+        <mat-label><b>leeftijd: </b></mat-label>
+        <mat-label>{{age}}</mat-label>
         <br>
-        <mat-label>{{appointment.patientPostalCode}}</mat-label>
+        <mat-label><b>Geboorte datum: </b></mat-label>
+        <mat-label>{{appointment.patient.dateOfBirth | date: 'dd-MM-yyyy'}}</mat-label>
+        <br>
+        <mat-label><b>Telefoon nummer: </b></mat-label>
+        <mat-label>{{appointment.patient.phoneNumber}}</mat-label>
       </div>
     </div>
   </div>

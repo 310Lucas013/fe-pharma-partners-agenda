@@ -37,15 +37,6 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
   type: string;
   date: string;
   time: string;
-  location: string;
-  doctorName: string;
-  patientName: string;
-  patientStreetNameNumber: string;
-  patientDateOfBirth: string;
-  patientPostalCode: string;
-  reasonSelection: string;
-  reasonText: string;
-  attentionLineText: string;
 
   minDate: Date;
 
