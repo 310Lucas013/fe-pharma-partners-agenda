@@ -30,7 +30,6 @@ export class AppointmentInformationModalComponent implements OnInit {
     this.appointment.endTime = this.dateService.checkTimezones(this.appointment.endTime);
     this.patientService.getById(this.appointment.patientId).subscribe(
       data => {
-        console.log(data);
         this.appointment.patient = data;
         this.CalculateAge(this.appointment.patient.dateOfBirth);
       }
@@ -50,5 +49,4 @@ export class AppointmentInformationModalComponent implements OnInit {
       const timeDiff = Math.abs(Date.now() - new Date(date).getTime());
       this.age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
     }
-
 }

@@ -19,6 +19,8 @@ import * as moment from 'moment';
 import {FormControl} from "@angular/forms";
 import {DateService} from '../../../shared/services/date/date.service';
 import {DateAdapter} from '@angular/material/core';
+import {PatientService} from '../../../shared/services/patient/patient.service';
+import {LocationService} from '../../../shared/services/location/location.service';
 
 @Component({
   selector: 'app-appointment-edit-modal',
@@ -67,10 +69,9 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
 
   // todo change the modal private to the modal of the parent
   constructor(private modal: NgbModal, private appointmentService: AppointmentService,
-              private tokenService: TokenStorageService, private datePipe: DatePipe, private dateService: DateService, private dateAdapter: DateAdapter<Date>) {
+              private tokenService: TokenStorageService, private datePipe: DatePipe, private dateService: DateService, private dateAdapter: DateAdapter<Date>, private patientService: PatientService, private locationService: LocationService) {
     this.datePipe = new DatePipe('nl');
     this.dateAdapter.setLocale('nl');
-
   }
 
   ngAfterContentInit(): void {
@@ -84,7 +85,18 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     this.minDate = new Date();
-
+    this.patientService.getById(this.appointment.patientId).subscribe(
+      data => {
+        this.appointment.patient = data;
+        if(this.appointment.patient.locationId != null){
+          this.locationService.getById(this.appointment.patient.locationId).subscribe(
+            data => {
+              this.appointment.patient.location = data;
+            }
+          )
+        }
+      }
+    )
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
