@@ -18,8 +18,7 @@ const routes: Routes = [
   { path: 'agenda/:id', component: AgendaComponent, canActivate: [AuthguardService] },
   { path: 'appointmentsearch', component: AppointmentSearchComponent, canActivate: [AuthguardService] },
   { path: 'clientoverview', component: ClientOverviewComponent, canActivate: [AuthguardService] },
-  { path: 'appointmentsearch', component: AppointmentSearchComponent, canActivate: [AuthguardService] },
-  { path: 'clientoverview', component: ClientOverviewComponent, canActivate: [AuthguardService] },
+  { path: 'clientoverview/:id', component: ClientOverviewComponent, canActivate: [AuthguardService] },
   { path: '**', component: PageNotFoundComponent }
 ];
 
