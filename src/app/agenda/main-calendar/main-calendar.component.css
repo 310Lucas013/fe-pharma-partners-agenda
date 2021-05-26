@@ -46,6 +46,12 @@ a:hover {
   }
 }
 
+.status-icon{
+  text-align: center;
+  width: 1.25em;
+  font-size: 20px !important;
+}
+
 .row {
   flex-wrap: nowrap !important;
 }

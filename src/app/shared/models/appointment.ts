@@ -10,6 +10,7 @@ export class Appointment {
   startTime: Date;
   endTime: Date;
   appointmentType: AppointmentType;
+  appointmentStatus: string;
   reasonType: ReasonType;
   reason: string;
   attention: string;

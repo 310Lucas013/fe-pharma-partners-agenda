@@ -42,13 +42,6 @@ export class MainCalendarComponent implements OnInit {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<span class="material-icons">done</span>',
-      a11yLabel: 'CheckIn',
-      onClick: ({event}: { event: CalendarEvent }): void => {
-        this.doneEvent(event);
-      }
-    },
-    {
       label: '<i class="fas fa-fw fa-pencil-alt"></i>',
       a11yLabel: 'Edit',
       onClick: ({event}: { event: CalendarEvent }): void => {
@@ -64,6 +57,28 @@ export class MainCalendarComponent implements OnInit {
       },
     },
   ];
+
+  actionRegistered: CalendarEventAction = {
+      label: '<span class="material-icons status-icon">person</span>',
+      a11yLabel: 'CheckIn',
+      onClick: ({event}: { event: CalendarEvent }): void => {
+        this.doneEvent(event);
+      }};
+
+  actionAbsent: CalendarEventAction = {
+    label: '<span class="material-icons status-icon">person_off</span>',
+    a11yLabel: 'CheckIn',
+    onClick: ({event}: { event: CalendarEvent }): void => {
+      this.doneEvent(event);
+    }};
+
+  actionDone: CalendarEventAction = {
+    label: '<span class="material-icons status-icon">done</span>',
+    a11yLabel: 'CheckIn',
+    onClick: ({event}: { event: CalendarEvent }): void => {
+      this.doneEvent(event);
+    }};
+
 
   refresh: Subject<any> = new Subject();
 
@@ -108,8 +123,22 @@ export class MainCalendarComponent implements OnInit {
           beforeStart: true,
           afterEnd: true,
         };
+        a.event.actions = [];
+        switch (a.appointmentStatus){
+          case "ABSENT":
+            a.event.actions.push(this.actionAbsent);
+            break;
+          case "REGISTERED":
+            a.event.actions.push(this.actionRegistered);
+            break;
+          case "DONE":
+            a.event.actions.push(this.actionDone);
+            break;
+        }
+        for(let action of this.actions){
+          a.event.actions.push(action);
+        }
         a.event.draggable = false;
-        a.event.actions = this.actions;
         this.events.push(a.event);
         this.appointments[i] = a;
       }
