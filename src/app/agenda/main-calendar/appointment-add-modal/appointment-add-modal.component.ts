@@ -22,24 +22,27 @@ export class AppointmentAddModalComponent implements OnInit {
   date: string;
   appointment = {} as Appointment;
   error = '' as string;
-  selectedColor: any ;
+  selectedColor: any;
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 
-  colors: any = {
-    red: {
+  colors: any = [
+    {
+      color: 'red',
       primary: '#ad2121',
       secondary: '#FAE3E3',
     },
-    blue: {
+    {
+      color: 'blue',
       primary: '#1e90ff',
       secondary: '#D1E8FF',
     },
-    yellow: {
+    {
+      color: 'yellow',
       primary: '#e3bc08',
       secondary: '#FDF1BA',
-    },
-  };
+    }
+  ];
 
   modalData: {
     action: string;
@@ -76,18 +79,20 @@ export class AppointmentAddModalComponent implements OnInit {
   }
 
   saveAppointment(): void {
-    if (this.selectedColor == "red"){
-      this.appointment.colorSecondary = this.colors.red.secondary;
-      this.appointment.colorPrimary = this.colors.red.primary;
+    if (this.selectedColor === '#FAE3E3'){
+      this.appointment.colorSecondary = this.colors[0].secondary;
+      this.appointment.colorPrimary = this.colors[0].primary;
     }
-    if (this.selectedColor == "blue"){
-      this.appointment.colorSecondary = this.colors.blue.secondary;
-      this.appointment.colorPrimary = this.colors.blue.primary;
+    if (this.selectedColor === '#D1E8FF'){
+      this.appointment.colorSecondary = this.colors[1].secondary;
+      this.appointment.colorPrimary = this.colors[1].primary;
     }
-    if (this.selectedColor == "yellow"){
-      this.appointment.colorSecondary = this.colors.yellow.secondary;
-      this.appointment.colorPrimary = this.colors.yellow.primary;
+    if (this.selectedColor === '#FDF1BA'){
+      this.appointment.colorSecondary = this.colors[2].secondary;
+      this.appointment.colorPrimary = this.colors[2].primary;
     }
+    console.log(this.selectedColor);
+    console.log(this.appointment);
 
 
     if(!this.setAppointmentTimes()){
