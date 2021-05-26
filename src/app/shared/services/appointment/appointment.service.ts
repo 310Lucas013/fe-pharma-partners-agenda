@@ -39,4 +39,16 @@ export class AppointmentService {
       date: appointment.dateString
     }, httpOptions);
   }
+
+  setAppointmentStatusAbsent(appointmentId: number): Observable<any> {
+    return this.http.get<any>(API_KEY + '/absent/' + appointmentId);
+  }
+
+  setAppointmentStatusRegistered(appointmentId: number): Observable<any> {
+    return this.http.get<any>(API_KEY + '/registered/' + appointmentId);
+  }
+
+  setAppointmentStatusDone(appointmentId: number): Observable<any> {
+    return this.http.get<any>(API_KEY + '/done/' + appointmentId);
+  }
 }

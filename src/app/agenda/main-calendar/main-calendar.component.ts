@@ -58,25 +58,25 @@ export class MainCalendarComponent implements OnInit {
     },
   ];
 
-  actionRegistered: CalendarEventAction = {
-      label: '<span class="material-icons status-icon">person</span>',
-      a11yLabel: 'CheckIn',
-      onClick: ({event}: { event: CalendarEvent }): void => {
-        this.doneEvent(event);
-      }};
-
   actionAbsent: CalendarEventAction = {
     label: '<span class="material-icons status-icon">person_off</span>',
-    a11yLabel: 'CheckIn',
+    a11yLabel: 'Absent',
     onClick: ({event}: { event: CalendarEvent }): void => {
-      this.doneEvent(event);
+      this.actionSetRegistered(event);
     }};
+
+  actionRegistered: CalendarEventAction = {
+      label: '<span class="material-icons status-icon">person</span>',
+      a11yLabel: 'Registered',
+      onClick: ({event}: { event: CalendarEvent }): void => {
+        this.actionSetDone(event);
+      }};
 
   actionDone: CalendarEventAction = {
     label: '<span class="material-icons status-icon">done</span>',
-    a11yLabel: 'CheckIn',
+    a11yLabel: 'Done',
     onClick: ({event}: { event: CalendarEvent }): void => {
-      this.doneEvent(event);
+      this.actionSetAbsent(event);
     }};
 
 
@@ -171,16 +171,7 @@ export class MainCalendarComponent implements OnInit {
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
-
-    for (let i = 0; i < this.appointments.length; i++) {
-      // TODO: niet hardcoded
-      if (JSON.stringify(this.appointments[i].event) === JSON.stringify(event)) {
-        this.selectedAppointment = this.appointments[i];
-        console.log(this.selectedAppointment);
-        break;
-      }
-    }
-
+    this.selectedAppointment = this.getAppointmentFromEvent(event);
     this.modalData = {event, action};
     if (action === 'Info') {
       this.modal.open(this.appointmentInformationModal, {size: 'lg'});
@@ -193,24 +184,49 @@ export class MainCalendarComponent implements OnInit {
     }
   }
 
-  addEvent(): void {
-    // const startTime = subDays(startOfDay(new Date()), 1);
-    // const endTime = addDays(new Date(), 1);
-    // const titleEvent = startTime.getHours().toString() + ':' + startTime.getMinutes().toString() + ' - ' + 'Message';
-    // this.events = [
-    //   ...this.events,
-    //   {
-    //     title: titleEvent,
-    //     start: startTime,
-    //     end: endTime,
-    //     color: colors.red,
-    //     actions: this.actions,
-    //     resizable: {
-    //       beforeStart: true,
-    //       afterEnd: true,
-    //     },
-    //   },
-    // ];
+  getAppointmentFromEvent(event: CalendarEvent): Appointment {
+    for (let i = 0; i < this.appointments.length; i++) {
+      // TODO: niet hardcoded
+      if (JSON.stringify(this.appointments[i].event) === JSON.stringify(event)) {
+        return this.appointments[i];
+      }
+    }
+  }
+
+  actionSetAbsent(event: CalendarEvent): void {
+    let appointment = this.getAppointmentFromEvent(event);
+    this.appointmentService.setAppointmentStatusAbsent(appointment.id).subscribe(
+      data => {
+        location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  actionSetRegistered(event: CalendarEvent): void {
+    let appointment = this.getAppointmentFromEvent(event);
+    this.appointmentService.setAppointmentStatusRegistered(appointment.id).subscribe(
+      data => {
+        location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  actionSetDone(event: CalendarEvent): void {
+    let appointment = this.getAppointmentFromEvent(event);
+    this.appointmentService.setAppointmentStatusDone(appointment.id).subscribe(
+      data => {
+        location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
   deleteEvent(eventToDelete: CalendarEvent): void {
