@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
   selector: 'app-appointment-information-modal',
   templateUrl: './appointment-information-modal.component.html',
   styleUrls: ['./appointment-information-modal.component.css'],
-  providers: [{provide: DateAdapter, useClass: CustomDateAdapter }]
+  providers: [{provide: DateAdapter, useClass: CustomDateAdapter}]
 })
 export class AppointmentInformationModalComponent implements OnInit {
 
@@ -22,7 +22,7 @@ export class AppointmentInformationModalComponent implements OnInit {
   @ViewChild('confirmationModalContent', {static: true}) confirmationModalContent: TemplateRef<any>;
   @Input() appointment: Appointment;
   appointmentTime: string;
-  age:number;
+  age: number;
 
   ngOnInit(): void {
     this.appointment = JSON.parse(JSON.stringify(this.appointment));
@@ -34,7 +34,7 @@ export class AppointmentInformationModalComponent implements OnInit {
         this.appointment.patient = data;
         this.CalculateAge(this.appointment.patient.dateOfBirth);
       }
-    )
+    );
   }
 
   edit(): void {
@@ -42,16 +42,19 @@ export class AppointmentInformationModalComponent implements OnInit {
     this.modal.open(this.editModalContent, {size: 'lg'});
   }
 
-  delete(){
+  delete() {
     this.modal.open(this.confirmationModalContent, {size: 'sm'});
   }
 
-  navigateToPatient(){
-    return this.router.navigate(["clientoverview", this.appointment.patient.id])
+  navigateToPatient() {
+    this.modal.dismissAll();
+    this.router.navigate(['']).then(result =>
+      this.router.navigate(['clientoverview', this.appointment.patient.id])
+    );
   }
 
   private CalculateAge(date: Date): void {
-      const timeDiff = Math.abs(Date.now() - new Date(date).getTime());
-      this.age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
-    }
+    const timeDiff = Math.abs(Date.now() - new Date(date).getTime());
+    this.age = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
+  }
 }
