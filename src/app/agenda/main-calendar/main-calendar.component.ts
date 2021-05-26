@@ -42,14 +42,14 @@ export class MainCalendarComponent implements OnInit {
 
   actions: CalendarEventAction[] = [
     {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
+      label: '<span class="material-icons">edit</span>',
       a11yLabel: 'Edit',
       onClick: ({event}: { event: CalendarEvent }): void => {
         this.handleEvent('Edited', event);
       },
     },
     {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
+      label: '<span class="material-icons">delete</span>',
       a11yLabel: 'Delete',
       onClick: ({event}: { event: CalendarEvent }): void => {
         this.events = this.events.filter((iEvent) => iEvent !== event);
@@ -59,21 +59,21 @@ export class MainCalendarComponent implements OnInit {
   ];
 
   actionAbsent: CalendarEventAction = {
-    label: '<span class="material-icons status-icon">person_off</span>',
+    label: '<span class="material-icons">person_off</span>',
     a11yLabel: 'Absent',
     onClick: ({event}: { event: CalendarEvent }): void => {
       this.actionSetRegistered(event);
     }};
 
   actionRegistered: CalendarEventAction = {
-      label: '<span class="material-icons status-icon">person</span>',
+      label: '<span class="material-icons">person</span>',
       a11yLabel: 'Registered',
       onClick: ({event}: { event: CalendarEvent }): void => {
         this.actionSetDone(event);
       }};
 
   actionDone: CalendarEventAction = {
-    label: '<span class="material-icons status-icon">done</span>',
+    label: '<span class="material-icons">done</span>',
     a11yLabel: 'Done',
     onClick: ({event}: { event: CalendarEvent }): void => {
       this.actionSetAbsent(event);
