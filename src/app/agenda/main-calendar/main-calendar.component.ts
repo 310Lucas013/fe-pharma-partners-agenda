@@ -104,11 +104,8 @@ export class MainCalendarComponent implements OnInit {
         const a = this.appointments[i];
         a.event = {} as CalendarEvent;
         a.event.title = a.reason;
-
         a.event.start = dateService.checkTimezones(new Date(a.startTime));
         a.event.end = dateService.checkTimezones(new Date(a.endTime));
-        // @ts-ignore
-      //  a.event.color = new EventColor();
 
         const color: any = {
           color: {
@@ -116,8 +113,8 @@ export class MainCalendarComponent implements OnInit {
             secondary: a.colorSecondary,
           }
         };
-        a.event.color = color.color ; // TODO: save colours somewhere
-       // console.log(a.color);
+
+        a.event.color = color.color ;
         a.event.cssClass = 'calendar-gray'; // TODO: save cssClass somewhere?
         a.event.resizable = {
           beforeStart: true,
@@ -186,7 +183,6 @@ export class MainCalendarComponent implements OnInit {
 
   getAppointmentFromEvent(event: CalendarEvent): Appointment {
     for (let i = 0; i < this.appointments.length; i++) {
-      // TODO: niet hardcoded
       if (JSON.stringify(this.appointments[i].event) === JSON.stringify(event)) {
         return this.appointments[i];
       }
@@ -271,7 +267,6 @@ export class MainCalendarComponent implements OnInit {
 
   doneEvent(event: CalendarEvent): void {
     console.log(event);
-    console.log('hello');
     this.events = this.events.map((iEvent) => {
       if (iEvent === event) {
         const startDate = event.start;
