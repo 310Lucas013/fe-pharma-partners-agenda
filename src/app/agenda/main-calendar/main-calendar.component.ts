@@ -49,7 +49,7 @@ export class MainCalendarComponent implements OnInit {
       },
     },
     {
-      label: '<span class="material-icons">delete</span>',
+      label: '<span class="material-icons">delete</span><br/>',
       a11yLabel: 'Delete',
       onClick: ({event}: { event: CalendarEvent }): void => {
         this.events = this.events.filter((iEvent) => iEvent !== event);
