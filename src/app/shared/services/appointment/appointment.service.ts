@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Appointment} from '../../models/appointment';
 import {Observable} from 'rxjs';
 import {environment} from '../../../../environments/environment';
+import {AppointmentDto} from '../../dto/appointment-dto';
 
 const API_KEY = environment.gatewayApi + 'appointments';
 
@@ -33,11 +34,9 @@ export class AppointmentService {
     return this.http.delete(aaa);
   }
 
-  updateAppointment(appointment: Appointment): Observable<any> {
-    return this.http.put<Appointment>(API_KEY + '/update/', {
-      appointment,
-      date: appointment.dateString
-    }, httpOptions);
+  updateAppointment(appointment: AppointmentDto): Observable<any> {
+    console.log(appointment);
+    return this.http.put<Appointment>(API_KEY + '/update/', JSON.stringify(appointment), httpOptions);
   }
 
   setAppointmentStatusAbsent(appointmentId: number): Observable<any> {
