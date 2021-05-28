@@ -62,57 +62,57 @@
       </div>
       <!--      patient zoeken-->
 
-      <div class="modal-patient">
+      <!--      <div class="modal-patient">-->
+      <!--        <h2><span class="material-icons">search</span>Patiënt zoeken</h2>-->
+      <!--        <label>-->
+      <!--          <input name="patientName" required [(ngModel)]="appointment.patientName" matInput-->
+      <!--                 class="input-patient"-->
+      <!--                 placeholder="Voor- of achternaam"/>-->
+      <!--        </label>-->
+      <!--        <label>-->
+      <!--          <input name="patientStreetNameNumber" required-->
+      <!--                 [(ngModel)]="appointment.patientStreetNameNumber" matInput-->
+      <!--                 class="input-patient" placeholder="Straatnaam + huisnummer">-->
+      <!--        </label>-->
+      <!--        <label>-->
+      <!--          <input disabled="disabled" name="patientDateOfBirth" required [(ngModel)]="appointment.patientDateOfBirth"-->
+      <!--                 matInput-->
+      <!--                 class="input-patient" placeholder="Geboortedatum">-->
+      <!--        </label>-->
+      <!--        <label>-->
+      <!--          <input disabled="disabled" name="patientPostalCode" required [(ngModel)]="appointment.patientPostalCode"-->
+      <!--                 matInput-->
+      <!--                 class="input-patient" placeholder="Postcode">-->
+      <!--        </label>-->
+      <!--      </div>-->
+      <!--      <br>-->
+      <div *ngIf="appointment.patient !== undefined && appointment.patient.location !== undefined && appointment.patient.location !== null" class="modal-patient">
         <h2><span class="material-icons">search</span>Patiënt zoeken</h2>
         <label>
-          <input name="patientName" required [(ngModel)]="appointment.patientName" matInput
+          <input disabled="disabled" name="patientName" required [(ngModel)]="appointment.patient.firstName" matInput
                  class="input-patient"
                  placeholder="Voor- of achternaam"/>
         </label>
         <label>
-          <input name="patientStreetNameNumber" required
-                 [(ngModel)]="appointment.patientStreetNameNumber" matInput
+          <input disabled="disabled" name="patientStreetNameNumber" required
+                 [(ngModel)]="appointment.patient.location.street" matInput
                  class="input-patient" placeholder="Straatnaam + huisnummer">
         </label>
         <label>
-          <input disabled="disabled" name="patientDateOfBirth" required [(ngModel)]="appointment.patientDateOfBirth"
+          <input disabled="disabled" name="patientDateOfBirth" required [(ngModel)]="appointment.patient.dateOfBirth"
                  matInput
                  class="input-patient" placeholder="Geboortedatum">
         </label>
         <label>
-          <input disabled="disabled" name="patientPostalCode" required [(ngModel)]="appointment.patientPostalCode"
+          <input disabled="disabled" name="patientPostalCode" required
+                 [(ngModel)]="appointment.patient.location.zipCode"
                  matInput
                  class="input-patient" placeholder="Postcode">
         </label>
       </div>
       <br>
-        <div *ngIf="appointment.patient.location">
-          <h2>Patiënt</h2>
-          <label>
-            <input disabled="disabled" name="patientName" required [(ngModel)]="appointment.patient.firstName" matInput
-                   class="input-patient"
-                   placeholder="Voor- of achternaam"/>
-          </label>
-          <label>
-            <input disabled="disabled" name="patientStreetNameNumber" required
-                   [(ngModel)]="appointment.patient.location.street" matInput
-                   class="input-patient" placeholder="Straatnaam + huisnummer">
-          </label>
-          <label>
-            <input disabled="disabled" name="patientDateOfBirth" required [(ngModel)]="appointment.patient.dateOfBirth"
-                   matInput
-                   class="input-patient" placeholder="Geboortedatum">
-          </label>
-          <label>
-            <input disabled="disabled" name="patientPostalCode" required
-                   [(ngModel)]="appointment.patient.location.zipCode"
-                   matInput
-                   class="input-patient" placeholder="Postcode">
-          </label>
-        </div>
-        <br>
-      </div>
     </div>
+    <!--</div>-->
 
     <!--      reden van komst-->
     <div class="modal-reason box">
@@ -124,8 +124,8 @@
       </mat-select>
       <br>
       <label>
-<textarea name="reasonText" [(ngModel)]="appointment.reason" class="text-area-width"
-          placeholder="Vul de reden aan met vrije tekst"></textarea>
+        <textarea name="reasonText" [(ngModel)]="appointment.reason" class="text-area-width"
+                  placeholder="Vul de reden aan met vrije tekst"></textarea>
       </label>
     </div>
 
