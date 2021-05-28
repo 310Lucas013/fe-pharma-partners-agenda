@@ -10,7 +10,7 @@
       <a><span (click)="delete()" class="material-icons">delete</span><br>Verwijderen</a>
       <a><span class="material-icons">checklist</span><br>Actielijst openen</a>
       <a><span class="material-icons">info</span><br>Patient informatie</a>
-      <a><span><button>Dossier</button></span></a>
+      <a><span><button (click)="navigateToPatient()">Dossier</button></span></a>
     </div>
 
     <div class="left">
@@ -21,7 +21,7 @@
 
       <div class="wrapper-">
         <mat-icon>schedule</mat-icon>
-        <mat-label>{{appointment.startTime | date:'hh:mm'}}-{{appointment.endTime | date:'hh:mm'}}uur </mat-label>
+        <mat-label>{{appointment.startTime | date:'hh:mm'}}-{{appointment.endTime | date:'hh:mm'}} uur</mat-label>
       </div>
 
       <div class="wrapper-">
@@ -30,12 +30,14 @@
       </div>
 
       <div class="wrapper-">
-        <mat-label><b>Reden van komst: </b></mat-label><br>
+        <mat-label><b>Reden van komst: </b></mat-label>
+        <br>
         <mat-label>{{appointment.reason}}</mat-label>
       </div>
 
       <div class="wrapper-">
-        <mat-label><b>Attentieregel: </b></mat-label><br>
+        <mat-label><b>Attentieregel: </b></mat-label>
+        <br>
         <mat-label>{{appointment.attention}}</mat-label>
       </div>
 
@@ -43,20 +45,29 @@
         <mat-checkbox disabled="disabled" [checked]="appointment.priority">Prioriteit</mat-checkbox>
       </div>
       <div class="wrapper-">
-        <mat-checkbox disabled="disabled" [checked]="appointment.mgn">Afspraak zichtbaar voor patient(MGn)</mat-checkbox>
+        <mat-checkbox disabled="disabled" [checked]="appointment.mgn">Afspraak zichtbaar voor patient(MGn)
+        </mat-checkbox>
       </div>
 
     </div>
     <div class="right">
       <div class="wrapper-">
-        <mat-label><b>Patient: </b></mat-label>
-        <mat-label>{{appointment.patientName}}</mat-label>
-        <br>
-        <mat-label>{{appointment.patientDateOfBirth}}</mat-label>
-        <br>
-        <mat-label>{{appointment.patientStreetNameNumber}}</mat-label>
-        <br>
-        <mat-label>{{appointment.patientPostalCode}}</mat-label>
+        <div *ngIf="appointment.patient">
+          <mat-label><b>Patient: </b></mat-label>
+          <mat-label>{{appointment.patient.firstName}} {{appointment.patient.middleName}} {{appointment.patient.lastName}}</mat-label>
+          <br>
+          <mat-label><b>Geslacht: </b></mat-label>
+          <mat-label>{{appointment.patient.gender}}</mat-label>
+          <br>
+          <mat-label><b>leeftijd: </b></mat-label>
+          <mat-label>{{age}}</mat-label>
+          <br>
+          <mat-label><b>Geboorte datum: </b></mat-label>
+          <mat-label>{{appointment.patient.dateOfBirth | date: 'dd-MM-yyyy'}}</mat-label>
+          <br>
+          <mat-label><b>Telefoon nummer: </b></mat-label>
+          <mat-label>{{appointment.patient.phoneNumber}}</mat-label>
+        </div>
       </div>
     </div>
   </div>

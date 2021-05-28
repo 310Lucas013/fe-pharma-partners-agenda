@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Gender} from '../shared/models/gender.enum';
 import {ThirdPartyService} from '../shared/services/third-party/third-party.service';
 import {PatientDto} from '../shared/dto/patient-dto';
 import {PatientService} from '../shared/services/patient/patient.service';
 import {Patient} from '../shared/models/patient';
+import {LocationService} from '../shared/services/location/location.service';
 
 @Component({
   selector: 'app-client-overview',
@@ -13,6 +14,7 @@ import {Patient} from '../shared/models/patient';
 })
 export class ClientOverviewComponent implements OnInit {
 
+  id: number;
   firstName: string;
   lastName: string;
   middleName: string;
@@ -26,10 +28,41 @@ export class ClientOverviewComponent implements OnInit {
   city: string;
   country: string;
 
+  locationId: number;
+
   createdPatient: Patient;
 
-  constructor(private router: Router, private thirdPartyService: ThirdPartyService, private patientService: PatientService) {
-
+  constructor(private router: Router, private thirdPartyService: ThirdPartyService, private patientService: PatientService, private route: ActivatedRoute, private locationService: LocationService) {
+    this.route.params.subscribe(params => {
+      this.id = params.id;
+    });
+    if(this.id != null){
+      this.patientService.getById(this.id).subscribe(
+        data => {
+          this.id = data.id;
+          this.firstName = data.firstName;
+          this.lastName = data.lastName;
+          this.middleName = data.middleName;
+          this.gender = data.gender;
+          this.dateOfBirth = data.dateOfBirth;
+          this.phoneNumber = data.phoneNumber;
+          this.dossierInformation = data.dossier.information;
+          this.locationId = data.locationId;
+          if (this.locationId != null) {
+            this.locationService.getById(this.locationId).subscribe(
+              data => {
+                this.streetName = data.street;
+                this.houseNumber = data.houseNumber;
+                this.zipCode = data.zipCode;
+                this.city = data.city;
+                this.country = data.country;
+              },
+              error => {
+                console.log(error);
+              });
+          }
+        });
+    }
   }
 
   ngOnInit(): void {

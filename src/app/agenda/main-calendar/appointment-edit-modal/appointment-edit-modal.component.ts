@@ -1,24 +1,18 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  TemplateRef,
-  ViewChild,
-  EventEmitter,
-  Input,
-  AfterViewInit,
-  AfterContentInit
-} from '@angular/core';
-import {CalendarEvent, CalendarEventAction} from 'angular-calendar';
+import {AfterContentInit, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
+import {CalendarEvent} from 'angular-calendar';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Appointment} from '../../../shared/models/appointment';
 import {AppointmentService} from 'src/app/shared/services/appointment/appointment.service';
 import {TokenStorageService} from '../../../shared/services/token-storage/token-storage.service';
 import {DatePipe} from '@angular/common';
 import * as moment from 'moment';
-import {FormControl} from "@angular/forms";
 import {DateService} from '../../../shared/services/date/date.service';
 import {DateAdapter} from '@angular/material/core';
+import {PatientService} from '../../../shared/services/patient/patient.service';
+import {LocationService} from '../../../shared/services/location/location.service';
+import {ActivatedRoute} from '@angular/router';
+import {AppointmentDto} from '../../../shared/dto/appointment-dto';
+import {AppointmentStatus} from '../../../shared/models/appointment-status.enum';
 
 @Component({
   selector: 'app-appointment-edit-modal',
@@ -28,24 +22,16 @@ import {DateAdapter} from '@angular/material/core';
 })
 export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
 
-  duration: number;
   startTime = '00:00';
   endTime = '00:00';
   appointmentDate: Date;
+  employeeId: number;
+  errorMessage: string;
 
   // Appointment parameters
   type: string;
   date: string;
   time: string;
-  location: string;
-  doctorName: string;
-  patientName: string;
-  patientStreetNameNumber: string;
-  patientDateOfBirth: string;
-  patientPostalCode: string;
-  reasonSelection: string;
-  reasonText: string;
-  attentionLineText: string;
 
   minDate: Date;
 
@@ -76,10 +62,10 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
 
   // todo change the modal private to the modal of the parent
   constructor(private modal: NgbModal, private appointmentService: AppointmentService,
-              private tokenService: TokenStorageService, private datePipe: DatePipe, private dateService: DateService, private dateAdapter: DateAdapter<Date>) {
+              private tokenService: TokenStorageService, private datePipe: DatePipe, private dateService: DateService,
+              private dateAdapter: DateAdapter<Date>, private patientService: PatientService, private locationService: LocationService) {
     this.datePipe = new DatePipe('nl');
     this.dateAdapter.setLocale('nl');
-
   }
 
   ngAfterContentInit(): void {
@@ -93,7 +79,18 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     this.minDate = new Date();
-
+    this.patientService.getById(this.appointment.patientId).subscribe(
+      data => {
+        this.appointment.patient = data;
+        if(this.appointment.patient.locationId != null){
+          this.locationService.getById(this.appointment.patient.locationId).subscribe(
+            data => {
+              this.appointment.patient.location = data;
+            }
+          )
+        }
+      }
+    )
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
@@ -106,11 +103,15 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
   }
 
   updateAppointment(): void {
-    this.appointment.dateString = this.datePipe.transform(this.appointment.event.start, 'yyyy-MM-dd');
-    this.appointmentService.updateAppointment(this.appointment).subscribe(
+    if(!this.setAppointmentTimes()){
+      this.errorMessage = "Afspraak tijden zijn niet goed ingevuld."
+      return;
+    }
+    let dto = AppointmentEditModalComponent.setDtoFromAppointment(this.appointment)
+    this.appointmentService.updateAppointment(dto).subscribe(
       data => {
         console.log(data);
-        //location.reload();
+        location.reload();
       },
       error => {
         console.log(error);
@@ -125,14 +126,22 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
     let startMin = Number(this.startTime.split(':')[1]);
     let endHours = Number(this.endTime.split(':')[0]);
     let endMin = Number(this.endTime.split(':')[1]);
+    console.log(startHours);
+    console.log(startMin);
+    console.log(endHours);
+    console.log(endMin);
+    this.appointment.date = this.dateService.convertTZ(this.appointmentDate, Intl.DateTimeFormat().resolvedOptions().timeZone);
     this.appointment.startTime = new Date();
+    this.appointment.startTime.setDate(this.appointment.date.getDate());
     this.appointment.endTime = new Date();
+    this.appointment.endTime.setDate(this.appointment.date.getDate());
     this.appointment.startTime.setHours(startHours);
     this.appointment.startTime.setMinutes(startMin);
     this.appointment.endTime.setHours(endHours);
     this.appointment.endTime.setMinutes(endMin);
 
-    this.appointment.date = this.dateService.convertTZ(this.appointment.date, Intl.DateTimeFormat().resolvedOptions().timeZone);
+    console.log(this.appointment);
+
     this.appointment.startTime = this.dateService.convertTZ(this.appointment.startTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
     this.appointment.endTime = this.dateService.convertTZ(this.appointment.endTime, Intl.DateTimeFormat().resolvedOptions().timeZone);
 
@@ -149,5 +158,28 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
         console.log(error);
       }
     );
+  }
+
+  private static setDtoFromAppointment(appointment: Appointment): AppointmentDto{
+    let dto = new AppointmentDto();
+    dto.id = appointment.id;
+    dto.date = appointment.date;
+    dto.startTime = appointment.startTime;
+    dto.endTime = appointment.endTime;
+    dto.reason = appointment.reason;
+    dto.attention = appointment.attention;
+    dto.colorPrimary = appointment.event.color.primary;
+    dto.colorSecondary = appointment.event.color.secondary;
+    dto.priority = appointment.priority;
+    dto.mgn = appointment.mgn;
+
+    dto.appointmentType = appointment.appointmentType;
+    dto.appointmentStatus = AppointmentStatus[appointment.appointmentStatus];
+    dto.reasonType = appointment.reasonType;
+
+    dto.employeeId = appointment.employeeId;
+    dto.patientId = appointment.patientId;
+    dto.locationId = appointment.locationId;
+    return dto;
   }
 }

@@ -2,6 +2,7 @@ import {AppointmentType} from './appointment-type';
 import {ReasonType} from './reason-type';
 import {CalendarEvent} from 'angular-calendar';
 import {EventAction, EventColor} from 'calendar-utils';
+import {Patient} from './patient';
 
 export class Appointment {
   id: number;
@@ -9,6 +10,7 @@ export class Appointment {
   startTime: Date;
   endTime: Date;
   appointmentType: AppointmentType;
+  appointmentStatus: string;
   reasonType: ReasonType;
   reason: string;
   attention: string;
@@ -20,6 +22,8 @@ export class Appointment {
   mgn: boolean;
   colorPrimary: string;
   colorSecondary: string;
+
+  patient: Patient;
 
   event: CalendarEvent;
 

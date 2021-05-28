@@ -58,11 +58,14 @@
 
         </div>
 
-        <mat-select name="colorSelection" required class="mat-select-width"[(ngModel)]="selectedColor"
-                    placeholder="kies een kleur">
-          <mat-option style="background-color: #FAE3E3; " value="red"></mat-option>
-          <mat-option style="background-color: #D1E8FF; " value="blue"></mat-option>
-          <mat-option style="background-color: #FDF1BA; " value="yellow"></mat-option>
+        <mat-select name="colorSelection" required class="mat-select-width" [(ngModel)]="selectedColor"
+                    placeholder="kies een kleur" [ngStyle]="{'background-color': selectedColor}">
+          <mat-option *ngFor="let col of colors" [ngStyle]="{'background-color': col.secondary}" [value]="col.secondary"></mat-option>
+<!--          <mat-option *ngFor="let col of colors" value="col">hi</mat-option>-->
+
+<!--          <mat-option style="background-color: #FAE3E3; " value="colors.red"></mat-option>-->
+<!--          <mat-option style="background-color: #D1E8FF; " value="colors.blue"></mat-option>-->
+<!--          <mat-option style="background-color: #FDF1BA; " value="colors.yellow"></mat-option>-->
         </mat-select>
       </div>
       <!--      patient zoeken-->

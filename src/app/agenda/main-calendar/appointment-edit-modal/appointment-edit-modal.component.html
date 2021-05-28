@@ -86,6 +86,32 @@
         </label>
       </div>
       <br>
+        <div *ngIf="appointment.patient.location">
+          <h2>Patiënt</h2>
+          <label>
+            <input disabled="disabled" name="patientName" required [(ngModel)]="appointment.patient.firstName" matInput
+                   class="input-patient"
+                   placeholder="Voor- of achternaam"/>
+          </label>
+          <label>
+            <input disabled="disabled" name="patientStreetNameNumber" required
+                   [(ngModel)]="appointment.patient.location.street" matInput
+                   class="input-patient" placeholder="Straatnaam + huisnummer">
+          </label>
+          <label>
+            <input disabled="disabled" name="patientDateOfBirth" required [(ngModel)]="appointment.patient.dateOfBirth"
+                   matInput
+                   class="input-patient" placeholder="Geboortedatum">
+          </label>
+          <label>
+            <input disabled="disabled" name="patientPostalCode" required
+                   [(ngModel)]="appointment.patient.location.zipCode"
+                   matInput
+                   class="input-patient" placeholder="Postcode">
+          </label>
+        </div>
+        <br>
+      </div>
     </div>
 
     <!--      reden van komst-->
@@ -125,6 +151,7 @@
     </div>
 
   </form>
+  <mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
 </div>
 
 
