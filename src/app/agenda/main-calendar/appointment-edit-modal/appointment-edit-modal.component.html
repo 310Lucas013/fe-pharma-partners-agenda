@@ -65,12 +65,12 @@
       <div class="modal-patient">
         <h2><span class="material-icons">search</span>Patiënt zoeken</h2>
         <label>
-          <input disabled="disabled" name="patientName" required [(ngModel)]="appointment.patientName" matInput
+          <input name="patientName" required [(ngModel)]="appointment.patientName" matInput
                  class="input-patient"
                  placeholder="Voor- of achternaam"/>
         </label>
         <label>
-          <input disabled="disabled" name="patientStreetNameNumber" required
+          <input name="patientStreetNameNumber" required
                  [(ngModel)]="appointment.patientStreetNameNumber" matInput
                  class="input-patient" placeholder="Straatnaam + huisnummer">
         </label>

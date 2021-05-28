@@ -28,4 +28,8 @@ export class PatientService {
     return this.http.get<Patient[]>(this.API_KEY, this.httpOptions);
   }
 
+  getPatientsByName(name: string): Observable<any> {
+    return this.http.get<any>(this.API_KEY + '/' + name, this.httpOptions);
+  }
+
 }
