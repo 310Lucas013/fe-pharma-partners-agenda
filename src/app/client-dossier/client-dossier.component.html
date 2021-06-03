@@ -1,0 +1,53 @@
+<app-navigation></app-navigation>
+<div class="vertical-center horizontal-center">
+  <h1 class="not-found-header-text">Patiënt Dossier</h1>
+
+  <div class="span-spacing">
+    <mat-label>Voornaam: </mat-label>
+    <label *ngIf="patient">{{patient.firstName}}</label>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Tussenvoegsel: </mat-label>
+    <label *ngIf="patient">{{patient.middleName}}</label>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Achternaam: </mat-label>
+    <label *ngIf="patient">{{patient.lastName}}</label>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Geslacht: </mat-label>
+    <label *ngIf="patient">{{patient.gender}}</label>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Geboortedatum: </mat-label>
+    <label *ngIf="patient">{{patient.dateOfBirth}}</label>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Telefoonnummer: </mat-label>
+    <label *ngIf="patient">{{patient.phoneNumber}}</label>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Dossier informatie: </mat-label>
+    <label *ngIf="patient && patient.dossier">{{patient.dossier.information}}</label>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Straatnaam: </mat-label>
+    <label *ngIf="patient && patient.location">{{patient.location.street}}</label>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Huisnummer: </mat-label>
+    <label *ngIf="patient && patient.location">{{patient.location.houseNumber}}</label>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Postcode: </mat-label>
+    <label *ngIf="patient && patient.location">{{patient.location.zipCode}}</label>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Stad: </mat-label>
+    <label *ngIf="patient && patient.location">{{patient.location.city}}</label>
+  </div>
+  <div class="span-spacing">
+    <mat-label>Land: </mat-label>
+    <label *ngIf="patient && patient.location">{{patient.location.country}}</label>
+  </div>
+</div>

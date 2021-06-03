@@ -8,6 +8,7 @@ import { ClientOverviewComponent } from './client-overview/client-overview.compo
 import { AuthguardService } from './shared/services/authGuard/authguard.service';
 import { AgendaEmployeeComponent } from './agenda-employee/agenda-employee.component';
 import { VerifyCodeComponent } from './verify-code/verify-code.component';
+import { ClientDossierComponent } from './client-dossier/client-dossier.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'appointmentsearch', component: AppointmentSearchComponent, canActivate: [AuthguardService] },
   { path: 'clientoverview', component: ClientOverviewComponent, canActivate: [AuthguardService] },
   { path: 'clientoverview/:id', component: ClientOverviewComponent, canActivate: [AuthguardService] },
+  { path: 'clientdossier/:id', component: ClientDossierComponent, canActivate: [AuthguardService] },
   { path: '**', component: PageNotFoundComponent }
 ];
 
