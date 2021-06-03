@@ -6,6 +6,8 @@ import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 import {DateService} from '../../../shared/services/date/date.service';
 import {PatientService} from '../../../shared/services/patient/patient.service';
 import {Router} from '@angular/router';
+import {CalendarEvent} from 'angular-calendar';
+import {AppointmentService} from '../../../shared/services/appointment/appointment.service';
 
 @Component({
   selector: 'app-appointment-information-modal',
@@ -15,7 +17,7 @@ import {Router} from '@angular/router';
 })
 export class AppointmentInformationModalComponent implements OnInit {
 
-  constructor(private modal: NgbModal, private dateService: DateService, private patientService: PatientService, private router: Router) {
+  constructor(private modal: NgbModal, private dateService: DateService, private patientService: PatientService, private router: Router, private appointmentService: AppointmentService) {
   }
 
   @ViewChild('editModalContent', {static: true}) editModalContent: TemplateRef<any>;
@@ -51,6 +53,39 @@ export class AppointmentInformationModalComponent implements OnInit {
     this.router.navigate(['']).then(result =>
       this.router.navigate(['clientoverview', this.appointment.patient.id])
     );
+  }
+
+  setAbsent(): void {
+    this.appointmentService.setAppointmentStatusAbsent(this.appointment.id).subscribe(
+      data => {
+        location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  setRegistered(): void {
+    this.appointmentService.setAppointmentStatusRegistered(this.appointment.id).subscribe(
+      data => {
+        location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
+
+  setDone(): void {
+    this.appointmentService.setAppointmentStatusDone(this.appointment.id).subscribe(
+      data => {
+        location.reload();
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
   private CalculateAge(date: Date): void {
