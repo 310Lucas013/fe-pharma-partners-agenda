@@ -34,7 +34,7 @@ export class AppointmentService {
     return this.http.delete(aaa);
   }
 
-  updateAppointment(appointment: AppointmentDto): Observable<any> {
+  updateAppointment(appointment: Appointment): Observable<any> {
     console.log(appointment);
     return this.http.put<Appointment>(API_KEY + '/update/', JSON.stringify(appointment), httpOptions);
   }
