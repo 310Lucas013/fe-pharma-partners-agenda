@@ -51,7 +51,7 @@ export class AppointmentInformationModalComponent implements OnInit {
   navigateToPatient() {
     this.modal.dismissAll();
     this.router.navigate(['']).then(result =>
-      this.router.navigate(['clientoverview', this.appointment.patient.id])
+      this.router.navigate(['clientdossier', this.appointment.patient.id])
     );
   }
 

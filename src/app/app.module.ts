@@ -33,6 +33,7 @@ import {AppointmentAddModalComponent} from './agenda/main-calendar/appointment-a
 import {AppointmentInformationModalComponent} from './agenda/main-calendar/appointment-information-modal/appointment-information-modal.component';
 import {ConfirmationModalComponent} from './agenda/main-calendar/appointment-information-modal/confirmation-modal/confirmation-modal.component';
 import {ChangeAgendaEmployeeComponent} from './agenda/main-calendar/change-agenda-employee/change-agenda-employee.component';
+import { ClientDossierComponent } from './client-dossier/client-dossier.component';
 
 registerLocaleData(localeNl);
 
@@ -58,6 +59,7 @@ registerLocaleData(localeNl);
     AppointmentInformationModalComponent,
     ConfirmationModalComponent,
     ChangeAgendaEmployeeComponent,
+    ClientDossierComponent,
   ],
     imports: [
         BrowserModule,
