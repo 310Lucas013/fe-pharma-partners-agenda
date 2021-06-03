@@ -33,6 +33,7 @@ import {AppointmentAddModalComponent} from './agenda/main-calendar/appointment-a
 import {AppointmentInformationModalComponent} from './agenda/main-calendar/appointment-information-modal/appointment-information-modal.component';
 import {ConfirmationModalComponent} from './agenda/main-calendar/appointment-information-modal/confirmation-modal/confirmation-modal.component';
 import {ChangeAgendaEmployeeComponent} from './agenda/main-calendar/change-agenda-employee/change-agenda-employee.component';
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 
 registerLocaleData(localeNl);
 
@@ -60,6 +61,7 @@ registerLocaleData(localeNl);
     ChangeAgendaEmployeeComponent,
   ],
     imports: [
+        NgxMatSelectSearchModule,
         BrowserModule,
         CommonModule,
         RouterModule,

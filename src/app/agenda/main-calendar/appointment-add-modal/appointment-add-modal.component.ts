@@ -11,6 +11,9 @@ import {DateService} from '../../../shared/services/date/date.service';
 import {DateAdapter} from '@angular/material/core';
 import {PatientService} from '../../../shared/services/patient/patient.service';
 import {Patient} from '../../../shared/models/patient';
+import {FormControl} from '@angular/forms';
+import {Observable, of} from 'rxjs';
+import {map, startWith, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-appointment-add-modal',
@@ -26,7 +29,10 @@ export class AppointmentAddModalComponent implements OnInit {
   error = '' as string;
   selectedColor: any;
   selectedPatient: Patient;
-  patientlist = [];
+  myControl = new FormControl();
+  patientList = [] as string[];
+  patientListObservable: any;
+  filteredOptions: Observable<string[]>;
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 
@@ -56,14 +62,20 @@ export class AppointmentAddModalComponent implements OnInit {
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
 
   // todo change the modal private to the modal of the parent
-  constructor(private modal: NgbModal, private patientService: PatientService, private appointmentService: AppointmentService, private activedRoute: ActivatedRoute, private dateService: DateService, private dateAdapter: DateAdapter<Date>) {
+  constructor(private modal: NgbModal, private patientService: PatientService,
+              private appointmentService: AppointmentService, private activedRoute: ActivatedRoute,
+              private dateService: DateService, private dateAdapter: DateAdapter<Date>) {
     this.selectedPatient = new Patient();
     this.appointment.appointmentType = {} as AppointmentType;
     this.appointment.reasonType = {} as ReasonType;
     activedRoute.params.subscribe(params => {
       this.employeeId = +params.id;
     });
+    this.patientList.push('hi');
+    this.patientList.push('ji');
+    this.patientListObservable = of(this.patientList);
     this.dateAdapter.setLocale('nl');
+
   }
 
 
@@ -72,6 +84,17 @@ export class AppointmentAddModalComponent implements OnInit {
     this.appointment.startTime = new Date();
     this.appointment.endTime = new Date();
     this.appointment.endTime.setTime(0);
+
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+  }
+
+  private _filter(value: string): any {
+    const filterValue = value.toLowerCase();
+    return this.patientList.filter(patient => patient.toLowerCase().includes(filterValue));
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
@@ -87,10 +110,10 @@ export class AppointmentAddModalComponent implements OnInit {
 
   }
 
-  onSearchChange(): void {
-    this.patientService.getPatientsByName(this.appointment.patientName).subscribe(response => {
-      this.patientlist = response as Patient[];
-      console.log(this.patientlist);
+  onSearchChange(value: string): void {
+    this.patientService.getPatientsByName(value).subscribe(response => {
+      // this.patientlist = response as Patient[];
+      console.log(this.patientList);
     });
   }
 

@@ -29,7 +29,8 @@ export class PatientService {
   }
 
   getPatientsByName(name: string): Observable<any> {
-    return this.http.get<any>(this.API_KEY + '/' + name, this.httpOptions);
+    console.log(name)
+    return this.http.get<any>(this.API_KEY + '/findByName/' + name, this.httpOptions);
   }
 
   getById(id: number): Observable<any> {
