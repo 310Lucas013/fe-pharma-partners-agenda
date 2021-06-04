@@ -14,6 +14,7 @@ import {Patient} from '../../../shared/models/patient';
 import {FormControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {map, startWith, tap} from 'rxjs/operators';
+import {LocationService} from '../../../shared/services/location/location.service';
 
 @Component({
   selector: 'app-appointment-add-modal',
@@ -64,7 +65,8 @@ export class AppointmentAddModalComponent implements OnInit {
   // todo change the modal private to the modal of the parent
   constructor(private modal: NgbModal, private patientService: PatientService,
               private appointmentService: AppointmentService, private activedRoute: ActivatedRoute,
-              private dateService: DateService, private dateAdapter: DateAdapter<Date>) {
+              private dateService: DateService, private dateAdapter: DateAdapter<Date>,
+              private locationService: LocationService) {
     this.selectedPatient = new Patient();
     this.appointment.appointmentType = {} as AppointmentType;
     this.appointment.reasonType = {} as ReasonType;
@@ -110,6 +112,11 @@ export class AppointmentAddModalComponent implements OnInit {
   onSelectedPatient(): void{
     this.patientService.getPatientsByName(this.appointment.patientName).subscribe(response => {
       this.patientList = response as Patient[];
+      for (let i = 0; i < this.patientList.length; i++) {
+        this.locationService.getById(this.patientList[i].locationId).subscribe(data => {
+          this.patientList[i].location = data;
+        });
+      }
     });
   }
 
@@ -122,9 +129,20 @@ export class AppointmentAddModalComponent implements OnInit {
   // }
 
   selectPatient(patient: Patient): void{
-    console.log('selectPatient method');
-    console.log(patient);
     this.selectedPatient = patient;
+    this.appointment.patient = patient;
+    this.appointment.patientName = this.selectedPatient.firstName;
+    if (this.selectedPatient.middleName !== null && this.selectedPatient.middleName !== undefined &&
+        this.selectedPatient.middleName !== '') {
+      this.appointment.patientName += ' ' + this.selectedPatient.middleName;
+      this.appointment.patientName += ' ' + this.selectedPatient.lastName;
+    } else {
+      this.appointment.patientName += ' ' + this.selectedPatient.lastName;
+    }
+    this.appointment.patientDateOfBirth = String(this.selectedPatient.dateOfBirth);
+    this.appointment.patientStreetNameNumber = this.selectedPatient.location.street + ' ' + this.selectedPatient.location.houseNumber;
+    this.appointment.patientPostalCode = this.selectedPatient.location.zipCode;
+
   }
 
   saveAppointment(): void {
@@ -154,10 +172,10 @@ export class AppointmentAddModalComponent implements OnInit {
       return;
     }
     if (this.appointment.patientId === null || this.appointment.patientId === undefined) {
-      this.appointment.patientId = 1;
+      this.appointment.patientId = this.selectedPatient.id;
     }
     if (this.appointment.locationId === null || this.appointment.locationId === undefined) {
-      this.appointment.locationId = 1;
+      this.appointment.locationId = this.selectedPatient.location.id;
     }
 
     this.appointment.employeeId = this.employeeId;

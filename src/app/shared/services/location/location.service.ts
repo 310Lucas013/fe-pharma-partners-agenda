@@ -19,6 +19,6 @@ export class LocationService {
 
 
   getById(id: number): Observable<any> {
-    return this.http.get<any>(this.API_KEY + "/" + id, this.httpOptions);
+    return this.http.get<any>(this.API_KEY + '/' + id, this.httpOptions);
   }
 }
