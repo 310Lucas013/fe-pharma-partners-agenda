@@ -41,6 +41,9 @@ export class AppointmentInformationModalComponent implements OnInit {
 
   edit(): void {
     this.modal.dismissAll();
+    this.appointment.startTime = this.dateService.undoTimezones(this.appointment.startTime);
+    this.appointment.endTime = this.dateService.undoTimezones(this.appointment.endTime);
+    this.appointment.date = this.dateService.undoTimezones(this.appointment.date);
     this.modal.open(this.editModalContent, {size: 'lg'});
   }
 

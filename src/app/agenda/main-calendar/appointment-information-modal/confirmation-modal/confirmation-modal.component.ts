@@ -3,6 +3,7 @@ import {Appointment} from '../../../../shared/models/appointment';
 import {AppointmentService} from '../../../../shared/services/appointment/appointment.service';
 import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {RouterLink} from '@angular/router';
+import {DateService} from '../../../../shared/services/date/date.service';
 
 @Component({
   selector: 'app-confirmation-modal',
@@ -13,7 +14,7 @@ export class ConfirmationModalComponent implements OnInit {
   @Input() appointment: Appointment;
   @ViewChild('appointmentInformationModal', {static: true}) informationModalContent: TemplateRef<any>;
 
-  constructor(private modal: NgbModal, private appointmentService: AppointmentService) { }
+  constructor(private modal: NgbModal, private appointmentService: AppointmentService, private dateService: DateService) { }
 
   ngOnInit(): void {
   }
@@ -31,6 +32,9 @@ export class ConfirmationModalComponent implements OnInit {
   }
 
   close(){
+    this.appointment.startTime = this.dateService.undoTimezones(this.appointment.startTime);
+    this.appointment.endTime = this.dateService.undoTimezones(this.appointment.endTime);
+    this.appointment.date = this.dateService.undoTimezones(this.appointment.date);
     this.modal.dismissAll();
     this.modal.open(this.informationModalContent, {size: 'lg'});
   }

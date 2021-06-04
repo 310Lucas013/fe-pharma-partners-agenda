@@ -47,15 +47,7 @@ export class MainCalendarComponent implements OnInit {
       onClick: ({event}: { event: CalendarEvent }): void => {
         this.handleEvent('Edited', event);
       },
-    },
-    {
-      label: '<span class="material-icons">delete</span><br/>',
-      a11yLabel: 'Delete',
-      onClick: ({event}: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
+    }
   ];
 
   actionAbsent: CalendarEventAction = {
