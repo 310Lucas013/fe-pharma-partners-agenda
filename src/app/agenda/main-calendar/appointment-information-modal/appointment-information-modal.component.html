@@ -3,11 +3,11 @@
   <div class="container">
     <h2>Afspraakinformatie</h2>
     <div class="above">
-      <a><span (click)="setAbsent()"class="material-icons">login</span><br>Moet nog komen</a>
-      <a><span (click)="setRegistered()" class="material-icons">apartment</span><br>Aangemeld</a>
-      <a><span (click)="setDone()" class="material-icons">check</span><br>Afgerond</a>
-      <a><span (click)="edit()" class="material-icons">edit</span><br>Wijzigen </a>
-      <a><span (click)="delete()" class="material-icons">delete</span><br>Verwijderen</a>
+      <a (click)="setAbsent()"><span class="material-icons">login</span><br>Moet nog komen</a>
+      <a (click)="setRegistered()"><span class="material-icons">apartment</span><br>Aangemeld</a>
+      <a (click)="setDone()"><span class="material-icons">check</span><br>Afgerond</a>
+      <a (click)="edit()"><span class="material-icons">edit</span><br>Wijzigen </a>
+      <a (click)="delete()"><span class="material-icons">delete</span><br>Verwijderen</a>
       <a><span class="material-icons">checklist</span><br>Actielijst openen</a>
       <a><span class="material-icons">info</span><br>Patient informatie</a>
       <a><span><button (click)="navigateToPatient()">Dossier</button></span></a>
