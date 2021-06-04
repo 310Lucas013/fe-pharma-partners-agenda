@@ -14,6 +14,7 @@ import {Patient} from '../../../shared/models/patient';
 import {FormControl} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {map, startWith, tap} from 'rxjs/operators';
+import {LocationService} from '../../../shared/services/location/location.service';
 
 @Component({
   selector: 'app-appointment-add-modal',
@@ -29,10 +30,10 @@ export class AppointmentAddModalComponent implements OnInit {
   error = '' as string;
   selectedColor: any;
   selectedPatient: Patient;
-  myControl = new FormControl();
-  patientList = [] as string[];
-  patientListObservable: any;
-  filteredOptions: Observable<string[]>;
+  // myControl = new FormControl();
+  patientList: Patient[];
+  // patientListObservable: any;
+  // filteredOptions: Observable<string[]>;
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 
@@ -64,16 +65,18 @@ export class AppointmentAddModalComponent implements OnInit {
   // todo change the modal private to the modal of the parent
   constructor(private modal: NgbModal, private patientService: PatientService,
               private appointmentService: AppointmentService, private activedRoute: ActivatedRoute,
-              private dateService: DateService, private dateAdapter: DateAdapter<Date>) {
+              private dateService: DateService, private dateAdapter: DateAdapter<Date>,
+              private locationService: LocationService) {
     this.selectedPatient = new Patient();
     this.appointment.appointmentType = {} as AppointmentType;
     this.appointment.reasonType = {} as ReasonType;
     activedRoute.params.subscribe(params => {
       this.employeeId = +params.id;
     });
-    this.patientList.push('hi');
-    this.patientList.push('ji');
-    this.patientListObservable = of(this.patientList);
+    this.patientList = [];
+    // this.patientList.push('hi');
+    // this.patientList.push('ji');
+    // this.patientListObservable = of(this.patientList);
     this.dateAdapter.setLocale('nl');
 
   }
@@ -85,17 +88,17 @@ export class AppointmentAddModalComponent implements OnInit {
     this.appointment.endTime = new Date();
     this.appointment.endTime.setTime(0);
 
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
+    // this.filteredOptions = this.myControl.valueChanges
+    //   .pipe(
+    //     startWith(''),
+    //     map(value => this._filter(value))
+    //   );
   }
 
-  private _filter(value: string): any {
-    const filterValue = value.toLowerCase();
-    return this.patientList.filter(patient => patient.toLowerCase().includes(filterValue));
-  }
+  // private _filter(value: string): any {
+  //   const filterValue = value.toLowerCase();
+  //   return this.patientList.filter(patient => patient.toLowerCase().includes(filterValue));
+  // }
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = {event, action};
@@ -107,19 +110,39 @@ export class AppointmentAddModalComponent implements OnInit {
   }
 
   onSelectedPatient(): void{
-
-  }
-
-  onSearchChange(value: string): void {
-    this.patientService.getPatientsByName(value).subscribe(response => {
-      // this.patientlist = response as Patient[];
-      console.log(this.patientList);
+    this.patientService.getPatientsByName(this.appointment.patientName).subscribe(response => {
+      this.patientList = response as Patient[];
+      for (let i = 0; i < this.patientList.length; i++) {
+        this.locationService.getById(this.patientList[i].locationId).subscribe(data => {
+          this.patientList[i].location = data;
+        });
+      }
     });
   }
 
-  selectPatient(): void{
-    console.log('asdsadasdasdsasaddsads');
-    // this.selectedPatient = patient;
+  // onSearchChange(value: string): void {
+  //   console.log('OnSearchChange');
+  //   this.patientService.getPatientsByName(value).subscribe(response => {
+  //     // this.patientlist = response as Patient[];
+  //     console.log(this.patientList);
+  //   });
+  // }
+
+  selectPatient(patient: Patient): void{
+    this.selectedPatient = patient;
+    this.appointment.patient = patient;
+    this.appointment.patientName = this.selectedPatient.firstName;
+    if (this.selectedPatient.middleName !== null && this.selectedPatient.middleName !== undefined &&
+        this.selectedPatient.middleName !== '') {
+      this.appointment.patientName += ' ' + this.selectedPatient.middleName;
+      this.appointment.patientName += ' ' + this.selectedPatient.lastName;
+    } else {
+      this.appointment.patientName += ' ' + this.selectedPatient.lastName;
+    }
+    this.appointment.patientDateOfBirth = String(this.selectedPatient.dateOfBirth);
+    this.appointment.patientStreetNameNumber = this.selectedPatient.location.street + ' ' + this.selectedPatient.location.houseNumber;
+    this.appointment.patientPostalCode = this.selectedPatient.location.zipCode;
+
   }
 
   saveAppointment(): void {
@@ -149,10 +172,10 @@ export class AppointmentAddModalComponent implements OnInit {
       return;
     }
     if (this.appointment.patientId === null || this.appointment.patientId === undefined) {
-      this.appointment.patientId = 1;
+      this.appointment.patientId = this.selectedPatient.id;
     }
     if (this.appointment.locationId === null || this.appointment.locationId === undefined) {
-      this.appointment.locationId = 1;
+      this.appointment.locationId = this.selectedPatient.location.id;
     }
 
     this.appointment.employeeId = this.employeeId;

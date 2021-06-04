@@ -3,6 +3,7 @@ import {ReasonType} from './reason-type';
 import {CalendarEvent} from 'angular-calendar';
 import {EventAction, EventColor} from 'calendar-utils';
 import {Patient} from './patient';
+import {Location} from './location';
 
 export class Appointment {
   id: number;
@@ -34,6 +35,7 @@ export class Appointment {
   //   beforeStart: boolean,
   //   afterEnd: boolean
   // };
+
 
   location: string;
   street: string;
