@@ -29,10 +29,10 @@ export class AppointmentAddModalComponent implements OnInit {
   error = '' as string;
   selectedColor: any;
   selectedPatient: Patient;
-  myControl = new FormControl();
-  patientList = [] as string[];
-  patientListObservable: any;
-  filteredOptions: Observable<string[]>;
+  // myControl = new FormControl();
+  patientList: Patient[];
+  // patientListObservable: any;
+  // filteredOptions: Observable<string[]>;
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 
@@ -71,9 +71,10 @@ export class AppointmentAddModalComponent implements OnInit {
     activedRoute.params.subscribe(params => {
       this.employeeId = +params.id;
     });
-    this.patientList.push('hi');
-    this.patientList.push('ji');
-    this.patientListObservable = of(this.patientList);
+    this.patientList = [];
+    // this.patientList.push('hi');
+    // this.patientList.push('ji');
+    // this.patientListObservable = of(this.patientList);
     this.dateAdapter.setLocale('nl');
 
   }
@@ -85,17 +86,17 @@ export class AppointmentAddModalComponent implements OnInit {
     this.appointment.endTime = new Date();
     this.appointment.endTime.setTime(0);
 
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );
+    // this.filteredOptions = this.myControl.valueChanges
+    //   .pipe(
+    //     startWith(''),
+    //     map(value => this._filter(value))
+    //   );
   }
 
-  private _filter(value: string): any {
-    const filterValue = value.toLowerCase();
-    return this.patientList.filter(patient => patient.toLowerCase().includes(filterValue));
-  }
+  // private _filter(value: string): any {
+  //   const filterValue = value.toLowerCase();
+  //   return this.patientList.filter(patient => patient.toLowerCase().includes(filterValue));
+  // }
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = {event, action};
@@ -107,19 +108,23 @@ export class AppointmentAddModalComponent implements OnInit {
   }
 
   onSelectedPatient(): void{
-
-  }
-
-  onSearchChange(value: string): void {
-    this.patientService.getPatientsByName(value).subscribe(response => {
-      // this.patientlist = response as Patient[];
-      console.log(this.patientList);
+    this.patientService.getPatientsByName(this.appointment.patientName).subscribe(response => {
+      this.patientList = response as Patient[];
     });
   }
 
-  selectPatient(): void{
-    console.log('asdsadasdasdsasaddsads');
-    // this.selectedPatient = patient;
+  // onSearchChange(value: string): void {
+  //   console.log('OnSearchChange');
+  //   this.patientService.getPatientsByName(value).subscribe(response => {
+  //     // this.patientlist = response as Patient[];
+  //     console.log(this.patientList);
+  //   });
+  // }
+
+  selectPatient(patient: Patient): void{
+    console.log('selectPatient method');
+    console.log(patient);
+    this.selectedPatient = patient;
   }
 
   saveAppointment(): void {

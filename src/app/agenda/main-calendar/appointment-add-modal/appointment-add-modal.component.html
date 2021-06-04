@@ -16,7 +16,7 @@
         </div>
         <div class="modal-information date-picker">
           <div style="float:left;">
-            <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </div>
           <div class="right-side">
@@ -25,7 +25,6 @@
                      [matDatepicker]="picker">
             </label>
           </div>
-
 
 
           <br>
@@ -37,16 +36,16 @@
               </td>
               <td>
                 <label for="starttimeHour"><input type="time" class="time" min="00:00" max="23:59"
-                                                          id="starttimeHour"
-                                                          value=" " placeholder="Uur"
-                                                          name="startTime"
-                                                          [(ngModel)]="startTime"></label>
+                                                  id="starttimeHour"
+                                                  value=" " placeholder="Uur"
+                                                  name="startTime"
+                                                  [(ngModel)]="startTime"></label>
               </td>
               <td>
                 <label for="endtimeHour"><input type="time" class="time" min="00:00" max="23:59"
-                                                        id="endtimeHour"
-                                                        name="endTime"
-                                                        value="" placeholder="Uur" [(ngModel)]="endTime"></label>
+                                                id="endtimeHour"
+                                                name="endTime"
+                                                value="" placeholder="Uur" [(ngModel)]="endTime"></label>
               </td>
               <!--                        <input type="time" class="time" min="00" max="59" id="breaktime${{i}}">-->
             </tr>
@@ -60,7 +59,8 @@
 
         <mat-select name="colorSelection" required class="mat-select-width" [(ngModel)]="selectedColor"
                     placeholder="kies een kleur" [ngStyle]="{'background-color': selectedColor}">
-          <mat-option *ngFor="let col of colors" [ngStyle]="{'background-color': col.secondary}" [value]="col.secondary"></mat-option>
+          <mat-option *ngFor="let col of colors" [ngStyle]="{'background-color': col.secondary}"
+                      [value]="col.secondary"></mat-option>
           <mat-option *ngFor="let col of colors" value="col">hi</mat-option>
 
           <mat-option style="background-color: #FAE3E3; " value="colors.red"></mat-option>
@@ -74,36 +74,36 @@
         <h2><span class="material-icons">search</span>Patiënt zoeken</h2>
 
 
-
-        <form class="example-form">
-          <mat-form-field>
-            <mat-label>Number</mat-label>
-            <input
-                   type="text"
-                   placeholder="Voor- of achternaam"
-                   aria-label="Number"
-                   matInput
-                   [formControl]="myControl"
-                   [matAutocomplete]="auto"
-                   >
-            <mat-autocomplete #auto="matAutocomplete">
-              <mat-option *ngFor="let patient of filteredOptions | async" [value]="patient">
-                {{patient}}
-              </mat-option>
-            </mat-autocomplete>
-          </mat-form-field>
-        </form>
-
+        <!--        <form class="example-form">-->
+        <!--          <mat-form-field>-->
+        <!--            <mat-label>Number</mat-label>-->
+        <!--            <input-->
+        <!--                   type="text"-->
+        <!--                   placeholder="Voor- of achternaam"-->
+        <!--                   aria-label="Number"-->
+        <!--                   matInput-->
+        <!--                   [formControl]="myControl"-->
+        <!--                   [matAutocomplete]="auto"-->
+        <!--                   >-->
+        <!--            <mat-autocomplete #auto="matAutocomplete">-->
+        <!--              <mat-option *ngFor="let patient of filteredOptions | async" [value]="patient">-->
+        <!--                {{patient}}-->
+        <!--              </mat-option>-->
+        <!--            </mat-autocomplete>-->
+        <!--          </mat-form-field>-->
+        <!--        </form>-->
 
 
-<!--        <label>-->
-<!--            <input list="patients" name="patientName" required [(ngModel)]="appointment.patientName" matInput class="input-patient"-->
-<!--                            placeholder="Voor- of achternaam" (ngModelChange)="onSelectedPatient()" (input)="onSearchChange()">-->
-<!--          <datalist id="patients">-->
-<!--            <option *ngFor="let patient of patientlist">{{patient.firstName}} {{patient.middleName}} {{patient.lastName}}</option>-->
-<!--          </datalist>-->
-<!--        </label>-->
-          <label>
+        <label>
+          <input name="patientName" required [(ngModel)]="appointment.patientName" matInput class="input-patient"
+                 placeholder="Voor- of achternaam" (ngModelChange)="onSelectedPatient()">
+          <!--            <input list="patients" name="patientName" required [(ngModel)]="appointment.patientName" matInput class="input-patient"-->
+          <!--                            placeholder="Voor- of achternaam" (ngModelChange)="onSelectedPatient()" (input)="onSearchChange()">-->
+          <!--          <datalist id="patients">-->
+          <!--            <option *ngFor="let patient of patientlist">{{patient.firstName}} {{patient.middleName}} {{patient.lastName}}</option>-->
+          <!--          </datalist>-->
+        </label>
+        <label>
           <input name="patientStreetNameNumber" required [(ngModel)]="appointment.patientStreetNameNumber" matInput
                  class="input-patient" placeholder="Straatnaam + huisnummer">
         </label>
@@ -115,6 +115,12 @@
           <input name="patientPostalCode" required [(ngModel)]="appointment.patientPostalCode" matInput
                  class="input-patient" placeholder="Postcode">
         </label>
+        <div *ngFor="let patient of patientList" (click)="selectPatient(patient)">{{patient.firstName}}
+          <span
+            *ngIf="patient.middleName !== null && patient.middleName !== undefined">&nbsp;{{patient.middleName}}</span>
+          &nbsp;{{patient.lastName}}
+
+        </div>
       </div>
       <br>
     </div>
