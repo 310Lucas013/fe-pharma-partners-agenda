@@ -22,8 +22,6 @@ export class SideCalendarComponent implements OnInit {
   }
 
   public dateChanged(date): void {
-    // Do stuff here
-    // alert(date);
     this.dateSelected.emit(date);
   }
 }

@@ -3,7 +3,7 @@
   <div class="container">
     <h2>Afspraakinformatie</h2>
     <div class="above">
-      <a (click)="setAbsent()"><span class="material-icons">login</span><br>Moet nog komen</a>
+      <a (click)="setAbsent()"><span class="material-icons absent">login</span><br>Moet nog komen</a>
       <a (click)="setRegistered()"><span class="material-icons">apartment</span><br>Aangemeld</a>
       <a (click)="setDone()"><span class="material-icons">check</span><br>Afgerond</a>
       <a (click)="edit()"><span class="material-icons">edit</span><br>Wijzigen </a>
@@ -72,7 +72,6 @@
     </div>
   </div>
 
-  <!--  <ng-template #editModalContent let-close="close" *ngIf="(this.selectedAppointment | json) != {}">-->
   <ng-template #editModalContent let-close="close">
     <app-appointment-edit-modal [appointment]="this.appointment"></app-appointment-edit-modal>
   </ng-template>

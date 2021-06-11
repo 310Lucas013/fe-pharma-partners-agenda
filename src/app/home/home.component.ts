@@ -15,7 +15,6 @@ export class HomeComponent{
     this.employeeService.getAllEmployees().subscribe(
       data => {
         this.employees = data;
-        console.log(data);
       },
       error => {
         console.log(error);

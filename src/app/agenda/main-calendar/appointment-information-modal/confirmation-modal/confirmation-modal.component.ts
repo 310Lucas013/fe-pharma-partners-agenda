@@ -1,8 +1,7 @@
 import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Appointment} from '../../../../shared/models/appointment';
 import {AppointmentService} from '../../../../shared/services/appointment/appointment.service';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {RouterLink} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DateService} from '../../../../shared/services/date/date.service';
 
 @Component({

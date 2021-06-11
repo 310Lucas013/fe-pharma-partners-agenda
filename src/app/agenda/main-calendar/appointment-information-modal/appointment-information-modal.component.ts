@@ -2,11 +2,10 @@ import {Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {Appointment} from '../../../shared/models/appointment';
 import {DateAdapter} from '@angular/material/core';
 import {CustomDateAdapter} from '../../../shared/pipes/custom-date-adapter';
-import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DateService} from '../../../shared/services/date/date.service';
 import {PatientService} from '../../../shared/services/patient/patient.service';
 import {Router} from '@angular/router';
-import {CalendarEvent} from 'angular-calendar';
 import {AppointmentService} from '../../../shared/services/appointment/appointment.service';
 
 @Component({

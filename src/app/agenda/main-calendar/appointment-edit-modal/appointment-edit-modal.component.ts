@@ -10,9 +10,9 @@ import {DateService} from '../../../shared/services/date/date.service';
 import {DateAdapter} from '@angular/material/core';
 import {PatientService} from '../../../shared/services/patient/patient.service';
 import {LocationService} from '../../../shared/services/location/location.service';
-import {ActivatedRoute} from '@angular/router';
 import {AppointmentDto} from '../../../shared/dto/appointment-dto';
 import {AppointmentStatus} from '../../../shared/models/appointment-status.enum';
+import {Patient} from '../../../shared/models/patient';
 
 @Component({
   selector: 'app-appointment-edit-modal',
@@ -33,6 +33,8 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
   date: string;
   time: string;
 
+  selectedPatient: Patient;
+  patientList: Patient[];
   minDate: Date;
 
   @Output() editAppointmentEvent = new EventEmitter<Appointment>();
@@ -73,7 +75,7 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit(): void {
     moment.locale('nl');
-
+    this.appointment.patientName = this.appointment.patient.firstName + ' ' + this.appointment.patient.lastName;
     this.appointmentDate = moment(this.dateService.checkTimezones(this.appointment.date)).toDate();
     this.date = moment(this.dateService.checkTimezones(this.appointment.date)).format('LT').toString();
     this.startTime = moment(this.dateService.checkTimezones(this.appointment.startTime)).format('LT').toString();
@@ -187,5 +189,33 @@ export class AppointmentEditModalComponent implements OnInit, AfterContentInit {
     dto.patientId = appointment.patientId;
     dto.locationId = appointment.locationId;
     return dto;
+  }
+
+  onSelectedPatient(): void{
+    this.patientService.getPatientsByName(this.appointment.patientName).subscribe(response => {
+      this.patientList = response as Patient[];
+      for (let i = 0; i < this.patientList.length; i++) {
+        this.locationService.getById(this.patientList[i].locationId).subscribe(data => {
+          this.patientList[i].location = data;
+        });
+      }
+    });
+  }
+
+  selectPatient(patient: Patient): void{
+    this.selectedPatient = patient;
+    this.appointment.patient = patient;
+    this.appointment.patientName = this.selectedPatient.firstName;
+    if (this.selectedPatient.middleName !== null && this.selectedPatient.middleName !== undefined &&
+      this.selectedPatient.middleName !== '') {
+      this.appointment.patientName += ' ' + this.selectedPatient.middleName;
+      this.appointment.patientName += ' ' + this.selectedPatient.lastName;
+    } else {
+      this.appointment.patientName += ' ' + this.selectedPatient.lastName;
+    }
+    this.appointment.patientDateOfBirth = String(this.selectedPatient.dateOfBirth);
+    this.appointment.patientStreetNameNumber = this.selectedPatient.location.street + ' ' + this.selectedPatient.location.houseNumber;
+    this.appointment.patientPostalCode = this.selectedPatient.location.zipCode;
+    this.patientList = [];
   }
 }

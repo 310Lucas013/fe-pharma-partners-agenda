@@ -3,7 +3,6 @@ import {CalendarEvent} from 'angular-calendar';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Appointment} from '../../../shared/models/appointment';
 import {AppointmentService} from 'src/app/shared/services/appointment/appointment.service';
-import {TokenStorageService} from '../../../shared/services/token-storage/token-storage.service';
 import {AppointmentType} from '../../../shared/models/appointment-type';
 import {ReasonType} from '../../../shared/models/reason-type';
 import {ActivatedRoute} from '@angular/router';
@@ -11,9 +10,6 @@ import {DateService} from '../../../shared/services/date/date.service';
 import {DateAdapter} from '@angular/material/core';
 import {PatientService} from '../../../shared/services/patient/patient.service';
 import {Patient} from '../../../shared/models/patient';
-import {FormControl} from '@angular/forms';
-import {Observable, of} from 'rxjs';
-import {map, startWith, tap} from 'rxjs/operators';
 import {LocationService} from '../../../shared/services/location/location.service';
 
 @Component({
@@ -30,10 +26,7 @@ export class AppointmentAddModalComponent implements OnInit {
   error = '' as string;
   selectedColor: any;
   selectedPatient: Patient;
-  // myControl = new FormControl();
   patientList: Patient[];
-  // patientListObservable: any;
-  // filteredOptions: Observable<string[]>;
 
   @Output() addAppointmentEvent = new EventEmitter<Appointment>();
 
@@ -74,9 +67,6 @@ export class AppointmentAddModalComponent implements OnInit {
       this.employeeId = +params.id;
     });
     this.patientList = [];
-    // this.patientList.push('hi');
-    // this.patientList.push('ji');
-    // this.patientListObservable = of(this.patientList);
     this.dateAdapter.setLocale('nl');
 
   }
@@ -87,18 +77,7 @@ export class AppointmentAddModalComponent implements OnInit {
     this.appointment.startTime = new Date();
     this.appointment.endTime = new Date();
     this.appointment.endTime.setTime(0);
-
-    // this.filteredOptions = this.myControl.valueChanges
-    //   .pipe(
-    //     startWith(''),
-    //     map(value => this._filter(value))
-    //   );
   }
-
-  // private _filter(value: string): any {
-  //   const filterValue = value.toLowerCase();
-  //   return this.patientList.filter(patient => patient.toLowerCase().includes(filterValue));
-  // }
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = {event, action};
@@ -120,14 +99,6 @@ export class AppointmentAddModalComponent implements OnInit {
     });
   }
 
-  // onSearchChange(value: string): void {
-  //   console.log('OnSearchChange');
-  //   this.patientService.getPatientsByName(value).subscribe(response => {
-  //     // this.patientlist = response as Patient[];
-  //     console.log(this.patientList);
-  //   });
-  // }
-
   selectPatient(patient: Patient): void{
     this.selectedPatient = patient;
     this.appointment.patient = patient;
@@ -142,7 +113,7 @@ export class AppointmentAddModalComponent implements OnInit {
     this.appointment.patientDateOfBirth = String(this.selectedPatient.dateOfBirth);
     this.appointment.patientStreetNameNumber = this.selectedPatient.location.street + ' ' + this.selectedPatient.location.houseNumber;
     this.appointment.patientPostalCode = this.selectedPatient.location.zipCode;
-
+    this.patientList = [];
   }
 
   saveAppointment(): void {
