@@ -13,7 +13,7 @@ export class PatientService {
 
   public API_KEY = environment.gatewayApi + 'patients';
 
-  public httpOptions = {
+  httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json',
       Authorization: this.tokenStorage.getToken()}),
   };
