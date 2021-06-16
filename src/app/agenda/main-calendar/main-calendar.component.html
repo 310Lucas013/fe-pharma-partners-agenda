@@ -112,7 +112,6 @@
 <!--  <ng-template #editModalContent let-close="close" *ngIf="(this.selectedAppointment | json) != {}">-->
   <ng-template #appointmentInformationModal let-close="close">
     <app-appointment-information-modal [appointment]="this.selectedAppointment" ></app-appointment-information-modal>
-    <!-- <app-appointment-edit-modal [appointment]="this.selectedAppointment"></app-appointment-edit-modal> !-->
    </ng-template>
   <ng-template #editModalContent let-close="close">
     <app-appointment-edit-modal [appointment]="this.selectedAppointment"></app-appointment-edit-modal>
@@ -120,7 +119,6 @@
 
   <ng-template #changeAgendaModal let-close="close">
     <app-change-agenda-employee></app-change-agenda-employee>
-    <!-- <app-appointment-edit-modal [appointment]="this.selectedAppointment"></app-appointment-edit-modal> !-->
   </ng-template>
  </div>
 

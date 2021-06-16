@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {addDays, addHours, endOfMonth, isSameDay, isSameMonth, parseISO, startOfDay, subDays} from 'date-fns';
+import {isSameDay, isSameMonth} from 'date-fns';
 import {Subject} from 'rxjs';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
@@ -7,7 +7,6 @@ import {Appointment} from '../../shared/models/appointment';
 import {ActivatedRoute} from '@angular/router';
 import {AppointmentService} from '../../shared/services/appointment/appointment.service';
 import {WeekDay} from '@angular/common';
-import {EventAction, EventColor} from 'calendar-utils';
 import {DateService} from '../../shared/services/date/date.service';
 
 

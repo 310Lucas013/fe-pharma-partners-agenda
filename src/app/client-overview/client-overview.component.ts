@@ -27,9 +27,7 @@ export class ClientOverviewComponent implements OnInit {
   zipCode: string;
   city: string;
   country: string;
-
   locationId: number;
-
   createdPatient: Patient;
 
   constructor(private router: Router, private thirdPartyService: ThirdPartyService, private patientService: PatientService, private route: ActivatedRoute, private locationService: LocationService) {
@@ -74,7 +72,6 @@ export class ClientOverviewComponent implements OnInit {
 
   generateRandomInformation(): void {
     this.thirdPartyService.getRandomAdress().subscribe(data => {
-      console.log(data);
       const fullAddress: string = data[0];
       const splitAddress = fullAddress.split(', ');
       const street = splitAddress[0];
@@ -86,18 +83,13 @@ export class ClientOverviewComponent implements OnInit {
         this.streetName = street.split(' ')[0];
         this.houseNumber = street.split(' ')[1];
       }
-      console.log(this.streetName);
-      console.log(this.houseNumber);
       this.zipCode = splitAddress[2];
       this.city = splitAddress[3];
       this.country = 'Nederland';
     });
     this.thirdPartyService.getRandomName().subscribe(name => {
-      console.log(name);
       this.firstName = name[0].split(' ')[0];
       this.lastName = name[0].split(' ')[1];
-      console.log(this.firstName);
-      console.log(this.lastName);
     });
     const day: number = this.thirdPartyService.getRandomDay();
     const month: number = this.thirdPartyService.getRandomMonth();
@@ -105,30 +97,25 @@ export class ClientOverviewComponent implements OnInit {
     if (day !== null && month !== null && year !== null) {
 
       this.dateOfBirth = new Date();
-      console.log(this.dateOfBirth);
       this.dateOfBirth.setFullYear(year, month, day);
-      console.log(this.dateOfBirth);
     }
     this.thirdPartyService.getRandomPhoneNumber().subscribe(phoneNumber => {
-      console.log(phoneNumber);
       this.phoneNumber = phoneNumber[0];
     });
     this.thirdPartyService.getRandomDossierInformation().subscribe(dossierInformation => {
-      console.log(dossierInformation);
       this.dossierInformation = '';
       const allDossiers = dossierInformation.split('<br>');
       for (const dossier of allDossiers) {
         this.dossierInformation += dossier.toString().substring(0, 250);
       }
-      console.log(this.dossierInformation);
     });
     const genderNumber = this.thirdPartyService.getRandomGender();
     if (genderNumber === 0) {
-      this.gender = Gender.MALE;
+      this.gender = Gender.Man;
     } else if (genderNumber === 1) {
-      this.gender = Gender.FEMALE;
+      this.gender = Gender.Vrouw;
     } else {
-      this.gender = Gender.OTHER;
+      this.gender = Gender.Anders;
     }
   }
 
@@ -154,13 +141,6 @@ export class ClientOverviewComponent implements OnInit {
 
     this.patientService.createPatient(patientDto).subscribe(patient => {
       this.createdPatient = patient;
-      console.log(this.createdPatient);
     });
-
   }
-
-  checkDateOfBirth(): void {
-    console.log(this.dateOfBirth);
-  }
-
 }

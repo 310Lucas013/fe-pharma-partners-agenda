@@ -20,9 +20,6 @@ export class ChangeAgendaEmployeeComponent implements OnInit {
   ngOnInit(): void {
     this.employeeService.getAllEmployees().subscribe(response => {
       this.employees = response;
-      // response.forEach( (element, index) => {
-      //   this.employees.push(element);
-      // });
     });
   }
 

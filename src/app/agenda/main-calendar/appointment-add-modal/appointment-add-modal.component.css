@@ -92,9 +92,14 @@ input{
 }
 
 .button-save {
-  background-color: #e6e9ee;
+  background-color: #004496;
+
   color: #bbbec3;
 }
+.button-save:hover{
+  background-color: darkblue;
+}
+
 
 mat-form-field-flex{
   width: 300px;
@@ -144,4 +149,9 @@ p{
 
 .modal-attention input{
   background-color: white;
+}
+
+.ng-star-inserted:hover{
+  cursor: pointer;
+  background-color: lightblue;
 }

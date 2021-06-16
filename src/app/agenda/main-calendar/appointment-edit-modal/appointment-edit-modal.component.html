@@ -50,7 +50,6 @@
                                                 value="" placeholder="Uur" [ngModel]="endTime"
                                                 (ngModelChange)="endTime = $event"></label>
               </td>
-              <!--                        <input type="time" class="time" min="00" max="59" id="breaktime${{i}}">-->
             </tr>
             </tbody>
           </table>
@@ -62,66 +61,43 @@
         <mat-select name="colorSelection" required class="mat-select-width" [(ngModel)]="selectedColor"
                     placeholder="kies een kleur" [ngStyle]="{'background-color': selectedColor}">
           <mat-option *ngFor="let col of colors" [ngStyle]="{'background-color': col.secondary}" [value]="col.secondary"></mat-option>
-          <!--          <mat-option *ngFor="let col of colors" value="col">hi</mat-option>-->
-
-          <!--          <mat-option style="background-color: #FAE3E3; " value="colors.red"></mat-option>-->
-          <!--          <mat-option style="background-color: #D1E8FF; " value="colors.blue"></mat-option>-->
-          <!--          <mat-option style="background-color: #FDF1BA; " value="colors.yellow"></mat-option>-->
         </mat-select>
       </div>
-      <!--      patient zoeken-->
 
-      <!--      <div class="modal-patient">-->
-      <!--        <h2><span class="material-icons">search</span>Patiënt zoeken</h2>-->
-      <!--        <label>-->
-      <!--          <input name="patientName" required [(ngModel)]="appointment.patientName" matInput-->
-      <!--                 class="input-patient"-->
-      <!--                 placeholder="Voor- of achternaam"/>-->
-      <!--        </label>-->
-      <!--        <label>-->
-      <!--          <input name="patientStreetNameNumber" required-->
-      <!--                 [(ngModel)]="appointment.patientStreetNameNumber" matInput-->
-      <!--                 class="input-patient" placeholder="Straatnaam + huisnummer">-->
-      <!--        </label>-->
-      <!--        <label>-->
-      <!--          <input disabled="disabled" name="patientDateOfBirth" required [(ngModel)]="appointment.patientDateOfBirth"-->
-      <!--                 matInput-->
-      <!--                 class="input-patient" placeholder="Geboortedatum">-->
-      <!--        </label>-->
-      <!--        <label>-->
-      <!--          <input disabled="disabled" name="patientPostalCode" required [(ngModel)]="appointment.patientPostalCode"-->
-      <!--                 matInput-->
-      <!--                 class="input-patient" placeholder="Postcode">-->
-      <!--        </label>-->
-      <!--      </div>-->
-      <!--      <br>-->
       <div *ngIf="appointment.patient !== undefined && appointment.patient.location !== undefined && appointment.patient.location !== null" class="modal-patient">
         <h2><span class="material-icons">search</span>Patiënt zoeken</h2>
         <label>
-          <input disabled="disabled" name="patientName" required [(ngModel)]="appointment.patient.firstName" matInput
+          <input name="patientName" required [(ngModel)]="appointment.patientName"  matInput
                  class="input-patient"
-                 placeholder="Voor- of achternaam"/>
+                 placeholder="Voor- of achternaam"
+                 (ngModelChange)="onSelectedPatient()"
+                 autocomplete="off"/>
         </label>
         <label>
-          <input disabled="disabled" name="patientStreetNameNumber" required
+          <input name="patientStreetNameNumber" required
                  [(ngModel)]="appointment.patient.location.street" matInput
                  class="input-patient" placeholder="Straatnaam + huisnummer">
         </label>
         <label>
-          <input disabled="disabled" name="patientDateOfBirth" required [(ngModel)]="appointment.patient.dateOfBirth"
+          <input name="patientDateOfBirth" required [ngModel]="appointment.patient.dateOfBirth | date: 'dd-MM-yyyy'"
                  matInput
                  class="input-patient" placeholder="Geboortedatum">
         </label>
         <label>
-          <input disabled="disabled" name="patientPostalCode" required
+          <input name="patientPostalCode" required
                  [(ngModel)]="appointment.patient.location.zipCode"
                  matInput
                  class="input-patient" placeholder="Postcode">
         </label>
+        <div class="found-patients" *ngFor="let patient of patientList" (click)="selectPatient(patient)">{{patient.firstName}}
+          <span
+            *ngIf="patient.middleName !== null && patient.middleName !== undefined">&nbsp;{{patient.middleName}}</span>
+          &nbsp;{{patient.lastName}}
+
+        </div>
       </div>
       <br>
     </div>
-    <!--</div>-->
 
     <!--      reden van komst-->
     <div class="modal-reason box">
@@ -129,7 +105,7 @@
       <mat-select name="reasonSelection" required [(ngModel)]="appointment.reasonType.id" class="mat-select-width"
                   placeholder="Geef de reden van de afspraak aan">
         <mat-option [value]="1">Ziekte</mat-option>
-        <mat-option [value]="2">Hypochondriac</mat-option>
+        <mat-option [value]="2">Vaste afspraak</mat-option>
       </mat-select>
       <br>
       <label>
@@ -145,11 +121,11 @@
         <input name="attention" disabled="disabled" [ngModel]="appointment.attention">
       </label>
     </div>
-    <label for="Prioriteit"></label><input disabled="disabled" class="left-side checkbox" type="checkbox"
+    <label for="Prioriteit"></label><input class="left-side checkbox" type="checkbox"
                                            id="Prioriteit" name="priority"
                                            [(ngModel)]="appointment.priority">
     <p><b> Prioriteit</b></p>
-    <label for="MGN"></label><input disabled="disabled" class="left-side checkbox" type="checkbox" id="MGN"
+    <label for="MGN"></label><input class="left-side checkbox" type="checkbox" id="MGN"
                                     [(ngModel)]="appointment.mgn"
                                     name="mgn">
     <p><b> Afspraak zichtbaar voor patient (MGn)</b></p>
@@ -162,97 +138,3 @@
   </form>
   <mat-error *ngIf="errorMessage">{{errorMessage}}</mat-error>
 </div>
-
-
-<!--<div class="around">-->
-<!--  <form (ngSubmit)="updateAppointment()">-->
-<!--    <h1>Afspraak bewerken</h1>-->
-<!--    <div class="modal-type">-->
-<!--      <h2>Soort afspraak</h2>-->
-<!--      <br>-->
-<!--      <div>-->
-<!--        <mat-select name="type" required [(ngModel)]="appointment.appointmentType.id" class="mat-select-width"-->
-<!--                    placeholder="Kies hier de soort afspraak">-->
-<!--          <mat-option value="Patiënt afspraak">Patiënt afspraak</mat-option>-->
-<!--        </mat-select>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="modal-information">-->
-<!--      <div class="date-picker">-->
-<!--        <span class="material-icons">date_range</span>-->
-<!--        <mat-form-field appearance="fill">-->
-<!--          <mat-label>Kies een datum</mat-label>-->
-<!--          <label>-->
-<!--            <input [min]="minDate" name="date" [(ngModel)]="appointment.event.start" matInput [matDatepicker]="picker">-->
-<!--          </label>-->
-<!--          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
-<!--          <mat-datepicker #picker></mat-datepicker>-->
-<!--        </mat-form-field>-->
-<!--      </div>-->
-<!--      <br>-->
-<!--      <span class="material-icons">schedule</span>-->
-<!--      <input matInput class="start-time" name="startTime" placeholder="hh:mm" required (ngModelChange)="calcEndTime()"-->
-<!--             [(ngModel)]="startTime">-->
-<!--      <mat-label>-</mat-label>-->
-<!--      <mat-label name="endTime" class="end-time">{{endTime | timeNumbers}}</mat-label>-->
-<!--      <br>-->
-<!--      <mat-select name="duration" (selectionChange)="calcEndTime()" required [(ngModel)]="duration"-->
-<!--                  class="mat-select-width"-->
-<!--                  placeholder="Tijdsduur afspraak">-->
-<!--        <mat-option value="10">10 min</mat-option>-->
-<!--        <mat-option value="20">20 min</mat-option>-->
-<!--        <mat-option value="30">30 min</mat-option>-->
-<!--        <mat-option value="60">60 min</mat-option>-->
-<!--      </mat-select>-->
-<!--      <div class="right-side">-->
-<!--        <span class="material-icons">edit</span>-->
-<!--        Aanpassen-->
-<!--      </div>-->
-<!--      <span class="material-icons">location_on</span>-->
-<!--      <input name="location" required [(ngModel)]="appointment.location" matInput placeholder="Zoek naar een locatie">-->
-<!--      <div class="right-side">-->
-<!--        <span class="material-icons">edit</span>-->
-<!--        Aanpassen-->
-<!--      </div>-->
-<!--      <br>-->
-<!--      <span class="material-icons">person_add</span>-->
-<!--      <input matInput name="doctorName" [(ngModel)]="appointment.doctorName">-->
-<!--      <div class="right-side">-->
-<!--        <span class="material-icons">edit</span>-->
-<!--        Aanpassen-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div class="modal-patient">-->
-<!--      <h2><span class="material-icons">search</span>Patiënt zoeken</h2>-->
-<!--      <input name="patientName" required [(ngModel)]="appointment.patientName" matInput class="input-patient"-->
-<!--             placeholder="Voor- of achternaam"/>-->
-<!--      <input name="patientStreetNameNumber" required [(ngModel)]="appointment.patientStreetNameNumber" matInput-->
-<!--             class="input-patient" placeholder="Straatnaam + huisnummer">-->
-<!--      <input name="patientDateOfBirth" required [(ngModel)]="appointment.patientDateOfBirth" matInput-->
-<!--             class="input-patient" placeholder="Geboortedatum">-->
-<!--      <input name="patientPostalCode" required [(ngModel)]="appointment.patientPostalCode" matInput-->
-<!--             class="input-patient" placeholder="Postcode">-->
-<!--    </div>-->
-<!--    <br>-->
-<!--    <div class="modal-reason">-->
-<!--      <h2>Reden van komst</h2>-->
-<!--      <mat-select name="reasonSelection" required [(ngModel)]="appointment.reasonType.id" class="mat-select-width"-->
-<!--                  placeholder="Geef de reden van de afspraak aan">-->
-<!--        <mat-option value="Ziekte">Ziekte</mat-option>-->
-<!--      </mat-select>-->
-<!--      <br>-->
-<!--      <textarea name="reasonText" [(ngModel)]="appointment.reason" class="text-area-width"-->
-<!--                placeholder="Vul de reden aan met vrije tekst"></textarea>-->
-<!--    </div>-->
-<!--    <div class="modal-attention">-->
-<!--      <h2>Attentieregel</h2>-->
-<!--      <textarea name="attentionLineText" [(ngModel)]="appointment.attention" class="text-area-width"-->
-<!--                placeholder="Typ hier de attentieregel"></textarea>-->
-<!--    </div>-->
-<!--    <div class="modal-buttons">-->
-<!--      <button (click)="cancelAppointment()" class="button-cancel" mat-button>Annuleren</button>-->
-<!--      <button type="button" (click)="deleteAppointment()" class="button-delete" mat-button>Verwijderen</button>-->
-<!--      <button type="submit" class="button-save" mat-button>Opslaan</button>-->
-<!--    </div>-->
-<!--  </form>-->
-<!--</div>-->
