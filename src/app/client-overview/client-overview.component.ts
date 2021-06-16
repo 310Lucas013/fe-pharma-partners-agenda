@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Gender} from '../shared/models/gender.enum';
 import {ThirdPartyService} from '../shared/services/third-party/third-party.service';
@@ -30,11 +30,13 @@ export class ClientOverviewComponent implements OnInit {
   locationId: number;
   createdPatient: Patient;
 
-  constructor(private router: Router, private thirdPartyService: ThirdPartyService, private patientService: PatientService, private route: ActivatedRoute, private locationService: LocationService) {
+  constructor(private router: Router, private thirdPartyService: ThirdPartyService,
+              private patientService: PatientService, private route: ActivatedRoute,
+              private locationService: LocationService) {
     this.route.params.subscribe(params => {
       this.id = params.id;
     });
-    if(this.id != null){
+    if (this.id != null) {
       this.patientService.getById(this.id).subscribe(
         data => {
           this.id = data.id;
@@ -48,12 +50,12 @@ export class ClientOverviewComponent implements OnInit {
           this.locationId = data.locationId;
           if (this.locationId != null) {
             this.locationService.getById(this.locationId).subscribe(
-              data => {
-                this.streetName = data.street;
-                this.houseNumber = data.houseNumber;
-                this.zipCode = data.zipCode;
-                this.city = data.city;
-                this.country = data.country;
+              location => {
+                this.streetName = location.street;
+                this.houseNumber = location.houseNumber;
+                this.zipCode = location.zipCode;
+                this.city = location.city;
+                this.country = location.country;
               },
               error => {
                 console.log(error);
